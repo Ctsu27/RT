@@ -6,12 +6,14 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/08/02 10:09:35 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/09 17:26:35 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_TS_H
 # define RT_TS_H
+
+# include "vec3.h"
 
 # define FALSE 0
 # define TRUE 1
@@ -51,13 +53,6 @@ typedef struct	s_clr
 	double	b;
 	double	a;
 }				t_clr;
-
-typedef struct	s_vec3
-{
-	double	x;
-	double	y;
-	double	z;
-}				t_vec3;
 
 typedef struct	s_ray
 {

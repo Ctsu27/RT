@@ -6,13 +6,12 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:44 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/09 17:10:57 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/09 17:57:34 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
-#include "math_vec3.h"
 #include <math.h>
+#include "rt.h"
 
 static void		get_cam_dir(t_cam *cam, double const x, double const y)
 {
@@ -22,18 +21,19 @@ static void		get_cam_dir(t_cam *cam, double const x, double const y)
 	cam->ray.dir.x = x - half_w;
 	cam->ray.dir.y = y - half_h;
 	cam->ray.dir.z = half_w / tan((cam->fov * M_PI / 180) / 2);
-	cam->ray.dir = rotate_vec3(norm_vec3(cam->ray.dir), cam->rotate);
-	cam->ray.dir = norm_vec3(cam->ray.dir);
+	cam->ray.dir = rot_vec3(norm_vec3(&(cam->ray.dir)), &(cam->rotate));
+	cam->ray.dir = norm_vec3(&(cam->ray.dir));
 }
 
 static t_clr	handle_color(t_env *e, t_poly const *obj)
 {
 	static t_vec3	inter;
 	static t_vec3	normal;
+	static t_vec3	pos_hit;
 	static t_clr	color_pxl;
 
-	inter = add_vec3(e->core.cam.ray.pos, coeff_vec3(e->core.cam.ray.dir,
-				e->core.distance));
+	pos_hit = mul_vec3(&(e->core.cam.ray.dir), e->core.distance);
+	inter = add_vec3(&(e->core.cam.ray.pos), &(pos_hit));
 	normal = e->core.normal_obj[obj->type](obj->data,
 			(obj->type != TYPE_PLANE) ? inter : e->core.cam.ray.dir);
 	color_pxl = phong_shading(&e->core, obj, normal, inter);

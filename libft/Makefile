@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/12 10:24:15 by kehuang           #+#    #+#              #
-#    Updated: 2018/09/25 19:18:48 by kehuang          ###   ########.fr        #
+#    Updated: 2018/11/09 17:53:56 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,6 @@ SRC_NAME		:=			$(SRC_BOOL_DIR)/ft_isalnum.c     	\
 							$(SRC_IO_DIR)/ft_putstr_fd.c 		\
 							$(SRC_IO_DIR)/ft_putunbr_fd.c		\
 							$(SRC_IO_DIR)/get_next_line.c		\
-							$(SRC_IO_DIR)/gnl.c					\
 							$(SRC_LBUF_DIR)/lbuf_in.c			\
 							$(SRC_LBUF_DIR)/lbuf_init.c			\
 							$(SRC_LBUF_DIR)/lbuf_out.c			\
@@ -143,11 +142,13 @@ SRC_NAME		:=			$(SRC_BOOL_DIR)/ft_isalnum.c     	\
 							$(SRC_VEC3_DIR)/add_vec3.c			\
 							$(SRC_VEC3_DIR)/div_vec3.c			\
 							$(SRC_VEC3_DIR)/mul_vec3.c			\
+							$(SRC_VEC3_DIR)/rot_vec3.c			\
 							$(SRC_VEC3_DIR)/sub_vec3.c			\
 							$(SRC_VEC3_DIR)/dot_vec3.c			\
 							$(SRC_VEC3_DIR)/norm_vec3.c			\
 							$(SRC_VEC3_DIR)/xx_rot3.c			\
 							$(SRC_VEC3_DIR)/yy_rot3.c			\
+							$(SRC_VEC3_DIR)/zz_rot3.c			\
 
 SRC_ALL			:= 			$(addprefix $(SRC_DIR)/,$(SRC_NAME))
 
@@ -160,7 +161,7 @@ INDEX			:=			0
 #                            COMPILER & FLAGS                                  #
 
 CC				:=			gcc
-CFLAGS			:=			-Wall -Wextra -Werror -I$(INC_DIR)
+CFLAGS			:=			-Wall -Wextra -Werror
 
 #==============================================================================#
 #------------------------------------------------------------------------------#
@@ -177,7 +178,7 @@ $(OBJ_DIR)/%.o:			 $(SRC_DIR)/%.c $(INC_DIR)
 	@$(eval DONE=$(shell echo $$(($(INDEX)*20/$(NB)))))
 	@$(eval PERCENT=$(shell echo $$(($(INDEX)*100/$(NB)))))
 	@$(eval TO_DO=$(shell echo "$@"))
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -o $@ -c $< -I$(INC_DIR)
 	@printf "[ %d%% ] %s :: %s        \r" $(PERCENT) $(NAME) $@
 	@$(eval INDEX=$(shell echo $$(($(INDEX)+1))))
 

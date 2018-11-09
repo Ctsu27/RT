@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 14:25:44 by kehuang           #+#    #+#             */
-/*   Updated: 2018/07/24 15:11:45 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/09 18:43:47 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,4 @@ int		intersection_sphere(t_ray const ray, void *obj, double *t);
 int		intersection_cylinder(t_ray const ray, void *obj, double *t);
 int		intersection_cone(t_ray const ray, void *obj, double *t);
 
-t_vec3	add_vec3(t_vec3 u, t_vec3 v);
-t_vec3	coeff_vec3(t_vec3 vec, double coeff);
-double	dot_product(t_vec3 o, t_vec3 d);
-t_vec3	sub_vec3(t_vec3 o, t_vec3 d);
-t_vec3	norm_vec3(t_vec3 vec);
-
-t_vec3	rotate_vec3(t_vec3 vec, t_vec3 rotation);
 #endif

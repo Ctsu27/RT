@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 14:33:56 by kehuang           #+#    #+#             */
-/*   Updated: 2018/09/17 09:45:04 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/09 17:55:40 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ t_vec3	norm_vec3(t_vec3 const *a);
 t_vec3	xx_rot3(t_vec3 const *a, double const rad);
 t_vec3	yy_rot3(t_vec3 const *a, double const rad);
 t_vec3	zz_rot3(t_vec3 const *a, double const rad);
+t_vec3	rot_vec3(t_vec3 const a, t_vec3 const *rad);
 #endif
