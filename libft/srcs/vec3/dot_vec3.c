@@ -6,13 +6,13 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 14:55:09 by kehuang           #+#    #+#             */
-/*   Updated: 2018/09/16 15:18:47 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/09 19:11:58 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec3.h"
 
-double	dot_vec3(t_vec3 const *a, t_vec3 const *b)
+double	dot_vec3(t_vec3 const a, t_vec3 const b)
 {
-	return (a->x * b->x + a->y * b->y + a->z * b->z);
+	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }

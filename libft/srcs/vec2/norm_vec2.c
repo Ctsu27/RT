@@ -6,14 +6,14 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 14:46:25 by kehuang           #+#    #+#             */
-/*   Updated: 2018/09/16 15:26:40 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/09 19:15:20 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "vec2.h"
 
-t_vec2	norm_vec2(t_vec2 const *a)
+t_vec2	norm_vec2(t_vec2 const a)
 {
-	return (div_vec2(a, sqrt(a->x * a->x + a->y * a->y)));
+	return (div_vec2(a, sqrt(a.x * a.x + a.y * a.y)));
 }

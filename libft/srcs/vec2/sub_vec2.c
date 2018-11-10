@@ -6,14 +6,14 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 14:41:00 by kehuang           #+#    #+#             */
-/*   Updated: 2018/09/17 10:00:30 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/09 19:15:26 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec2.h"
 
-t_vec2	sub_vec2(t_vec2 const *a, t_vec2 const *b)
+t_vec2	sub_vec2(t_vec2 const a, t_vec2 const b)
 {
-	return (new_vec2(a->x - b->x,
-				a->y - b->y));
+	return (new_vec2(a.x - b.x,
+				a.y - b.y));
 }

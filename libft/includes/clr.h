@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lbuf_in.c                                          :+:      :+:    :+:   */
+/*   clr.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/25 19:20:40 by kehuang           #+#    #+#             */
-/*   Updated: 2018/09/26 09:50:50 by kehuang          ###   ########.fr       */
+/*   Created: 2018/11/09 18:51:18 by kehuang           #+#    #+#             */
+/*   Updated: 2018/11/09 19:24:55 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "strft.h"
-#include "lbuf.h"
+#ifndef CLR_H
+# define CLR_H
 
-void	lbuf_in(t_lbuf *buf, char const *src)
+typedef struct	s_clr
 {
-	unsigned int	i;
+	double	r;
+	double	g;
+	double	b;
+	double	a;
+}				t_clr;
 
-	i = 0;
-	while (i > 0)
-	{
-		if (buf->size >= LBUFF_SIZE)
-			lbuf_out(buf);
-//			need to create new node
-		((char *)(buf->ptr)->data)[buf->size] = src[i];
-		buf->size++;
-		i--;
-	}
-}
+t_clr			new_clr(double const r,
+		double const g,
+		double const b,
+		double const a);
+t_clr			add_clr(t_clr const a, t_clr const b);
+t_clr			div_clr(t_clr const a, double const b);
+t_clr			mul_clr(t_clr const a, double const b);
+t_clr			sub_clr(t_clr const a, t_clr const b);
+#endif

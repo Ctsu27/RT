@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:05 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/09 18:22:06 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/09 19:39:06 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static int		not_obstruct(t_rtv1 const *core, t_poly const *obj,
 	static double	distance_max;
 
 	ray.pos = inter;
-	vdis = sub_vec3(&(light->pos), &(ray.pos));
-	ray.dir = norm_vec3(&(vdis));
+	vdis = sub_vec3(light->pos, ray.pos);
+	ray.dir = norm_vec3(vdis);
 	ptr = core->objs;
 	distance_max = sqrt(vdis.x * vdis.x + vdis.y * vdis.y + vdis.z * vdis.z);
 	while (ptr != NULL)
@@ -56,7 +56,7 @@ static t_clr	diffuse_clr(t_clr obj_clr, t_vec3 obj_normal,
 	static t_clr	diffuse;
 	static double	factor_clr;
 
-	factor_clr = dot_vec3(&(obj_normal), &(light_dir));
+	factor_clr = dot_vec3(obj_normal, light_dir);
 	if (factor_clr < 0.0)
 	{
 		diffuse.r = 0.0;
@@ -81,7 +81,7 @@ static t_clr	specular_clr(t_vec3 const view, t_vec3 const refl_vec,
 	static double		omega;
 	static const int	alpha = 120;
 
-	omega = dot_vec3(&(refl_vec), &(view));
+	omega = dot_vec3(refl_vec, view);
 	if (omega > 0.0)
 	{
 		omega = pow(omega, alpha);
@@ -100,8 +100,6 @@ static t_clr	specular_clr(t_vec3 const view, t_vec3 const refl_vec,
 	return (specul);
 }
 
-//	fu norm --> need to remove 2 lines
-
 t_clr			phong_shading(t_rtv1 const *core, t_poly const *obj,
 		t_vec3 const obj_normal, t_vec3 const inter)
 {
@@ -117,15 +115,12 @@ t_clr			phong_shading(t_rtv1 const *core, t_poly const *obj,
 	{
 		if (not_obstruct(core, obj, inter, light_ptr))
 		{
-			light_dir = sub_vec3(&(inter), &(light_ptr->pos));
-			light_dir = norm_vec3(&(light_dir));
+			light_dir = norm_vec3(sub_vec3(inter, light_ptr->pos));
 			color = add_clr(color, diffuse_clr(obj->clr, obj_normal,
 						light_dir, core->n_light));
-			view = sub_vec3(&(core->cam.ray.pos), &(inter));
-			view = norm_vec3(&(view));
-			refl_vec = mul_vec3(&(obj_normal), 2.0 * dot_vec3(&(obj_normal), &(light_dir)));
-			refl_vec = sub_vec3(&(light_dir), &(refl_vec));
-			refl_vec = norm_vec3(&(refl_vec));
+			view = norm_vec3(sub_vec3(core->cam.ray.pos, inter));
+			refl_vec = norm_vec3(sub_vec3(light_dir, mul_vec3(obj_normal,
+							2.0 * dot_vec3(obj_normal, light_dir))));
 			color = add_clr(color,
 					specular_clr(view, refl_vec, light_ptr->clr));
 		}

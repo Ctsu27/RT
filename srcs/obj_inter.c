@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 15:07:52 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/09 18:02:20 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/09 19:33:56 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ int			intersection_sphere(t_ray const ray, void *obj, double *t)
 	static t_unknown	tmp;
 
 	sphere = (t_sphere *)obj;
-	oc = sub_vec3(&(ray.pos), &(sphere->pos));
-	tmp.a = dot_vec3(&(ray.dir), &(ray.dir));
-	tmp.b = 2.0 * dot_vec3(&(ray.dir), &(oc));
-	tmp.c = dot_vec3(&(oc), &(oc)) - sphere->radius * sphere->radius;
+	oc = sub_vec3(ray.pos, sphere->pos);
+	tmp.a = dot_vec3(ray.dir, ray.dir);
+	tmp.b = 2.0 * dot_vec3(ray.dir, oc);
+	tmp.c = dot_vec3(oc, oc) - sphere->radius * sphere->radius;
 	return (solver_quadratic(tmp.a, tmp.b, tmp.c, t));
 }
 
@@ -55,9 +55,9 @@ int			intersection_cylinder(t_ray const ray, void *obj, double *t)
 	static t_unknown	tmp;
 
 	cyl = (t_cyl *)obj;
-	oc = sub_vec3(&(ray.pos), &(cyl->pos));
-	oc = rot_vec3(oc, &(cyl->rot));
-	dir = rot_vec3(ray.dir, &(cyl->rot));
+	oc = sub_vec3(ray.pos, cyl->pos);
+	oc = rot_vec3(oc, cyl->rot);
+	dir = rot_vec3(ray.dir, cyl->rot);
 	tmp.a = dir.x * dir.x + dir.z * dir.z;
 	tmp.b = 2.0 * (dir.x * oc.x + dir.z * oc.z);
 	tmp.c = (oc.x * oc.x + oc.z * oc.z) - cyl->radius * cyl->radius;
@@ -73,9 +73,9 @@ int			intersection_cone(t_ray const ray, void *obj, double *t)
 	static double		pow_r;
 
 	cone = (t_cone *)obj;
-	oc = sub_vec3(&(ray.pos), &(cone->pos));
-	oc = rot_vec3(oc, &(cone->rot));
-	dir = rot_vec3(ray.dir, &(cone->rot));
+	oc = sub_vec3(ray.pos, cone->pos);
+	oc = rot_vec3(oc, cone->rot);
+	dir = rot_vec3(ray.dir, cone->rot);
 	pow_r = cone->radius * cone->radius;
 	tmp.a = dir.x * dir.x - pow_r * dir.y * dir.y + dir.z * dir.z;
 	tmp.b = 2.0 * (dir.x * oc.x - pow_r * dir.y * oc.y + dir.z * oc.z);
@@ -86,15 +86,13 @@ int			intersection_cone(t_ray const ray, void *obj, double *t)
 int			intersection_plane(t_ray const ray, void *obj, double *t)
 {
 	static t_plane	*plane;
-	static t_vec3	pos;
 	static double	div;
 
 	plane = (t_plane *)obj;
-	div = dot_vec3(&(plane->dir), &(ray.dir));
+	div = dot_vec3(plane->dir, ray.dir);
 	if (div == 0)
 		return (0);
-	pos = sub_vec3(&(plane->pos), &(ray.pos));
-	*t = dot_vec3(&(plane->dir), &(pos)) / div;
+	*t = dot_vec3(plane->dir, sub_vec3(plane->pos, ray.pos)) / div;
 	if (*t <= 0.0)
 		return (0);
 	return (1);

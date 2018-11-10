@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/12 10:24:15 by kehuang           #+#    #+#              #
-#    Updated: 2018/11/09 17:53:56 by kehuang          ###   ########.fr        #
+#    Updated: 2018/11/09 19:26:03 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,24 +18,23 @@ NAME			:=			libft.a
 
 SRC_DIR			:=			./srcs
 SRC_SUB_DIR		:=			boolean	\
+							clr		\
 							clst	\
 							io		\
-							lbuf	\
-							maths	\
 							memory	\
-							sbuf	\
 							slst	\
 							str		\
 							vec2	\
 							vec3	\
 
 SRC_BOOL_DIR	:=			boolean
+SRC_CLR_DIR		:=			clr
 SRC_CLST_DIR	:=			clst
 SRC_IO_DIR		:=			io
-SRC_LBUF_DIR	:=			lbuf
-SRC_MATHS_DIR	:=			maths
+#SRC_LBUF_DIR	:=			lbuf
+#SRC_MATHS_DIR	:=			maths
 SRC_MEMORY_DIR	:=			memory
-SRC_SBUF_DIR	:=			sbuf
+#SRC_SBUF_DIR	:=			sbuf
 SRC_SLST_DIR	:=			slst
 SRC_STR_DIR		:=			str
 SRC_VEC2_DIR	:=			vec2
@@ -54,6 +53,11 @@ SRC_NAME		:=			$(SRC_BOOL_DIR)/ft_isalnum.c     	\
 							$(SRC_BOOL_DIR)/ft_isdigit.c     	\
 							$(SRC_BOOL_DIR)/ft_isprint.c     	\
 							$(SRC_BOOL_DIR)/ft_iswhitespace.c	\
+							$(SRC_CLR_DIR)/add_clr.c			\
+							$(SRC_CLR_DIR)/div_clr.c			\
+							$(SRC_CLR_DIR)/mul_clr.c			\
+							$(SRC_CLR_DIR)/new_clr.c			\
+							$(SRC_CLR_DIR)/sub_clr.c			\
 							$(SRC_CLST_DIR)/del_clst.c			\
 							$(SRC_CLST_DIR)/new_clst.c			\
 							$(SRC_CLST_DIR)/pbeg_clst.c			\
@@ -70,13 +74,6 @@ SRC_NAME		:=			$(SRC_BOOL_DIR)/ft_isalnum.c     	\
 							$(SRC_IO_DIR)/ft_putstr_fd.c 		\
 							$(SRC_IO_DIR)/ft_putunbr_fd.c		\
 							$(SRC_IO_DIR)/get_next_line.c		\
-							$(SRC_LBUF_DIR)/lbuf_in.c			\
-							$(SRC_LBUF_DIR)/lbuf_init.c			\
-							$(SRC_LBUF_DIR)/lbuf_out.c			\
-							$(SRC_MATHS_DIR)/absf.c				\
-							$(SRC_MATHS_DIR)/hypoth.c			\
-							$(SRC_MATHS_DIR)/maxf.c				\
-							$(SRC_MATHS_DIR)/minf.c				\
 							$(SRC_MEMORY_DIR)/ft_bzero.c   		\
 							$(SRC_MEMORY_DIR)/ft_memalloc.c		\
 							$(SRC_MEMORY_DIR)/ft_memccpy.c 		\
@@ -87,9 +84,6 @@ SRC_NAME		:=			$(SRC_BOOL_DIR)/ft_isalnum.c     	\
 							$(SRC_MEMORY_DIR)/ft_memmove.c 		\
 							$(SRC_MEMORY_DIR)/ft_memset.c  		\
 							$(SRC_MEMORY_DIR)/ft_swap.c    		\
-							$(SRC_SBUF_DIR)/sbuf_in.c			\
-							$(SRC_SBUF_DIR)/sbuf_init.c			\
-							$(SRC_SBUF_DIR)/sbuf_out.c			\
 							$(SRC_SLST_DIR)/del_slst.c			\
 							$(SRC_SLST_DIR)/new_slst.c			\
 							$(SRC_SLST_DIR)/pbeg_slst.c			\

@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/08 16:59:52 by kehuang           #+#    #+#              #
-#    Updated: 2018/11/09 17:30:06 by kehuang          ###   ########.fr        #
+#    Updated: 2018/11/09 19:39:22 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRC				:=			main.c					\
 							phong.c					\
 							matrix.c				\
 							init.c					\
-							utils.c					\
+#							utils.c					\
 
 SRC_PARSER		:=			parser_json.c			\
 							json_key.c				\

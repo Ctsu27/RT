@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/09 17:26:35 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/09 19:29:02 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RT_TS_H
 
 # include "vec3.h"
+# include "clr.h"
 
 # define FALSE 0
 # define TRUE 1
@@ -45,14 +46,6 @@ typedef struct	s_cur
 	int		y;
 	int		i;
 }				t_cur;
-
-typedef struct	s_clr
-{
-	double	r;
-	double	g;
-	double	b;
-	double	a;
-}				t_clr;
 
 typedef struct	s_ray
 {
@@ -115,8 +108,8 @@ typedef struct	s_rtv1
 	unsigned int	mask;
 }				t_rtv1;
 
-t_clr			add_clr(t_clr const c1, t_clr const c2);
-t_clr			div_clr(t_clr const c1, int const fac);
+//t_clr			add_clr(t_clr const c1, t_clr const c2);
+//t_clr			div_clr(t_clr const c1, int const fac);
 
 void			json_error(t_cur *fcur, int const err);
 void			ft_atod(t_cur *fcur, char *str, double *val);

@@ -1,16 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minf.c                                             :+:      :+:    :+:   */
+/*   sub_clr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/16 14:20:05 by kehuang           #+#    #+#             */
-/*   Updated: 2018/09/16 14:20:15 by kehuang          ###   ########.fr       */
+/*   Created: 2018/11/09 18:51:34 by kehuang           #+#    #+#             */
+/*   Updated: 2018/11/09 19:22:00 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-double	minf(double a, double b)
+#include "clr.h"
+
+t_clr	sub_clr(t_clr const a, t_clr const b)
 {
-	return ((a < b) ? a : b);
+	return (new_clr(a.r - b.r,
+				a.g - b.g,
+				a.b - b.b,
+				a.a - b.a));
 }

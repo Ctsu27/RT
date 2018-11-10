@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sbuf_in.c                                          :+:      :+:    :+:   */
+/*   div_clr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/25 19:16:13 by kehuang           #+#    #+#             */
-/*   Updated: 2018/09/25 19:31:28 by kehuang          ###   ########.fr       */
+/*   Created: 2018/11/09 18:51:38 by kehuang           #+#    #+#             */
+/*   Updated: 2018/11/09 19:23:50 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "strft.h"
-#include "sbuf.h"
+#include "clr.h"
 
-/*
-**	need to change concatenation
-*/
-
-void	sbuf_in(t_sbuf *buf, char const *src)
+t_clr	div_clr(t_clr const a, double const b)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		if (buf->size >= SBUFF_SIZE)
-			sbuf_out(buf);
-		buf->s[buf->size] = src[i];
-		buf->size++;
-		i++;
-	}
+	return (new_clr(a.r / b,
+				a.g / b,
+				a.b / b,
+				a.a / b));
 }

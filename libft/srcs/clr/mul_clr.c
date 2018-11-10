@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sbuf.h                                             :+:      :+:    :+:   */
+/*   mul_clr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/25 19:15:33 by kehuang           #+#    #+#             */
-/*   Updated: 2018/09/25 19:25:11 by kehuang          ###   ########.fr       */
+/*   Created: 2018/11/09 18:51:37 by kehuang           #+#    #+#             */
+/*   Updated: 2018/11/09 19:24:09 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SBUF_H
-# define SBUF_H
+#include "clr.h"
 
-# define SBUFF_SIZE 4096
-
-typedef struct	s_sbuf
+t_clr	mul_clr(t_clr const a, double const b)
 {
-	int				fd;
-	unsigned short	size;
-	char			s[SBUFF_SIZE];
-}				t_sbuf;
-
-int		sbuf_init(t_sbuf *buf, char const *path, int const mods,
-		int const rights);
-void	sbuf_in(t_sbuf *buf, char const *src);
-void	sbuf_out(t_sbuf *buf);
-#endif
+	return (new_clr(a.r * b,
+				a.g * b,
+				a.b * b,
+				a.a * b));
+}
