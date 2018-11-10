@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 12:00:17 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/09 17:16:46 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/10 13:49:16 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ static int	take_file_content(int const fd, int *fsize, char **cfile)
 	char	*ptr;
 
 	if ((*cfile = ft_strnew(0)) == NULL)
-	{
-		errno = ENOMEM;
 		return (-1);
-	}
 	while ((ret = read(fd, buf, 5000)) > 0)
 	{
 		if (handle_buffer(fsize, ret, buf, cfile) == -1)
@@ -68,7 +65,6 @@ static int	take_file_content(int const fd, int *fsize, char **cfile)
 		{
 			ft_strdel(&ptr);
 			*fsize = 0;
-			errno = ENOMEM;
 			return (-1);
 		}
 		ft_strdel(&ptr);

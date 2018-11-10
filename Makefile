@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/08 16:59:52 by kehuang           #+#    #+#              #
-#    Updated: 2018/11/09 19:39:22 by kehuang          ###   ########.fr        #
+#    Updated: 2018/11/10 11:51:45 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,7 @@ SRC				:=			main.c					\
 							obj_inter.c				\
 							obj_normal.c			\
 							phong.c					\
-							matrix.c				\
 							init.c					\
-#							utils.c					\
 
 SRC_PARSER		:=			parser_json.c			\
 							json_key.c				\
@@ -66,6 +64,8 @@ INDEX			:=			0
 
 CC				:=			gcc
 CFLAGS			:=			-Wall -Wextra -Werror
+CFLAGS			+=			-g3
+CFLAGS			+=			-O2
 INC_SDL			:=			-I/Users/kehuang/.brew/include/SDL2 -D_THREAD_SAFE
 LIB_SDL			:=			-L/Users/kehuang/.brew/lib -lSDL2
 CLIB			:=			-L$(LIB_DIR) -lft

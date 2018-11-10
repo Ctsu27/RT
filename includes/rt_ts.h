@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/09 19:29:02 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/10 14:06:34 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 
 typedef struct	s_aa
 {
-	double	step;
 	int		n_ray;
 	int		x;
 	int		y;
@@ -93,6 +92,7 @@ typedef struct	s_poly
 	void			*data;
 	int				type;
 	t_clr			clr;
+	t_clr			ambient;
 	struct s_poly	*next;
 }				t_poly;
 
@@ -107,9 +107,6 @@ typedef struct	s_rtv1
 	int				n_light;
 	unsigned int	mask;
 }				t_rtv1;
-
-//t_clr			add_clr(t_clr const c1, t_clr const c2);
-//t_clr			div_clr(t_clr const c1, int const fac);
 
 void			json_error(t_cur *fcur, int const err);
 void			ft_atod(t_cur *fcur, char *str, double *val);
