@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 16:01:33 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/09 19:36:02 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/10 15:35:18 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,5 @@ t_vec3			normal_plane(void *data, t_vec3 ray_dir)
 
 t_vec3			normal_sphere(void *data, t_vec3 intersect)
 {
-	static t_sphere	*sphere;
-
-	sphere = (t_sphere *)data;
-	return (norm_vec3(sub_vec3(sphere->pos, intersect)));
+	return (norm_vec3(sub_vec3(((t_sphere *)data)->pos, intersect)));
 }

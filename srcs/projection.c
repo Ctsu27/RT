@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:44 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/10 14:04:15 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/10 15:20:29 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,9 @@ static t_clr	handle_color(t_env *e, t_poly const *obj)
 	normal = e->core.normal_obj[obj->type](obj->data,
 			(obj->type != TYPE_PLANE) ? inter : e->core.cam.ray.dir);
 	color_pxl = phong_shading(&e->core, obj, normal, inter);
-	if (color_pxl.r > 1.0)
-		color_pxl.r = 255.0;
-	else
-		color_pxl.r = color_pxl.r * 255.0;
-	if (color_pxl.g > 1.0)
-		color_pxl.g = 255.0;
-	else
-		color_pxl.g = color_pxl.g * 255.0;
-	if (color_pxl.b > 1.0)
-		color_pxl.b = 255.0;
-	else
-		color_pxl.b = color_pxl.b * 255.0;
-//	color_pxl.r = ((color_pxl.r > 1.0) ? 1.0 : color_pxl.r) * 255.0;
-//	color_pxl.g = ((color_pxl.g > 1.0) ? 1.0 : color_pxl.g) * 255.0;
-//	color_pxl.b = ((color_pxl.b > 1.0) ? 1.0 : color_pxl.b) * 255.0;
+	color_pxl.r = ((color_pxl.r > 1.0) ? 1.0 : color_pxl.r) * 255.0;
+	color_pxl.g = ((color_pxl.g > 1.0) ? 1.0 : color_pxl.g) * 255.0;
+	color_pxl.b = ((color_pxl.b > 1.0) ? 1.0 : color_pxl.b) * 255.0;
 	return (color_pxl);
 }
 

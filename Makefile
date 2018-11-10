@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/08 16:59:52 by kehuang           #+#    #+#              #
-#    Updated: 2018/11/10 11:51:45 by kehuang          ###   ########.fr        #
+#    Updated: 2018/11/10 16:32:10 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ OBJ				+=			$(OBJ_PARSER)
 SRC_ALL			:=			$(SRC_PARSER)
 SRC_ALL			+=			$(SRC)
 
-LIBFT			:=			$(addprefix $(LIB_DIR),/libft.a)
+LIBFT			:=			$(LIB_DIR)/libft.a
 
 NB				:=			$(words $(SRC_ALL))
 INDEX			:=			0
@@ -65,7 +65,7 @@ INDEX			:=			0
 CC				:=			gcc
 CFLAGS			:=			-Wall -Wextra -Werror
 CFLAGS			+=			-g3
-CFLAGS			+=			-O2
+CFLAGS			+=			-O3
 INC_SDL			:=			-I/Users/kehuang/.brew/include/SDL2 -D_THREAD_SAFE
 LIB_SDL			:=			-L/Users/kehuang/.brew/lib -lSDL2
 CLIB			:=			-L$(LIB_DIR) -lft
