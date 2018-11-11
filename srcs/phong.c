@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:05 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/10 14:54:35 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/12 00:11:01 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ static t_clr	specular_clr(t_vec3 const view, t_vec3 const light_dir,
 	omega = dot_vec3(reflection, view);
 	if (omega > 0.0)
 	{
-		omega = pow(omega, alpha);
-		specul.r = omega * light_clr.r * 0.50;
-		specul.g = omega * light_clr.g * 0.50;
-		specul.b = omega * light_clr.b * 0.50;
+		omega = pow(omega, alpha) * 0.50;
+		specul.r = omega * light_clr.r;
+		specul.g = omega * light_clr.g;
+		specul.b = omega * light_clr.b;
 		specul.a = 0.0;
 	}
 	else

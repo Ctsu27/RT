@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/08 16:59:52 by kehuang           #+#    #+#              #
-#    Updated: 2018/11/10 16:32:10 by kehuang          ###   ########.fr        #
+#    Updated: 2018/11/12 00:16:50 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,9 +65,9 @@ INDEX			:=			0
 CC				:=			gcc
 CFLAGS			:=			-Wall -Wextra -Werror
 CFLAGS			+=			-g3
-CFLAGS			+=			-O3
-INC_SDL			:=			-I/Users/kehuang/.brew/include/SDL2 -D_THREAD_SAFE
-LIB_SDL			:=			-L/Users/kehuang/.brew/lib -lSDL2
+CFLAGS			+=			-O2
+INC_SDL			:=			-I/Users/$(USER)/.brew/include/SDL2 -D_THREAD_SAFE
+LIB_SDL			:=			-L/Users/$(USER)/.brew/lib -lSDL2
 CLIB			:=			-L$(LIB_DIR) -lft
 
 #==============================================================================#
