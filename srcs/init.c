@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:09:49 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/10 14:13:37 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/12 14:44:11 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int			init_env(t_env *e)
 	init_fct(&(e->core));
 	init_light(&e->core);
 	init_obj_clr(e->core.objs, e->core.n_light);
+	e->core.cam.ray.dir.z = (WIN_W / 2)
+		/ tan((e->core.cam.fov * M_PI / 180) / 2);
 	e->aa = 1;
 	e->on = TRUE;
 	SDL_SetRenderDrawColor(e->render, 0, 0, 0, 0);
