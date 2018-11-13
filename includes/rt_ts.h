@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/12 17:04:59 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/12 18:02:09 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct	s_rtv1
 	double			offset_aa;
 	int				n_light;
 	unsigned int	mask;
+	unsigned int	depth;
 }				t_rtv1;
 
 void			json_error(t_cur *fcur, int const err);

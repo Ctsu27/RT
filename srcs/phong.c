@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:05 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/12 00:11:01 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/13 18:27:12 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int		not_obstruct(t_rtv1 const *core, t_poly const *obj,
 	{
 		if (ptr != obj)
 			if (core->inter_obj[ptr->type](ray, ptr->data, &t))
-				if (t > 0.0 && t < distance_max)
+				if (t > 0.01 && t < distance_max)
 					return (FALSE);
 		ptr = ptr->next;
 	}

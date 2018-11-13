@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 15:07:52 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/09 19:33:56 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/13 18:27:04 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	solver_quadratic(double a, double b, double c, double *t)
 	a = a * 2.0;
 	dis[0] = ((b + delta) / a);
 	dis[1] = ((b - delta) / a);
-	if (dis[0] < 0 && dis[1] < 0)
+	if (dis[0] < 0.01 && dis[1] < 0.01)
 		return (0);
 	*t = (dis[0] < dis[1]) ? dis[0] : dis[1];
 	return (1);
