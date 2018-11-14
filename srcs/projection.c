@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:44 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/13 19:05:36 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/14 19:15:42 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,75 @@ static t_poly	*get_nearest_obj(t_rtv1 const *core, t_ray const ray,
 
 t_clr	raytrace(t_env const *e, t_ray ray, unsigned int depth);
 
-static t_clr	ray_trace_reflection(t_env const *e, t_ray ray,
+double	fresnel(t_ray const ray, t_vec3 const inter, t_vec3 const normal,
+		double const ior)
+{
+	static t_vec3	view;
+	static double	cos[2];
+	static double	eta[2];
+	static double	r[2];
+	static double	sin_t;
+
+	view = sub_vec3(inter, ray.pos);
+	cos[0] = dot_vec3(normal, view);
+	if (cos[0] < 0)
+	{
+		eta[0] = 1.0;
+		eta[1] = ior;
+	}
+	else
+	{
+		eta[0] = ior;
+		eta[1] = 1.0;
+	}
+	sin_t = (eta[0] / eta[1]) * fmax(0.0, 1.0 - cos[0] * cos[0]);
+	if (sin_t >= 1.0)
+		return (1.0);
+	cos[1] = fmax(0.0, 1.0 - sin_t * sin_t);
+	cos[0] = (cos[0] < 0.0) ? -cos[0] : cos[0];
+	r[0] = (eta[1] * cos[0] - eta[0] * cos[1]) / (eta[1] * cos[0] + eta[0] * cos[1]);
+	r[1] = (eta[0] * cos[0] - eta[1] * cos[1]) / (eta[0] * cos[0] + eta[1] * cos[1]);
+	return ((r[0] * r[0] + r[1] * r[1]) / 2);
+}
+
+t_clr	ray_trace_refraction(t_env const *e, t_ray ray,
 		t_vec3 const inter, t_vec3 const normal,
 		double const absorbance, unsigned int const depth)
 {
-	t_clr	refl_clr;
-	t_vec3	view;
+	static t_clr	refr_clr;
+	static t_vec3	view;
+	static double	tmp[3];
+	static double	ior = 1.5;
+
+	view = sub_vec3(inter, ray.pos);
+	tmp[0] = dot_vec3(normal, view);
+	if (tmp[0] < 0)
+	{
+		tmp[0] = -tmp[0];
+		tmp[1] = 1.0 / ior;
+	}
+	else
+		tmp[1] = ior;
+	tmp[2] = 1.0 - tmp[1] * tmp[1] * (1.0 - tmp[0] * tmp[0]);
+	if (tmp[2] < 0.0)
+	{
+		tmp[1] = 1.0;
+		tmp[2] = 1.0 - tmp[0] * tmp[0];
+	}
+	ray.pos = inter;
+	ray.dir = norm_vec3(add_vec3(mul_vec3(normal, tmp[1]),
+				mul_vec3(normal, tmp[1] * tmp[0] - sqrt(tmp[2]))));
+	refr_clr = raytrace(e, ray, depth - 1);
+	refr_clr = mul_clr(refr_clr, 1 - absorbance);
+	return (refr_clr);
+}
+
+t_clr	ray_trace_reflection(t_env const *e, t_ray ray,
+		t_vec3 const inter, t_vec3 const normal,
+		double const absorbance, unsigned int const depth)
+{
+	static t_clr	refl_clr;
+	static t_vec3	view;
 
 	view = sub_vec3(ray.pos, inter);
 	ray.pos = inter;
@@ -99,11 +162,25 @@ t_clr		raytrace(t_env const *e, t_ray ray, unsigned int const depth)
 				(obj_near->type != TYPE_PLANE) ? inter : ray.dir);
 		color_pxl = handle_color(e, normal, obj_near, inter);
 		if (depth > 0)
+//		if (obj_near->type != TYPE_PLANE && depth > 0)
+//		if (obj_near->type == TYPE_PLANE && depth > 0)
+//		if (obj_near->type == TYPE_SPHERE && depth > 0)
+//		if (obj_near->type != TYPE_PLANE
+//				&& obj_near->type != TYPE_CONE
+//				&& depth > 0)
 		{
+			double	kr;
+			kr = fresnel(ray, inter, normal, 1.5);
 			color_pxl = mul_clr(color_pxl, absorbance);
+//			color_pxl = add_clr(color_pxl,
+//					ray_trace_reflection(e, ray, inter, normal, absorbance,
+//					ray_trace_refraction(e, ray, inter, normal, absorbance,
+//						depth));
 			color_pxl = add_clr(color_pxl,
-					ray_trace_reflection(e, ray, inter, normal, absorbance,
-						depth));
+					add_clr(mul_clr(ray_trace_reflection(e,
+								ray, inter, normal, absorbance, depth), kr),
+						mul_clr(ray_trace_refraction(e,
+								ray, inter, normal, absorbance, depth), kr)));
 		}
 	}
 	else
@@ -150,7 +227,6 @@ void			projection(t_env *e)
 	int		x;
 	int		y;
 
-	e->core.depth = 4;
 	y = 0;
 	e->core.offset_aa = (0.40 * (e->aa * 0.66)) / e->aa;
 	while (y < WIN_H)

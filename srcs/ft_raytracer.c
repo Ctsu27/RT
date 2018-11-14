@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:25:18 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/09 17:10:42 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/14 13:22:13 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,24 @@ static void	handle_keyboard_event(t_env *e)
 		if (e->aa > 1)
 		{
 			e->aa--;
+			projection(e);
+			SDL_RenderPresent(e->render);
+		}
+	}
+	else if (e->evt.key.keysym.sym == SDLK_z)
+	{
+		if (e->core.depth > 0)
+		{
+			e->core.depth--;
+			projection(e);
+			SDL_RenderPresent(e->render);
+		}
+	}
+	else if (e->evt.key.keysym.sym == SDLK_x)
+	{
+		if (e->core.depth < 7)
+		{
+			e->core.depth++;
 			projection(e);
 			SDL_RenderPresent(e->render);
 		}
