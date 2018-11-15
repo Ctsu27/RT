@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:21:00 by kehuang           #+#    #+#             */
-/*   Updated: 2018/07/24 11:40:29 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/15 13:01:21 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,22 @@
 #include "rt_ts.h"
 #include "parser_int.h"
 
-static void	norm_mbenjell(int *ksize, char **keys)
-{
-	keys[0] = "\"plane\"";
-	keys[1] = "\"cylinder\"";
-	keys[2] = "\"cone\"";
-	keys[3] = "\"sphere\"";
-	keys[4] = "\"light\"";
-	keys[5] = "\"cam\"";
-	keys[6] = "\"normal\"";
-	keys[7] = "\"radius\"";
-	keys[8] = "\"color\"";
-	keys[9] = "\"fov\"";
-	keys[10] = "\"rot\"";
-	keys[11] = "\"pos\"";
-	ksize[0] = 7;
-	ksize[1] = 10;
-	ksize[2] = 6;
-	ksize[3] = 8;
-	ksize[4] = 7;
-	ksize[5] = 5;
-	ksize[6] = 8;
-	ksize[7] = 8;
-	ksize[8] = 7;
-	ksize[9] = 5;
-	ksize[10] = 5;
-	ksize[11] = 5;
-}
+static t_string	g_keys[12] = { \
+	[0] = {"\"plane\"", 7},
+	[1] = {"\"cylinder\"", 10},
+	[2] = {"\"cone\"", 6},
+	[3] = {"\"sphere\"", 8},
+	[4] = {"\"light\"", 7},
+	[5] = {"\"cam\"", 5},
+	[6] = {"\"normal\"", 8},
+	[7] = {"\"radius\"", 8},
+	[8] = {"\"color\"", 7},
+	[9] = {"\"fov\"", 5},
+	[10] = {"\"rot\"", 5},
+	[11] = {"\"pos\"", 5}
+};
 
-static int	mask_major(unsigned int *mask, int c)
+static int		mask_major(unsigned int *mask, int c)
 {
 	*mask = *mask | ((1 << c) << 8);
 	*mask = *mask | MASK_OBJ;
@@ -66,7 +53,7 @@ static int	mask_major(unsigned int *mask, int c)
 	return (0);
 }
 
-static int	mask_minor(t_rtv1 *core, int c)
+static int		mask_minor(t_rtv1 *core, int c)
 {
 	int		bit;
 
@@ -81,17 +68,15 @@ static int	mask_minor(t_rtv1 *core, int c)
 	return (0);
 }
 
-int			json_key(t_rtv1 *core, t_cur *fcur, char *cfile)
+int				json_key(t_rtv1 *core, t_cur *fcur, char *cfile)
 {
-	int		ksize[12];
 	int		c;
-	char	*keys[12];
 	char	lim;
 
-	norm_mbenjell(ksize, keys);
 	c = (core->mask & KEY_MAJOR) ? 6 : 0;
 	lim = (c == 6) ? 12 : 6;
-	while (c < lim && ft_strncmp(keys[c], cfile + fcur->i, ksize[c]) != 0)
+	while (c < lim
+			&& ft_strncmp(g_keys[c].str, cfile + fcur->i, g_keys[c].size) != 0)
 		c++;
 	if (c == lim)
 		return (-1);
@@ -104,7 +89,7 @@ int			json_key(t_rtv1 *core, t_cur *fcur, char *cfile)
 	}
 	else if (mask_minor(core, c) == -1)
 		return (-1);
-	fcur->i = fcur->i + ksize[c];
-	fcur->x = fcur->x + ksize[c];
+	fcur->i = fcur->i + g_keys[c].size;
+	fcur->x = fcur->x + g_keys[c].size;
 	return (0);
 }

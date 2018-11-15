@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:23:14 by kehuang           #+#    #+#             */
-/*   Updated: 2018/07/24 11:40:41 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/15 13:02:30 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,28 @@
 # define KEY_RAD		0x2
 # define KEY_NORMAL		0x1
 
-int			ft_atod_sep(t_cur *fcur, double *val, char *cfile, char check);
-int			check_sep_val(t_rtv1 *core, t_cur *fcur, char *cfile);
+typedef struct	s_string
+{
+	char				*str;
+	unsigned long int	size;
+}				t_string;
 
-void		free_lst(t_rtv1 *core);
-void		ft_zjump(t_cur *fcur, char *cfile);
-void		json_error(t_cur *fcur, int const err);
+int				ft_atod_sep(t_cur *fcur, double *val, char *cfile, char check);
+int				check_sep_val(t_rtv1 *core, t_cur *fcur, char *cfile);
 
-void		alloc_lst(t_rtv1 *core);
+void			free_lst(t_rtv1 *core);
+void			ft_zjump(t_cur *fcur, char *cfile);
+void			json_error(t_cur *fcur, int const err);
 
-void		take_obj_vec(t_rtv1 *core, t_vec3 **ptr);
-void		take_light_pos(t_rtv1 *core, t_vec3 **ptr);
-int			get_vec_value(t_vec3 *ptr, t_cur *fcur, char *cfile);
+void			alloc_lst(t_rtv1 *core);
 
-int			handle_double(t_rtv1 *core, t_cur *fcur, char *cfile);
-int			get_clr(t_rtv1 *core, t_cur *fcur, char *cfile);
+void			take_obj_vec(t_rtv1 *core, t_vec3 **ptr);
+void			take_light_pos(t_rtv1 *core, t_vec3 **ptr);
+int				get_vec_value(t_vec3 *ptr, t_cur *fcur, char *cfile);
 
-int			json_key(t_rtv1 *core, t_cur *fcur, char *cfile);
-int			json_val(t_rtv1 *core, t_cur *fcur, char *cfile);
+int				handle_double(t_rtv1 *core, t_cur *fcur, char *cfile);
+int				get_clr(t_rtv1 *core, t_cur *fcur, char *cfile);
+
+int				json_key(t_rtv1 *core, t_cur *fcur, char *cfile);
+int				json_val(t_rtv1 *core, t_cur *fcur, char *cfile);
 #endif
