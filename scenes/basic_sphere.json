@@ -13,6 +13,8 @@
 	"sphere" : {
 		"pos" : [0.0, 0.0, 0.0],
 		"radius": 3.0,
+		"material" : "default",
+		"depth" : 0,
 		"color" : [255.0, 22.0, 255.0, 0.0]
 	}
 }
