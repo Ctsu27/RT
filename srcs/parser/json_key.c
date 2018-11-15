@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:21:00 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/15 13:01:21 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/15 16:59:58 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include "rt_ts.h"
 #include "parser_int.h"
 
-static t_string	g_keys[12] = { \
+t_string		g_keys[14] = \
+{
 	[0] = {"\"plane\"", 7},
 	[1] = {"\"cylinder\"", 10},
 	[2] = {"\"cone\"", 6},
@@ -26,7 +27,9 @@ static t_string	g_keys[12] = { \
 	[8] = {"\"color\"", 7},
 	[9] = {"\"fov\"", 5},
 	[10] = {"\"rot\"", 5},
-	[11] = {"\"pos\"", 5}
+	[11] = {"\"pos\"", 5},
+	[12] = {"\"material\"", 10},
+	[13] = {"\"depth\"", 7}
 };
 
 static int		mask_major(unsigned int *mask, int c)
@@ -39,13 +42,17 @@ static int		mask_major(unsigned int *mask, int c)
 		*mask = *mask | KEY_ROT;
 	if (*mask & KEY_CAM)
 		*mask = *mask | KEY_FOV;
-	if (*mask & KEY_LIGHT || *mask & KEY_SPHERE || *mask & KEY_CONE
-			|| *mask & KEY_CYLINDER || *mask & KEY_PLANE)
+	if (*mask & KEY_LIGHT || *mask & KEY_OBJECT)
 		*mask = *mask | KEY_COLOR;
 	if (*mask & KEY_SPHERE || *mask & KEY_CONE || *mask & KEY_CYLINDER)
 		*mask = *mask | KEY_RAD;
 	if (*mask & KEY_PLANE)
 		*mask = *mask | KEY_NORMAL;
+	if (*mask & KEY_OBJECT)
+	{
+		*mask = *mask | KEY_MATERIAL;
+		*mask = *mask | KEY_DEPTH;
+	}
 	if (*mask & KEY_CAM && *mask & HAS_CAM)
 		return (-1);
 	if (*mask & KEY_CAM)
@@ -74,7 +81,7 @@ int				json_key(t_rtv1 *core, t_cur *fcur, char *cfile)
 	char	lim;
 
 	c = (core->mask & KEY_MAJOR) ? 6 : 0;
-	lim = (c == 6) ? 12 : 6;
+	lim = (c == 6) ? 14 : 6;
 	while (c < lim
 			&& ft_strncmp(g_keys[c].str, cfile + fcur->i, g_keys[c].size) != 0)
 		c++;

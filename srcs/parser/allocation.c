@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:25:00 by kehuang           #+#    #+#             */
-/*   Updated: 2018/08/21 19:32:33 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/15 14:07:47 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void		alloc_lst(t_rtv1 *core)
 			exit(EXIT_FAILURE);
 		}
 	}
-	else if (core->mask & (KEY_PLANE | KEY_SPHERE | KEY_CONE | KEY_CYLINDER))
+	else if (core->mask & (KEY_OBJECT))
 		if (alloc_obj(core) == -1)
 		{
 			ft_putstr_fd("error: allocation failed\n", 2);

@@ -6,10 +6,12 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:41:05 by kehuang           #+#    #+#             */
-/*   Updated: 2018/08/21 18:51:16 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/15 17:01:26 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include "strft.h"
 #include "parser_int.h"
 
 static int	get_vec(t_rtv1 *core, t_cur *fcur, char *cfile)
@@ -58,6 +60,50 @@ static int	handle_arr(t_rtv1 *core, t_cur *fcur, int size, char *cfile)
 	return (0);
 }
 
+char	*g_str_value[1][4] = \
+{
+	[ID_MATERIAL] = {"default", "reflective", "refractive", NULL}
+};
+
+void	get_obj_material(t_rtv1 *core, unsigned int type)
+{
+	t_poly	*ptr;
+
+	if ((ptr = core->objs) != NULL)
+	{
+		while (ptr->next != NULL)
+			ptr = ptr->next;
+		ptr->material = type;
+	}
+}
+
+static int	handle_str(t_rtv1 *core, t_cur *fcur,
+		char *cfile, unsigned char key)
+{
+	unsigned int	size;
+	unsigned int	idx;
+
+	if (cfile[fcur->i] != '"')
+		return (-1);
+	fcur->i++;
+	fcur->x++;
+	if (key == KEY_MATERIAL)
+		key = ID_MATERIAL;
+	else
+		return (-1);
+	idx = 0;
+	while (g_str_value[key][idx] != NULL
+			&& ft_strncmp(g_str_value[key][idx], cfile + fcur->i,
+				(size = ft_strlen(g_str_value[key][idx]))) != 0)
+		idx++;
+	if (g_str_value[key][idx] == NULL || cfile[fcur->i + size] != '"')
+		return (-1);
+	fcur->i = fcur->i + size + 1;
+	fcur->x = fcur->x + size + 1;
+	get_obj_material(core, idx);
+	return (0);
+}
+
 static int	get_data(t_rtv1 *core, t_cur *fcur, char *cfile, unsigned char key)
 {
 	if (key & KEY_POS || key & KEY_ROT || key & KEY_NORMAL)
@@ -68,6 +114,11 @@ static int	get_data(t_rtv1 *core, t_cur *fcur, char *cfile, unsigned char key)
 	else if (key & KEY_COLOR)
 	{
 		if (handle_arr(core, fcur, 4, cfile) == -1)
+			return (-1);
+	}
+	else if (key & KEY_MATERIAL)
+	{
+		if (handle_str(core, fcur, cfile, KEY_MATERIAL) == -1)
 			return (-1);
 	}
 	else if (handle_double(core, fcur, cfile) == -1)

@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/12 18:02:09 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/15 15:59:32 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # define TYPE_CYLINDER 1
 # define TYPE_CONE 2
 # define TYPE_PLANE 3
+
+# define MATERIAL_DEFAULT 0
+# define MATERIAL_REFLECTIVE 1
+# define MATERIAL_REFRACTIVE 2
 
 typedef struct	s_aa
 {
@@ -90,7 +94,9 @@ typedef struct	s_light
 typedef struct	s_poly
 {
 	void			*data;
-	int				type;
+	unsigned int	type;
+	unsigned int	material;
+	unsigned int	rebound;
 	t_clr			clr;
 	t_clr			ambient;
 	struct s_poly	*next;
