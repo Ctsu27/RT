@@ -2,6 +2,7 @@
  	"cam" : {
 			"pos" : [0.0, 0.0, -100.0],
 			"rot" : [0.0, 0.0, 0.0],
+			"depth" : 0,
 			"fov" :  30.0
 	},
 
@@ -13,7 +14,6 @@
 			"pos" : [0.0, 0.2, -60.0],
 			"color" : [255.0, 0.0, 0.0, 1.0],
 			"material" : "default",
-			"depth" : 0,
 			"radius": 1.0
 	},
 		"cylinder" : {
@@ -21,7 +21,6 @@
 			"rot" : [0.0, 0.0, -45.0],
 			"color" : [0.0, 255.0, 0.0, 1.0],
 			"material" : "default",
-			"depth" : 0,
 			"radius": 0.6
 	},
 		"cone" : {
@@ -29,21 +28,18 @@
 			"rot" : [0.0, 0.0, 45.0],
 			"color" : [255.0, 255.0, 0.0, 1.0],
 			"material" : "default",
-			"depth" : 0,
 			"radius": 20.0
 	},
 		"plane" : {
 			"pos" : [0.0, 0.0, 10.0],
 			"color" : [10.0, 10.0, 220.0, 1.0],
 			"material" : "default",
-			"depth" : 0,
 			"normal" : [0.0, 0.0, -1.0]
 	},
 		"plane" : {
 			"pos" : [0.0, 1.0, 0.0],
 			"color" : [155.0, 155.0, 155.0, 1.0],
 			"material" : "default",
-			"depth" : 0,
 			"normal" : [0.0, -1.0, 0.0]
 	}
 
