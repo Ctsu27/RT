@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:41:05 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/15 17:01:26 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/16 11:37:39 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static int	handle_arr(t_rtv1 *core, t_cur *fcur, int size, char *cfile)
 	return (0);
 }
 
-char	*g_str_value[1][4] = \
+char	*g_str_value[1][5] = \
 {
-	[ID_MATERIAL] = {"default", "reflective", "refractive", NULL}
+	[ID_MATERIAL] = {"reflective", "refractive", "fresnel", "default", NULL}
 };
 
 void	get_obj_material(t_rtv1 *core, unsigned int type)

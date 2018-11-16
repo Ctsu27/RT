@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:21:00 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/15 16:59:58 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/16 10:11:31 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ static int		mask_major(unsigned int *mask, int c)
 	if (*mask & KEY_CAM || *mask & KEY_CONE || *mask & KEY_CYLINDER)
 		*mask = *mask | KEY_ROT;
 	if (*mask & KEY_CAM)
+	{
 		*mask = *mask | KEY_FOV;
+		*mask = *mask | KEY_DEPTH;
+	}
 	if (*mask & KEY_LIGHT || *mask & KEY_OBJECT)
 		*mask = *mask | KEY_COLOR;
 	if (*mask & KEY_SPHERE || *mask & KEY_CONE || *mask & KEY_CYLINDER)
@@ -49,10 +52,7 @@ static int		mask_major(unsigned int *mask, int c)
 	if (*mask & KEY_PLANE)
 		*mask = *mask | KEY_NORMAL;
 	if (*mask & KEY_OBJECT)
-	{
 		*mask = *mask | KEY_MATERIAL;
-		*mask = *mask | KEY_DEPTH;
-	}
 	if (*mask & KEY_CAM && *mask & HAS_CAM)
 		return (-1);
 	if (*mask & KEY_CAM)
