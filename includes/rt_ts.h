@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/16 11:55:19 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/16 14:17:11 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ typedef struct	s_rtv1
 	t_light			*light;
 	t_poly			*objs;
 	t_cam			cam;
-	t_clr			(*re_trace[3])(struct s_rtv1 const *, t_ray, t_vec3 const,
-			t_vec3 const, double const, unsigned int const);
+//	t_clr			(*re_trace[3])(struct s_rtv1 const *, t_ray, t_vec3 const,
+//			t_vec3 const, double const, unsigned int const);
 	t_vec3			(*normal_obj[4])(void *, t_vec3);
 	int				(*inter_obj[4])(t_ray const, void *, double *);
 	double			distance;
@@ -117,6 +117,12 @@ typedef struct	s_rtv1
 	int				n_light;
 	unsigned int	mask;
 }				t_rtv1;
+
+t_clr			handle_color(t_rtv1 const *core, t_vec3 const normal,
+		t_poly const *obj, t_vec3 const inter);
+
+double	fresnel(t_ray const ray, t_vec3 const inter, t_vec3 const normal,
+		double const ior);
 
 t_clr	ray_trace_reflection(t_rtv1 const *core, t_ray ray,
 		t_vec3 const inter, t_vec3 const normal,

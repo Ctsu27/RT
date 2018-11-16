@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/08 16:59:52 by kehuang           #+#    #+#              #
-#    Updated: 2018/11/12 00:16:50 by kehuang          ###   ########.fr        #
+#    Updated: 2018/11/16 14:03:55 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ SRC				:=			main.c					\
 							obj_normal.c			\
 							phong.c					\
 							init.c					\
+							raytracing.c			\
+							fresnel.c				\
 
 SRC_PARSER		:=			parser_json.c			\
 							json_key.c				\

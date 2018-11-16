@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:05 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/13 18:27:12 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/16 14:01:19 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,16 @@ t_clr			phong_shading(t_rtv1 const *core, t_poly const *obj,
 		light_ptr = light_ptr->next;
 	}
 	return (pxl);
+}
+
+t_clr			handle_color(t_rtv1 const *core, t_vec3 const normal,
+		t_poly const *obj, t_vec3 const inter)
+{
+	t_clr	color_pxl;
+
+	color_pxl = phong_shading(core, obj, normal, inter);
+	color_pxl.r = (color_pxl.r > 1.0) ? 1.0 : color_pxl.r;
+	color_pxl.g = (color_pxl.g > 1.0) ? 1.0 : color_pxl.g;
+	color_pxl.b = (color_pxl.b > 1.0) ? 1.0 : color_pxl.b;
+	return (color_pxl);
 }
