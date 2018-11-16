@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 18:51:18 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/09 19:24:55 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/16 12:27:38 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ t_clr			add_clr(t_clr const a, t_clr const b);
 t_clr			div_clr(t_clr const a, double const b);
 t_clr			mul_clr(t_clr const a, double const b);
 t_clr			sub_clr(t_clr const a, t_clr const b);
+t_clr			lerp_clr(t_clr const a);
 #endif

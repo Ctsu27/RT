@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/12 10:24:15 by kehuang           #+#    #+#              #
-#    Updated: 2018/11/10 11:32:10 by kehuang          ###   ########.fr        #
+#    Updated: 2018/11/16 12:28:26 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRC_NAME		:=			$(SRC_BOOL_DIR)/ft_isalnum.c     	\
 							$(SRC_CLR_DIR)/mul_clr.c			\
 							$(SRC_CLR_DIR)/new_clr.c			\
 							$(SRC_CLR_DIR)/sub_clr.c			\
+							$(SRC_CLR_DIR)/lerp_clr.c			\
 							$(SRC_CLST_DIR)/del_clst.c			\
 							$(SRC_CLST_DIR)/new_clst.c			\
 							$(SRC_CLST_DIR)/pbeg_clst.c			\
