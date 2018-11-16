@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/15 15:59:32 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/16 11:55:19 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@
 # define TYPE_CONE 2
 # define TYPE_PLANE 3
 
-# define MATERIAL_DEFAULT 0
-# define MATERIAL_REFLECTIVE 1
-# define MATERIAL_REFRACTIVE 2
+# define MATERIAL_REFLECTIVE 0
+# define MATERIAL_REFRACTIVE 1
+# define MATERIAL_FRESNEL 2
+# define MATERIAL_DEFAULT 3
 
 typedef struct	s_aa
 {
@@ -79,9 +80,10 @@ typedef struct s_cone	t_cyl;
 
 typedef struct	s_cam
 {
-	t_ray	ray;
-	t_vec3	rotate;
-	double	fov;
+	t_ray			ray;
+	t_vec3			rotate;
+	double			fov;
+	unsigned int	rebound;
 }				t_cam;
 
 typedef struct	s_light
@@ -96,7 +98,6 @@ typedef struct	s_poly
 	void			*data;
 	unsigned int	type;
 	unsigned int	material;
-	unsigned int	rebound;
 	t_clr			clr;
 	t_clr			ambient;
 	struct s_poly	*next;
@@ -107,14 +108,26 @@ typedef struct	s_rtv1
 	t_light			*light;
 	t_poly			*objs;
 	t_cam			cam;
+	t_clr			(*re_trace[3])(struct s_rtv1 const *, t_ray, t_vec3 const,
+			t_vec3 const, double const, unsigned int const);
 	t_vec3			(*normal_obj[4])(void *, t_vec3);
 	int				(*inter_obj[4])(t_ray const, void *, double *);
 	double			distance;
 	double			offset_aa;
 	int				n_light;
 	unsigned int	mask;
-	unsigned int	depth;
 }				t_rtv1;
+
+t_clr	ray_trace_reflection(t_rtv1 const *core, t_ray ray,
+		t_vec3 const inter, t_vec3 const normal,
+		double const absorbance, unsigned int const rebound);
+t_clr	ray_trace_refraction(t_rtv1 const *core, t_ray ray,
+		t_vec3 const inter, t_vec3 const normal,
+		double const absorbance, unsigned int const rebound);
+t_clr	ray_trace_fresnel(t_rtv1 const *core, t_ray ray,
+		t_vec3 const inter, t_vec3 const normal,
+		double const absorbance, unsigned int const rebound);
+t_clr	raytrace(t_rtv1 const *core, t_ray ray, unsigned int const rebound);
 
 void			json_error(t_cur *fcur, int const err);
 void			ft_atod(t_cur *fcur, char *str, double *val);

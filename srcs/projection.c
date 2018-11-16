@@ -6,9 +6,12 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:44 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/14 19:15:42 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/16 12:31:12 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+//
+#include "ioft.h"
 
 #include <math.h>
 #include "rt.h"
@@ -29,12 +32,12 @@ static t_ray	get_cam_dir(t_env const *e, t_vec3 const pos,
 	return (ray);
 }
 
-static t_clr	handle_color(t_env const *e, t_vec3 const normal,
+static t_clr	handle_color(t_rtv1 const *core, t_vec3 const normal,
 		t_poly const *obj, t_vec3 const inter)
 {
 	t_clr	color_pxl;
 
-	color_pxl = phong_shading(&e->core, obj, normal, inter);
+	color_pxl = phong_shading(core, obj, normal, inter);
 	color_pxl.r = (color_pxl.r > 1.0) ? 1.0 : color_pxl.r;
 	color_pxl.g = (color_pxl.g > 1.0) ? 1.0 : color_pxl.g;
 	color_pxl.b = (color_pxl.b > 1.0) ? 1.0 : color_pxl.b;
@@ -64,8 +67,6 @@ static t_poly	*get_nearest_obj(t_rtv1 const *core, t_ray const ray,
 	}
 	return (near);
 }
-
-t_clr	raytrace(t_env const *e, t_ray ray, unsigned int depth);
 
 double	fresnel(t_ray const ray, t_vec3 const inter, t_vec3 const normal,
 		double const ior)
@@ -98,11 +99,10 @@ double	fresnel(t_ray const ray, t_vec3 const inter, t_vec3 const normal,
 	return ((r[0] * r[0] + r[1] * r[1]) / 2);
 }
 
-t_clr	ray_trace_refraction(t_env const *e, t_ray ray,
+t_clr	ray_trace_refraction(t_rtv1 const *core, t_ray ray,
 		t_vec3 const inter, t_vec3 const normal,
-		double const absorbance, unsigned int const depth)
+		double const absorbance, unsigned int const rebound)
 {
-	static t_clr	refr_clr;
 	static t_vec3	view;
 	static double	tmp[3];
 	static double	ior = 1.5;
@@ -116,8 +116,7 @@ t_clr	ray_trace_refraction(t_env const *e, t_ray ray,
 	}
 	else
 		tmp[1] = ior;
-	tmp[2] = 1.0 - tmp[1] * tmp[1] * (1.0 - tmp[0] * tmp[0]);
-	if (tmp[2] < 0.0)
+	if ((tmp[2] = 1.0 - tmp[1] * tmp[1] * (1.0 - tmp[0] * tmp[0])) < 0.0)
 	{
 		tmp[1] = 1.0;
 		tmp[2] = 1.0 - tmp[0] * tmp[0];
@@ -125,28 +124,36 @@ t_clr	ray_trace_refraction(t_env const *e, t_ray ray,
 	ray.pos = inter;
 	ray.dir = norm_vec3(add_vec3(mul_vec3(normal, tmp[1]),
 				mul_vec3(normal, tmp[1] * tmp[0] - sqrt(tmp[2]))));
-	refr_clr = raytrace(e, ray, depth - 1);
-	refr_clr = mul_clr(refr_clr, 1 - absorbance);
-	return (refr_clr);
+	return (mul_clr(raytrace(core, ray, rebound), 1.0 - absorbance));
 }
 
-t_clr	ray_trace_reflection(t_env const *e, t_ray ray,
+t_clr	ray_trace_reflection(t_rtv1 const *core, t_ray ray,
 		t_vec3 const inter, t_vec3 const normal,
-		double const absorbance, unsigned int const depth)
+		double const absorbance, unsigned int const rebound)
 {
-	static t_clr	refl_clr;
 	static t_vec3	view;
 
 	view = sub_vec3(ray.pos, inter);
 	ray.pos = inter;
 	ray.dir = norm_vec3(sub_vec3(mul_vec3(normal, 2.0 * dot_vec3(normal, view)),
 				view));
-	refl_clr = raytrace(e, ray, depth - 1);
-	refl_clr = mul_clr(refl_clr, 1 - absorbance);
-	return (refl_clr);
+	return (mul_clr(raytrace(core, ray, rebound), 1.0 - absorbance));
 }
 
-t_clr		raytrace(t_env const *e, t_ray ray, unsigned int const depth)
+t_clr		ray_trace_fresnel(t_rtv1 const *core, t_ray ray,
+		t_vec3 const inter, t_vec3 const normal,
+		double const absorbance, unsigned int const rebound)
+{
+	double	kr;
+
+	kr = fresnel(ray, inter, normal, 1.5);
+	return (add_clr(mul_clr(ray_trace_reflection(core, ray, inter,
+						normal, 1.0 - absorbance, rebound), kr),
+				mul_clr(ray_trace_refraction(core, ray, inter,
+						normal, 1.0 - absorbance, rebound), 1.0 - kr)));
+}
+
+t_clr		raytrace(t_rtv1 const *core, t_ray ray, unsigned int const rebound)
 {
 	t_clr			color_pxl;
 	t_poly			*obj_near;
@@ -155,50 +162,33 @@ t_clr		raytrace(t_env const *e, t_ray ray, unsigned int const depth)
 	double			distance;
 	static double	absorbance = 0.40;
 
-	if ((obj_near = get_nearest_obj(&e->core, ray, &distance)) != NULL)
+	color_pxl = new_clr(0.0, 0.0, 0.0, 0.0);
+	if ((obj_near = get_nearest_obj(core, ray, &distance)) != NULL)
 	{
 		inter = add_vec3(ray.pos, mul_vec3(ray.dir, distance));
-		normal = e->core.normal_obj[obj_near->type](obj_near->data,
+		normal = core->normal_obj[obj_near->type](obj_near->data,
 				(obj_near->type != TYPE_PLANE) ? inter : ray.dir);
-		color_pxl = handle_color(e, normal, obj_near, inter);
-		if (depth > 0)
-//		if (obj_near->type != TYPE_PLANE && depth > 0)
-//		if (obj_near->type == TYPE_PLANE && depth > 0)
-//		if (obj_near->type == TYPE_SPHERE && depth > 0)
-//		if (obj_near->type != TYPE_PLANE
-//				&& obj_near->type != TYPE_CONE
-//				&& depth > 0)
-		{
-			double	kr;
-			kr = fresnel(ray, inter, normal, 1.5);
-			color_pxl = mul_clr(color_pxl, absorbance);
-//			color_pxl = add_clr(color_pxl,
-//					ray_trace_reflection(e, ray, inter, normal, absorbance,
-//					ray_trace_refraction(e, ray, inter, normal, absorbance,
-//						depth));
-			color_pxl = add_clr(color_pxl,
-					add_clr(mul_clr(ray_trace_reflection(e,
-								ray, inter, normal, absorbance, depth), kr),
-						mul_clr(ray_trace_refraction(e,
-								ray, inter, normal, absorbance, depth), kr)));
-		}
+		color_pxl = handle_color(core, normal, obj_near, inter);
+		if (obj_near->material != MATERIAL_DEFAULT && rebound > 0)
+			color_pxl = add_clr(mul_clr(color_pxl, absorbance),
+					core->re_trace[obj_near->material](core, ray, inter,
+						normal, absorbance, rebound - 1));
 	}
-	else
-		color_pxl = new_clr(0.0, 0.0, 0.0, 0.0);
 	return (color_pxl);
 }
 
 t_clr			raytrace_alias(t_env *e, t_ray ray, int const x, int const y)
 {
 	static t_clr		color;
-	static t_clr		tmp;
 	static t_vec3		ray_pos;
 	static t_aa			data;
+	static unsigned int	rebound;
 
 	ray_pos = e->core.cam.ray.pos;
 	data.n_ray = 0;
 	data.y = -e->aa;
 	color = new_clr(0.0, 0.0, 0.0, 0.0);
+	rebound = e->core.cam.rebound;
 	while (data.y <= e->aa)
 	{
 		data.x = -e->aa + ((data.y < 0) ? -data.y : data.y);
@@ -207,12 +197,7 @@ t_clr			raytrace_alias(t_env *e, t_ray ray, int const x, int const y)
 		{
 			ray = get_cam_dir(e, ray_pos, x + (data.x * e->core.offset_aa),
 					y + (data.y * e->core.offset_aa));
-			tmp = raytrace(e, ray, e->core.depth);
-			tmp.r = ((tmp.r > 1.0) ? 1.0 : tmp.r) * 255.0;
-			tmp.g = ((tmp.g > 1.0) ? 1.0 : tmp.g) * 255.0;
-			tmp.b = ((tmp.b > 1.0) ? 1.0 : tmp.b) * 255.0;
-			tmp.a = 0;
-			color = add_clr(color, tmp);
+			color = add_clr(color, lerp_clr(raytrace(&e->core, ray, rebound)));
 			data.n_ray++;
 			data.x++;
 		}
