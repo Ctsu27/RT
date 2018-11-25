@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:41:05 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/16 11:37:39 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/23 16:20:53 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,10 +140,10 @@ int			json_val(t_rtv1 *core, t_cur *fcur, char *cfile)
 	}
 	else
 	{
-		key = ((core->mask >> 16) & 0xff);
+		key = ((core->mask >> 16) & 0xffff);
 		if (get_data(core, fcur, cfile, key) == -1)
 			return (-1);
-		core->mask = core->mask & 0xff00ffff;
+		core->mask = core->mask & (unsigned long)0xffffffff0000ffff;
 		if (check_sep_val(core, fcur, cfile) == -1)
 			core->mask = core->mask | MASK_STOP;
 	}

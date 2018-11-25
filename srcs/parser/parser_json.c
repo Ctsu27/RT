@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:16:49 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/15 14:39:11 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/24 19:23:29 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 **	cylinder
 **	plane
 **
+**	absorption
 **	depth
 **	material
 **	pos
@@ -29,8 +30,12 @@
 **	color
 **	radius
 **	normal
-**	--  ---c --ao    dmpr fcrn    --cl scyp    dmpr fcrn
-**	0b	0000 0000 |  0000 0000 |  0000 0000 |  0000 0000
+**	--  ---c --ao    ---- ----    ---- ----    --cl scyp
+**	0b  0000 0000 |  0000 0000 |  0000 0000 |  0000 0000
+**
+**	--  ---- ---a    dmpr fcrn    ---- ---a    dmpr fcrn
+**	--  0000 0000 |  0000 0000 |  0000 0000 |  0000 0000
+**
 **	'o' bit --> '{' had to be encounter
 **	'a' bit --> if object/light is allocated
 **	'c' 0x10000000 bit --> if there's a cam encountered

@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/16 14:17:11 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/24 19:13:46 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,25 +115,25 @@ typedef struct	s_rtv1
 	double			distance;
 	double			offset_aa;
 	int				n_light;
-	unsigned int	mask;
+	unsigned long	mask;
 }				t_rtv1;
 
 t_clr			handle_color(t_rtv1 const *core, t_vec3 const normal,
 		t_poly const *obj, t_vec3 const inter);
 
-double	fresnel(t_ray const ray, t_vec3 const inter, t_vec3 const normal,
+double			fresnel(t_ray const ray, t_vec3 const inter, t_vec3 const normal,
 		double const ior);
 
-t_clr	ray_trace_reflection(t_rtv1 const *core, t_ray ray,
+t_clr			ray_trace_reflection(t_rtv1 const *core, t_ray ray,
 		t_vec3 const inter, t_vec3 const normal,
 		double const absorbance, unsigned int const rebound);
-t_clr	ray_trace_refraction(t_rtv1 const *core, t_ray ray,
+t_clr			ray_trace_refraction(t_rtv1 const *core, t_ray ray,
 		t_vec3 const inter, t_vec3 const normal,
 		double const absorbance, unsigned int const rebound);
-t_clr	ray_trace_fresnel(t_rtv1 const *core, t_ray ray,
+t_clr			ray_trace_fresnel(t_rtv1 const *core, t_ray ray,
 		t_vec3 const inter, t_vec3 const normal,
 		double const absorbance, unsigned int const rebound);
-t_clr	raytrace(t_rtv1 const *core, t_ray ray, unsigned int const rebound);
+t_clr			raytrace(t_rtv1 const *core, t_ray ray, unsigned int const rebound);
 
 void			json_error(t_cur *fcur, int const err);
 void			ft_atod(t_cur *fcur, char *str, double *val);

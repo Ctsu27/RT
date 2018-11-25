@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:23:14 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/15 15:02:44 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/23 17:56:03 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,26 @@
 
 # define ID_MATERIAL	0
 
-# define MASK_OBJ		0x1000000
-# define MASK_STOP		0x80000000
+# define MASK_OBJ		0x100000000000000
+# define MASK_STOP		0x8000000000000000
 
-# define KEY_MAJOR		0x3f00
-# define KEY_MINOR		0x7f
-# define KEY_OBJS		0xf00
+# define KEY_MAJOR		0xff00000000
+# define KEY_MINOR		0xffff
+# define KEY_OBJS		0xf00000000
 
-# define HAS_CAM		0x10000000
+# define HAS_CAM		0x1000000000000000
 
-# define KEY_CAM		0x2000
-# define KEY_LIGHT		0x1000
+# define KEY_CAM		0x2000000000
+# define KEY_LIGHT		0x1000000000
 
-# define KEY_OBJECT		0xf00
+# define KEY_OBJECT		0xf00000000
 
-# define KEY_SPHERE		0x800
-# define KEY_CONE		0x400
-# define KEY_CYLINDER	0x200
-# define KEY_PLANE		0x100
+# define KEY_SPHERE		0x800000000
+# define KEY_CONE		0x400000000
+# define KEY_CYLINDER	0x200000000
+# define KEY_PLANE		0x100000000
+
+# define KEY_ABSORPTION	0x100
 
 # define KEY_DEPTH		0x80
 # define KEY_MATERIAL	0x40

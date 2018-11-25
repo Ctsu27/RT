@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:21:00 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/16 10:11:31 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/24 19:23:56 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ t_string		g_keys[14] = \
 	[13] = {"\"depth\"", 7}
 };
 
-static int		mask_major(unsigned int *mask, int c)
+static int		mask_major(unsigned long *mask, int c)
 {
-	*mask = *mask | ((1 << c) << 8);
+	*mask = *mask | (unsigned long)((unsigned long)(1 << c) << 32);
 	*mask = *mask | MASK_OBJ;
 	if (*mask & KEY_MAJOR)
 		*mask = *mask | KEY_POS;
@@ -62,7 +62,7 @@ static int		mask_major(unsigned int *mask, int c)
 
 static int		mask_minor(t_rtv1 *core, int c)
 {
-	int		bit;
+	unsigned long	bit;
 
 	bit = (1 << (c - 6));
 	if (core->mask & bit)

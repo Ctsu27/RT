@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:11:50 by kehuang           #+#    #+#             */
-/*   Updated: 2018/08/02 10:11:51 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/23 16:21:53 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	treat_major_sep(t_rtv1 *core, t_cur *fcur, char *cfile)
 		fcur->i++;
 		fcur->x++;
 	}
-	core->mask = core->mask & 0xf0000000;
+	core->mask = core->mask & (unsigned long)0xf000000000000000;
 	ft_zjump(fcur, cfile);
 	if (cfile[fcur->i] != ',')
 		core->mask = core->mask | MASK_STOP;

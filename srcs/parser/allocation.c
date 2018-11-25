@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:25:00 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/15 14:07:47 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/24 19:15:26 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	alloc_light(t_rtv1 *core)
 	return (0);
 }
 
-static int	alloc_data_obj(t_poly *obj, unsigned int mask)
+static int	alloc_data_obj(t_poly *obj, unsigned long mask)
 {
 	if (mask & KEY_PLANE)
 	{
@@ -60,7 +60,7 @@ static int	alloc_data_obj(t_poly *obj, unsigned int mask)
 	return (0);
 }
 
-static int	get_obj_type(int type_mask)
+static int	get_obj_type(unsigned long type_mask)
 {
 	if (type_mask & KEY_SPHERE)
 		return (TYPE_SPHERE);
