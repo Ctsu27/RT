@@ -6,13 +6,15 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:23:14 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/23 17:56:03 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/26 10:41:35 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_INT_H
 # define PARSER_INT_H
 # include "rt_ts.h"
+
+# define KEY_MAX		15
 
 # define ID_MATERIAL	0
 

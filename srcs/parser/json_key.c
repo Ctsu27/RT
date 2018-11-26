@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:21:00 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/24 19:23:56 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/26 11:04:35 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "rt_ts.h"
 #include "parser_int.h"
 
-t_string		g_keys[14] = \
+t_string		g_keys[KEY_MAX] = \
 {
 	[0] = {"\"plane\"", 7},
 	[1] = {"\"cylinder\"", 10},
@@ -29,8 +29,24 @@ t_string		g_keys[14] = \
 	[10] = {"\"rot\"", 5},
 	[11] = {"\"pos\"", 5},
 	[12] = {"\"material\"", 10},
-	[13] = {"\"depth\"", 7}
+	[13] = {"\"depth\"", 7},
+	[14] = {"\"absorption\"", 12}
 };
+
+static void		more_mask(unsigned long *mask)
+{
+	if (*mask & KEY_LIGHT || *mask & KEY_OBJECT)
+		*mask = *mask | KEY_COLOR;
+	if (*mask & KEY_SPHERE || *mask & KEY_CONE || *mask & KEY_CYLINDER)
+		*mask = *mask | KEY_RAD;
+	if (*mask & KEY_PLANE)
+		*mask = *mask | KEY_NORMAL;
+	if (*mask & KEY_OBJECT)
+	{
+		*mask = *mask | KEY_MATERIAL;
+		*mask = *mask | KEY_ABSORPTION;
+	}
+}
 
 static int		mask_major(unsigned long *mask, int c)
 {
@@ -45,14 +61,7 @@ static int		mask_major(unsigned long *mask, int c)
 		*mask = *mask | KEY_FOV;
 		*mask = *mask | KEY_DEPTH;
 	}
-	if (*mask & KEY_LIGHT || *mask & KEY_OBJECT)
-		*mask = *mask | KEY_COLOR;
-	if (*mask & KEY_SPHERE || *mask & KEY_CONE || *mask & KEY_CYLINDER)
-		*mask = *mask | KEY_RAD;
-	if (*mask & KEY_PLANE)
-		*mask = *mask | KEY_NORMAL;
-	if (*mask & KEY_OBJECT)
-		*mask = *mask | KEY_MATERIAL;
+	more_mask(mask);
 	if (*mask & KEY_CAM && *mask & HAS_CAM)
 		return (-1);
 	if (*mask & KEY_CAM)
@@ -81,7 +90,7 @@ int				json_key(t_rtv1 *core, t_cur *fcur, char *cfile)
 	char	lim;
 
 	c = (core->mask & KEY_MAJOR) ? 6 : 0;
-	lim = (c == 6) ? 14 : 6;
+	lim = (c == 6) ? KEY_MAX : 6;
 	while (c < lim
 			&& ft_strncmp(g_keys[c].str, cfile + fcur->i, g_keys[c].size) != 0)
 		c++;
