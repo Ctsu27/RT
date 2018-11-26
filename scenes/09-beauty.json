@@ -1,132 +1,149 @@
 {
- 	"cam" : {
-			"pos" : [0.0, 0.0, -500.0],
-			"rot" : [0.0, 0.0, 180.0],
-			"depth" : 1,
-			"fov" :  30.0
+	"cam" : {
+		"pos" : [0.0, 0.0, -500.0],
+		"rot" : [0.0, 0.0, 180.0],
+		"depth" : 1,
+		"fov" :  30.0
 	},
 
-		"light" : {
-			"pos" : [0.0, 0.0, -50.0],
-			"color" : [255.0, 255.0, 255.0, 0.0]
+	"light" : {
+		"pos" : [0.0, 0.0, -50.0],
+		"color" : [255.0, 255.0, 255.0, 0.0]
 	},
 
-		"light" : {
-			"pos" : [0.0, 50.0, -50.0],
-			"color" : [255.0, 255.0, 255.0, 0.0]
+	"light" : {
+		"pos" : [0.0, 50.0, -50.0],
+		"color" : [255.0, 255.0, 255.0, 0.0]
 	},
 
-		"sphere" : {
-			"pos" : [-10.0, 0.0, 0.0],
-			"color" : [255.0, 255.0, 0.0, 1.0],
-			"material" : "fresnel",
-			"radius": 9.0
+	"sphere" : {
+		"pos" : [-10.0, 0.0, 0.0],
+		"color" : [255.0, 255.0, 0.0, 1.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"radius": 9.0
 	},
-		"sphere" : {
-			"pos" : [0.0, 5.0, 10.0],
-			"color" : [255.0, 0.0, 255.0, 1.0],
-			"material" : "fresnel",
-			"radius": 9.0
+	"sphere" : {
+		"pos" : [0.0, 5.0, 10.0],
+		"color" : [255.0, 0.0, 255.0, 1.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"radius": 9.0
 	},
-		"sphere" : {
-			"pos" : [10.0, 0.0, 0.0],
-			"color" : [0.0, 255.0, 255.0, 1.0],
-			"material" : "fresnel",
-			"radius": 9.0
+	"sphere" : {
+		"pos" : [10.0, 0.0, 0.0],
+		"color" : [0.0, 255.0, 255.0, 1.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"radius": 9.0
 	},
-		"sphere" : {
-			"pos" : [0.0, -10.0, 0.0],
-			"color" : [155.0, 155.0, 155.0, 1.0],
-			"material" : "fresnel",
-			"radius": 9.0
+	"sphere" : {
+		"pos" : [0.0, -10.0, 0.0],
+		"color" : [155.0, 155.0, 155.0, 1.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"radius": 9.0
 	},
-		"cylinder" : {
-			"pos" : [0.0, 5.0, 10.0],
-			"color" : [150.0, 255.0, 155.0, 0.0],
-			"rot" : [-40.0, 0.0, 0.0],
-			"material" : "fresnel",
-			"radius": 4.0
-	},
-
-		"cone" : {
-			"pos" : [-50.0, 10.0, -100.0],
-			"color" : [150.0, 55.0, 55.0, 1.0],
-			"rot" : [0.0, 0.0, 0.0],
-			"material" : "fresnel",
-			"radius": 55.0
-	},
-		"cone" : {
-			"pos" : [50.0, 10.0, -100.0],
-			"color" : [150.0, 255.0, 155.0, 0.0],
-			"rot" : [0.0, 0.0, 0.0],
-			"material" : "fresnel",
-			"radius": 55.0
+	"cylinder" : {
+		"pos" : [0.0, 5.0, 10.0],
+		"color" : [150.0, 255.0, 155.0, 0.0],
+		"rot" : [-40.0, 0.0, 0.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"radius": 4.0
 	},
 
-		"cylinder" : {
-			"pos" : [-50.0, 0.0, -150.0],
-			"color" : [150.0, 155.0, 55.0, 0.0],
-			"rot" : [0.0, 0.0, 0.0],
-			"material" : "fresnel",
-			"radius": 10.0
+	"cone" : {
+		"pos" : [-50.0, 10.0, -100.0],
+		"color" : [150.0, 55.0, 55.0, 1.0],
+		"rot" : [0.0, 0.0, 0.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"radius": 55.0
 	},
-		"cylinder" : {
-			"pos" : [50.0, 0.0, -150.0],
-			"color" : [150.0, 155.0, 55.0, 0.0],
-			"rot" : [0.0, 0.0, 0.0],
-			"material" : "fresnel",
-			"radius": 10.0
-	},
-
-		"plane" : {
-			"pos" : [-10.0, 70.0, -10.0],
-			"color" : [155.0, 155.0, 155.0, 1.0],
-			"material" : "fresnel",
-			"normal" : [0.0, 1.0, 0.0]
-	},
-		"plane" : {
-			"pos" : [-10.0, -50.0, -10.0],
-			"color" : [155.0, 155.0, 155.0, 1.0],
-			"material" : "fresnel",
-			"normal" : [0.0, 1.0, 0.0]
-	},
-		"plane" : {
-			"pos" : [-10.0, -10.0, 45.0],
-			"color" : [155.0, 155.0, 155.0, 1.0],
-			"material" : "fresnel",
-			"normal" : [0.0, 0.0, -1.0]
-	},
-		"plane" : {
-			"pos" : [-10.0, -10.0, -600.0],
-			"color" : [155.0, 155.0, 155.0, 1.0],
-			"material" : "fresnel",
-			"normal" : [0.0, 0.0, -1.0]
-	},
-		"plane" : {
-			"pos" : [-120.0, -10.0, 10.0],
-			"color" : [155.0, 155.0, 155.0, 1.0],
-			"material" : "fresnel",
-			"normal" : [1.0, 0.0, 0.0]
-	},
-		"plane" : {
-			"pos" : [120.0, -10.0, 10.0],
-			"color" : [155.0, 155.0, 155.0, 1.0],
-			"material" : "fresnel",
-			"normal" : [-1.0, 0.0, 0.0]
+	"cone" : {
+		"pos" : [50.0, 10.0, -100.0],
+		"color" : [150.0, 255.0, 155.0, 0.0],
+		"rot" : [0.0, 0.0, 0.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"radius": 55.0
 	},
 
-		"sphere" : {
-			"pos" : [0.0, -30.0, -200.0],
-			"color" : [155.0, 155.0, 155.0, 1.0],
-			"material" : "fresnel",
-			"radius": 9.0
+	"cylinder" : {
+		"pos" : [-50.0, 0.0, -150.0],
+		"color" : [150.0, 155.0, 55.0, 0.0],
+		"rot" : [0.0, 0.0, 0.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"radius": 10.0
 	},
-		"cylinder" : {
-			"pos" : [0.0, -8.0, 3.0],
-			"color" : [150.0, 155.0, 55.0, 0.0],
-			"rot" : [0.0, 0.0, 90.0],
-			"material" : "fresnel",
-			"radius": 4.0
+	"cylinder" : {
+		"pos" : [50.0, 0.0, -150.0],
+		"color" : [150.0, 155.0, 55.0, 0.0],
+		"rot" : [0.0, 0.0, 0.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"radius": 10.0
+	},
+
+	"plane" : {
+		"pos" : [-10.0, 70.0, -10.0],
+		"color" : [155.0, 155.0, 155.0, 1.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"normal" : [0.0, 1.0, 0.0]
+	},
+	"plane" : {
+		"pos" : [-10.0, -50.0, -10.0],
+		"color" : [155.0, 155.0, 155.0, 1.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"normal" : [0.0, 1.0, 0.0]
+	},
+	"plane" : {
+		"pos" : [-10.0, -10.0, 45.0],
+		"color" : [155.0, 155.0, 155.0, 1.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"normal" : [0.0, 0.0, -1.0]
+	},
+	"plane" : {
+		"pos" : [-10.0, -10.0, -600.0],
+		"color" : [155.0, 155.0, 155.0, 1.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"normal" : [0.0, 0.0, -1.0]
+	},
+	"plane" : {
+		"pos" : [-120.0, -10.0, 10.0],
+		"color" : [155.0, 155.0, 155.0, 1.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"normal" : [1.0, 0.0, 0.0]
+	},
+	"plane" : {
+		"pos" : [120.0, -10.0, 10.0],
+		"color" : [155.0, 155.0, 155.0, 1.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"normal" : [-1.0, 0.0, 0.0]
+	},
+
+	"sphere" : {
+		"pos" : [0.0, -30.0, -200.0],
+		"color" : [155.0, 155.0, 155.0, 1.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"radius": 9.0
+	},
+	"cylinder" : {
+		"pos" : [0.0, -8.0, 3.0],
+		"color" : [150.0, 155.0, 55.0, 0.0],
+		"rot" : [0.0, 0.0, 90.0],
+		"material" : "fresnel",
+		"absorption" : 40.0,
+		"radius": 4.0
 	}
 
 }
