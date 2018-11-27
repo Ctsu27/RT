@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:25:18 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/27 14:46:25 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 16:30:24 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	handle_keyboard_event(t_env *e)
 		{
 			e->aa++;
 			projection(e);
-			SDL_RenderPresent(e->render);
 		}
 	}
 	else if (e->evt.key.keysym.sym == SDLK_q)
@@ -43,7 +42,6 @@ static void	handle_keyboard_event(t_env *e)
 		{
 			e->aa--;
 			projection(e);
-			SDL_RenderPresent(e->render);
 		}
 	}
 	else if (e->evt.key.keysym.sym == SDLK_z)
@@ -52,7 +50,6 @@ static void	handle_keyboard_event(t_env *e)
 		{
 			e->core.cam.rebound--;
 			projection(e);
-			SDL_RenderPresent(e->render);
 		}
 	}
 	else if (e->evt.key.keysym.sym == SDLK_x)
@@ -61,7 +58,6 @@ static void	handle_keyboard_event(t_env *e)
 		{
 			e->core.cam.rebound++;
 			projection(e);
-			SDL_RenderPresent(e->render);
 		}
 	}
 }
