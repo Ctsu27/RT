@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/26 11:52:32 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 15:15:02 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct	s_poly
 	t_clr			ambient;
 	double			absorption;
 	unsigned int	type;
-	unsigned int	material;
+	unsigned int	mat;
 	struct s_poly	*next;
 }				t_poly;
 

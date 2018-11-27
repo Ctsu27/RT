@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:41:05 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/23 16:20:53 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 15:16:00 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	get_obj_material(t_rtv1 *core, unsigned int type)
 	{
 		while (ptr->next != NULL)
 			ptr = ptr->next;
-		ptr->material = type;
+		ptr->mat = type;
 	}
 }
 

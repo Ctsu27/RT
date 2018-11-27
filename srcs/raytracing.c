@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 13:58:16 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/26 11:57:26 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 15:15:21 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,9 @@ t_clr		raytrace(t_rtv1 const *core, t_ray ray, unsigned int const rebound)
 	if (inter.obj != NULL)
 	{
 		color_pxl = handle_color(core, inter.normal, inter.obj, inter.pos);
-		if (inter.obj->material != MATERIAL_DEFAULT && rebound > 0)
+		if (inter.obj->mat != MATERIAL_DEFAULT && rebound > 0)
 			color_pxl = add_clr(mul_clr(color_pxl, inter.obj->absorption),
-					re_trace[inter.obj->material](core, ray, inter,
-						rebound - 1));
+					re_trace[inter.obj->mat](core, ray, inter, rebound - 1));
 	}
 	else
 		return (new_clr(0.0, 0.0, 0.0, 0.0));
