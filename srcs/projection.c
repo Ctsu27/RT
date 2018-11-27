@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:44 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/16 14:00:16 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 11:13:27 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,5 @@ void			projection(t_env *e)
 		}
 		y++;
 	}
+	SDL_RenderPresent(e->render);
 }

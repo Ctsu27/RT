@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:09:49 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/16 14:17:14 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 14:27:26 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@ static void	init_fct(t_rtv1 *core)
 	core->normal_obj[1] = &normal_cylinder;
 	core->normal_obj[2] = &normal_cone;
 	core->normal_obj[3] = &normal_plane;
-//	core->re_trace[0] = &ray_trace_reflection;
-//	core->re_trace[1] = &ray_trace_refraction;
-//	core->re_trace[2] = &ray_trace_fresnel;
 }
 
 static void	init_obj_clr(t_poly const *objs, int const n_light)

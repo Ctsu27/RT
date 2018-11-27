@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:25:18 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/16 10:23:11 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 14:27:49 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,6 @@ static void	treat_event(t_env *e)
 		e->on = 0;
 	else if (e->evt.type == SDL_KEYDOWN)
 		handle_keyboard_event(e);
-	else if (e->evt.type == SDL_WINDOWEVENT)
-		if (e->evt.window.event == SDL_WINDOWEVENT_EXPOSED)
-			SDL_RenderPresent(e->render);
 }
 
 void		ft_raytracer(t_env *e)
