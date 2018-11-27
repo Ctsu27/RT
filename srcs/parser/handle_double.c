@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:57:59 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/26 11:10:14 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 14:43:44 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int			handle_double(t_rtv1 *core, t_cur *fcur, char *cfile)
 	}
 	else if (core->mask & (KEY_DEPTH << 16))
 	{
-		if (val < 0)
+		if (val < 0 || (int)(val + 0.5) > REBOUND_MAX)
 			return (-1);
 		core->cam.rebound = (unsigned int)(val + 0.5);
 	}

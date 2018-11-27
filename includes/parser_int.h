@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:23:14 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/26 10:41:35 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 14:43:22 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "rt_ts.h"
 
 # define KEY_MAX		15
+# define REBOUND_MAX	15
 
 # define ID_MATERIAL	0
 
