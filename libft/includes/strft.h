@@ -6,13 +6,13 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 11:26:31 by kehuang           #+#    #+#             */
-/*   Updated: 2018/09/09 11:08:23 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 17:25:45 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRFT_H
 # define STRFT_H
-#include <string.h>
+# include <string.h>
 
 unsigned int	ft_strlen(const char *str);
 int				ft_str2len(char **arr);
@@ -51,5 +51,4 @@ char			**ft_strsplit(char const *s, char c);
 char			**ft_splitwhitespace(char const *s);
 char			*ft_itoa(int n);
 char			*ft_itoa_base(int n, int base);
-int				gl_match(char const *s1, char const *s2);
 #endif

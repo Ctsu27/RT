@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/12 10:24:15 by kehuang           #+#    #+#              #
-#    Updated: 2018/11/16 12:28:26 by kehuang          ###   ########.fr        #
+#    Updated: 2018/11/27 17:26:21 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,25 +19,16 @@ NAME			:=			libft.a
 SRC_DIR			:=			./srcs
 SRC_SUB_DIR		:=			boolean	\
 							clr		\
-							clst	\
 							io		\
 							memory	\
-							slst	\
 							str		\
-							vec2	\
 							vec3	\
 
 SRC_BOOL_DIR	:=			boolean
 SRC_CLR_DIR		:=			clr
-SRC_CLST_DIR	:=			clst
 SRC_IO_DIR		:=			io
-#SRC_LBUF_DIR	:=			lbuf
-#SRC_MATHS_DIR	:=			maths
 SRC_MEMORY_DIR	:=			memory
-#SRC_SBUF_DIR	:=			sbuf
-SRC_SLST_DIR	:=			slst
 SRC_STR_DIR		:=			str
-SRC_VEC2_DIR	:=			vec2
 SRC_VEC3_DIR	:=			vec3
 
 INC_DIR			:=			./includes
@@ -59,10 +50,6 @@ SRC_NAME		:=			$(SRC_BOOL_DIR)/ft_isalnum.c     	\
 							$(SRC_CLR_DIR)/new_clr.c			\
 							$(SRC_CLR_DIR)/sub_clr.c			\
 							$(SRC_CLR_DIR)/lerp_clr.c			\
-							$(SRC_CLST_DIR)/del_clst.c			\
-							$(SRC_CLST_DIR)/new_clst.c			\
-							$(SRC_CLST_DIR)/pbeg_clst.c			\
-							$(SRC_CLST_DIR)/pend_clst.c			\
 							$(SRC_IO_DIR)/ft_putchar.c   		\
 							$(SRC_IO_DIR)/ft_putchar_fd.c		\
 							$(SRC_IO_DIR)/ft_putendl.c   		\
@@ -85,10 +72,6 @@ SRC_NAME		:=			$(SRC_BOOL_DIR)/ft_isalnum.c     	\
 							$(SRC_MEMORY_DIR)/ft_memmove.c 		\
 							$(SRC_MEMORY_DIR)/ft_memset.c  		\
 							$(SRC_MEMORY_DIR)/ft_swap.c    		\
-							$(SRC_SLST_DIR)/del_slst.c			\
-							$(SRC_SLST_DIR)/new_slst.c			\
-							$(SRC_SLST_DIR)/pbeg_slst.c			\
-							$(SRC_SLST_DIR)/pend_slst.c			\
 							$(SRC_STR_DIR)/ft_atoi.c     		\
 							$(SRC_STR_DIR)/ft_free_str2.c		\
 							$(SRC_STR_DIR)/ft_itoa.c     		\
@@ -126,13 +109,6 @@ SRC_NAME		:=			$(SRC_BOOL_DIR)/ft_isalnum.c     	\
 							$(SRC_STR_DIR)/ft_strtrim.c  		\
 							$(SRC_STR_DIR)/ft_tolower.c  		\
 							$(SRC_STR_DIR)/ft_toupper.c  		\
-							$(SRC_STR_DIR)/gl_match.c 	 		\
-							$(SRC_VEC2_DIR)/add_vec2.c			\
-							$(SRC_VEC2_DIR)/div_vec2.c			\
-							$(SRC_VEC2_DIR)/mul_vec2.c			\
-							$(SRC_VEC2_DIR)/sub_vec2.c			\
-							$(SRC_VEC2_DIR)/dot_vec2.c			\
-							$(SRC_VEC2_DIR)/norm_vec2.c			\
 							$(SRC_VEC3_DIR)/new_vec3.c			\
 							$(SRC_VEC3_DIR)/add_vec3.c			\
 							$(SRC_VEC3_DIR)/div_vec3.c			\

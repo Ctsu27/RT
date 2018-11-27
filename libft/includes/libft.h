@@ -6,17 +6,17 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 11:16:03 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/09 17:13:25 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 17:25:20 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-#include "booleanft.h"
-#include "ioft.h"
-#include "memoryft.h"
-#include "strft.h"
+# include "booleanft.h"
+# include "ioft.h"
+# include "memoryft.h"
+# include "strft.h"
 
 /*
 **	boolean
