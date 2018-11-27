@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:44 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/27 11:13:27 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 15:04:04 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,28 @@ static t_clr	raytrace_alias(t_env *e, t_ray ray, int const x, int const y)
 	return (div_clr(color, data.n_ray));
 }
 
+static t_clr	raytrace_default(t_env *e, t_ray ray, int const x, int const y)
+{
+	ray = get_cam_dir(e, ray.pos, x, y);
+	return (lerp_clr(raytrace(&e->core, ray, e->core.cam.rebound)));
+}
+
 void			projection(t_env *e)
 {
+	t_clr	(*get_color)(t_env *, t_ray, int const, int const);
 	t_clr	pxl;
 	int		x;
 	int		y;
 
 	y = 0;
 	e->core.offset_aa = (0.40 * (e->aa * 0.66)) / e->aa;
+	get_color = (e->aa == 0) ? &raytrace_default : &raytrace_alias;
 	while (y < WIN_H)
 	{
 		x = 0;
 		while (x < WIN_W)
 		{
-			pxl = raytrace_alias(e, e->core.cam.ray, x, y);
+			pxl = get_color(e, e->core.cam.ray, x, y);
 			SDL_SetRenderDrawColor(e->render, pxl.r, pxl.g, pxl.b, pxl.a);
 			SDL_RenderDrawPoint(e->render, x, y);
 			x++;
