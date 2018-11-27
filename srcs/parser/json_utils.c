@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:16:53 by kehuang           #+#    #+#             */
-/*   Updated: 2018/08/21 19:27:24 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 17:31:08 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void		json_error(t_cur *fcur, int const err)
 		"error: there is no camera to launch the rtv1\n",
 		"]: need separator\n",
 		"]: not enought data\n"};
+
 	if (fcur != NULL)
 	{
 		ft_putstr_fd("error[", 2);

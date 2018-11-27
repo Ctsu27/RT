@@ -6,12 +6,12 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 17:09:19 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/10 11:52:34 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 17:32:44 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RTV1_H
-# define RTV1_H
+#ifndef RT_H
+# define RT_H
 # include "rt_ts.h"
 # include <SDL.h>
 # define WIN_W 980

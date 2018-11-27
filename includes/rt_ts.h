@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/27 15:15:02 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 17:32:29 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,13 +127,13 @@ typedef struct	s_rtv1
 t_clr			handle_color(t_rtv1 const *core, t_vec3 const normal,
 		t_poly const *obj, t_vec3 const inter);
 
-double			fresnel(t_ray const ray, t_vec3 const inter, t_vec3 const normal,
-		double const ior);
+double			fresnel(t_ray const ray, t_vec3 const inter,
+		t_vec3 const normal, double const ior);
 
 t_clr			ray_trace_refraction(t_rtv1 const *core, t_ray ray,
 		t_inter const inter, unsigned int const rebound);
 t_clr			ray_trace_reflection(t_rtv1 const *core, t_ray ray,
-		t_inter const inter,  unsigned int const rebound);
+		t_inter const inter, unsigned int const rebound);
 t_clr			ray_trace_fresnel(t_rtv1 const *core, t_ray ray,
 		t_inter const inter, unsigned int const rebound);
 t_clr			raytrace(t_rtv1 const *core, t_ray ray,

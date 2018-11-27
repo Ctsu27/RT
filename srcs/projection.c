@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:44 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/27 15:04:04 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 17:30:06 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_ray	get_cam_dir(t_env const *e, t_vec3 const pos,
 {
 	static double const	half_h = WIN_H / 2;
 	static double const	half_w = WIN_W / 2;
-	t_ray	ray;
+	t_ray				ray;
 
 	ray.pos = pos;
 	ray.dir.x = x - half_w;

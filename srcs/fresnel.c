@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:02:33 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/26 12:01:42 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 17:32:17 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	swap_double(double *a, double *b)
 	*b = tmp;
 }
 
-double	fresnel(t_ray const ray, t_vec3 const inter, t_vec3 const normal,
+double		fresnel(t_ray const ray, t_vec3 const inter, t_vec3 const normal,
 		double const ior)
 {
 	static t_vec3	view;

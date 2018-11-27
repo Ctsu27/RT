@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 13:58:16 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/27 15:15:21 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/27 17:29:30 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_inter	get_inter(t_rtv1 const *core, t_ray const ray)
 	return (inter);
 }
 
-t_clr	ray_trace_refraction(t_rtv1 const *core, t_ray ray,
+t_clr			ray_trace_refraction(t_rtv1 const *core, t_ray ray,
 		t_inter const inter, unsigned int const rebound)
 {
 	static t_vec3	view;
@@ -67,8 +67,8 @@ t_clr	ray_trace_refraction(t_rtv1 const *core, t_ray ray,
 	return (mul_clr(raytrace(core, ray, rebound), 1.0 - inter.obj->absorption));
 }
 
-t_clr	ray_trace_reflection(t_rtv1 const *core, t_ray ray,
-		t_inter const inter,  unsigned int const rebound)
+t_clr			ray_trace_reflection(t_rtv1 const *core, t_ray ray,
+		t_inter const inter, unsigned int const rebound)
 {
 	static t_vec3	view;
 
@@ -79,7 +79,7 @@ t_clr	ray_trace_reflection(t_rtv1 const *core, t_ray ray,
 	return (mul_clr(raytrace(core, ray, rebound), 1.0 - inter.obj->absorption));
 }
 
-t_clr		ray_trace_fresnel(t_rtv1 const *core, t_ray ray,
+t_clr			ray_trace_fresnel(t_rtv1 const *core, t_ray ray,
 		t_inter const inter, unsigned int const rebound)
 {
 	double	k;
@@ -90,7 +90,8 @@ t_clr		ray_trace_fresnel(t_rtv1 const *core, t_ray ray,
 					1.0 - k)));
 }
 
-t_clr		raytrace(t_rtv1 const *core, t_ray ray, unsigned int const rebound)
+t_clr			raytrace(t_rtv1 const *core, t_ray ray,
+		unsigned int const rebound)
 {
 	static t_clr	(*re_trace[3])(t_rtv1 const *, t_ray, t_inter const,
 			unsigned int const) = {&ray_trace_reflection, &ray_trace_refraction,
