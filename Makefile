@@ -35,6 +35,7 @@ SRC				:=			main.c					\
 							init.c					\
 							raytracing.c			\
 							fresnel.c				\
+							color.c					\
 
 SRC_PARSER		:=			parser_json.c			\
 							json_key.c				\

@@ -42,8 +42,8 @@ Features
 
 - ### Effect
 	+ Anti-aliasing [X]
-	+ Sepia filter [ ]
-	+ Daltonism filter [ ]
+	+ Sepia filter [X]
+	+ Daltonism filter [X]
 	+ Fifty shade of grey [ ]
 	+ Stereoscope [ ]
 

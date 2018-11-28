@@ -63,7 +63,9 @@ void			projection(t_env *e)
 	t_clr	pxl;
 	int		x;
 	int		y;
+	int		mod; // modifier
 
+	mod = 3; // 0 = normal : 1 = sepia : 2 = deuteranomaly : 3 = gray
 	y = 0;
 	e->core.offset_aa = (0.40 * (e->aa * 0.66)) / e->aa;
 	while (y < WIN_H)
@@ -72,6 +74,7 @@ void			projection(t_env *e)
 		while (x < WIN_W)
 		{
 			pxl = raytrace_alias(e, e->core.cam.ray, x, y);
+			color_modifier(&pxl, mod); // call function
 			SDL_SetRenderDrawColor(e->render, pxl.r, pxl.g, pxl.b, pxl.a);
 			SDL_RenderDrawPoint(e->render, x, y);
 			x++;

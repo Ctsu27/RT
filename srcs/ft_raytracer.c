@@ -26,6 +26,10 @@ static void	sdl_free(t_env *e, int ret)
 
 static void	handle_keyboard_event(t_env *e)
 {
+/*	SDL_Surface *sshot = SDL_CreateRGBSurface(0, 50, 50, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+	printf("render = %d\n", SDL_RenderReadPixels(e->render, NULL, SDL_PIXELFORMAT_ARGB8888, sshot->pixels, sshot->pitch));
+    printf("save   = %d\n", SDL_SaveBMP(sshot, "screenshot.bmp"));
+    SDL_FreeSurface(sshot);*/
 	if (e->evt.key.keysym.sym == SDLK_ESCAPE)
 		e->on = 0;
 	else if (e->evt.key.keysym.sym == SDLK_a)

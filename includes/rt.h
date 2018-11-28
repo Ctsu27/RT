@@ -13,7 +13,7 @@
 #ifndef RTV1_H
 # define RTV1_H
 # include "rt_ts.h"
-# include <SDL.h>
+# include "../../SDL2.framework/Headers/SDL.h"
 # define WIN_W 980
 # define WIN_H 720
 

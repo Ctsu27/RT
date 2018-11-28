@@ -30,4 +30,6 @@ t_clr			div_clr(t_clr const a, double const b);
 t_clr			mul_clr(t_clr const a, double const b);
 t_clr			sub_clr(t_clr const a, t_clr const b);
 t_clr			lerp_clr(t_clr const a);
+
+void			color_modifier(t_clr *pxl, int mod);
 #endif
