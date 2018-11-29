@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:09:49 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/27 14:46:33 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/28 11:43:03 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	init_fct(t_rtv1 *core)
 	core->normal_obj[3] = &normal_plane;
 }
 
-static void	init_obj_clr(t_poly const *objs, int const n_light)
+static void	init_obj_clr(t_poly const *objs, int const n_light, int *n_obj)
 {
 	t_poly	*ptr;
 
@@ -53,6 +53,7 @@ static void	init_obj_clr(t_poly const *objs, int const n_light)
 		ptr->ambient = mul_clr(ptr->clr, 0.30);
 		ptr->ambient.a = 0.0;
 		ptr = ptr->next;
+		*n_obj += 1;
 	}
 }
 
@@ -68,9 +69,10 @@ int			init_env(t_env *e)
 	if ((e->render = SDL_CreateRenderer(e->win, -1,
 					SDL_RENDERER_ACCELERATED)) == NULL)
 		return (0x06);
+	e->core.n_obj = 0;
 	init_fct(&(e->core));
 	init_light(&e->core);
-	init_obj_clr(e->core.objs, e->core.n_light);
+	init_obj_clr(e->core.objs, e->core.n_light, &e->core.n_obj);
 	e->core.cam.ray.dir.z = (WIN_W / 2)
 		/ tan((e->core.cam.fov * M_PI / 180) / 2);
 	e->aa = 0;

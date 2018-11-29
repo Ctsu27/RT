@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/27 17:32:29 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/29 12:00:37 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 # define MATERIAL_REFLECTIVE 0
 # define MATERIAL_REFRACTIVE 1
 # define MATERIAL_FRESNEL 2
-# define MATERIAL_DEFAULT 3
+# define MATERIAL_TRANSPARENT 3
+# define MATERIAL_DEFAULT 4
 
 typedef struct	s_aa
 {
@@ -109,7 +110,14 @@ typedef struct	s_inter
 	t_poly	*obj;
 	t_vec3	pos;
 	t_vec3	normal;
+	double	t;
 }				t_inter;
+
+typedef struct	s_inters
+{
+	t_inter	*data;
+	int		size;
+}				t_inters;
 
 typedef struct	s_rtv1
 {
@@ -121,11 +129,14 @@ typedef struct	s_rtv1
 	double			distance;
 	double			offset_aa;
 	int				n_light;
+	int				n_obj;
 	unsigned long	mask;
 }				t_rtv1;
 
 t_clr			handle_color(t_rtv1 const *core, t_vec3 const normal,
 		t_poly const *obj, t_vec3 const inter);
+
+t_inter			*get_all_inter(t_rtv1 const *core, t_ray const ray, int *size);
 
 double			fresnel(t_ray const ray, t_vec3 const inter,
 		t_vec3 const normal, double const ior);

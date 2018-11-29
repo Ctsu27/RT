@@ -6,106 +6,105 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 13:58:16 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/27 17:29:30 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/29 13:22:43 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include "memoryft.h"
 
-static t_inter	get_inter(t_rtv1 const *core, t_ray const ray)
+static t_clr	(*g_trace[3])(t_rtv1 const *,
+		t_ray,
+		t_inter const,
+		unsigned int const) = \
 {
-	static t_inter	inter;
-	static t_poly	*ptr;
-	static double	t[2];
+	&ray_trace_reflection,
+	&ray_trace_refraction,
+	&ray_trace_fresnel
+};
 
-	ptr = core->objs;
-	inter.obj = NULL;
-	t[1] = 0xffffffff;
-	while (ptr != NULL)
+static t_clr	get_all_transparent(t_rtv1 const *core, t_inters const hits,
+		int *i)
+{
+	t_clr	n;
+
+	n = new_clr(0.0, 0.0, 0.0, 0.0);
+	while (*i < hits.size && hits.data[*i].obj->mat == MATERIAL_TRANSPARENT)
 	{
-		if (core->inter_obj[ptr->type](ray, ptr->data, &t[0]))
-			if (t[0] > 0.01 && (inter.obj == NULL || t[0] < t[1]))
-			{
-				t[1] = t[0];
-				inter.obj = ptr;
-			}
-		ptr = ptr->next;
+		n = add_clr(n, mul_clr(handle_color(core, hits.data[*i].normal,
+						hits.data[*i].obj, hits.data[*i].pos),
+					hits.data[*i].obj->absorption));
+		*i += 1;
 	}
-	if (inter.obj != NULL)
-	{
-		inter.pos = add_vec3(ray.pos, mul_vec3(ray.dir, t[1]));
-		inter.normal = core->normal_obj[inter.obj->type](inter.obj->data,
-				(inter.obj->type != TYPE_PLANE) ? inter.pos : ray.dir);
-	}
-	return (inter);
+	return (div_clr(n, hits.size));
 }
 
-t_clr			ray_trace_refraction(t_rtv1 const *core, t_ray ray,
-		t_inter const inter, unsigned int const rebound)
+static t_clr	cl(t_rtv1 const *core, t_inters const hits,
+		t_clr const n, int const i)
 {
-	static t_vec3	view;
-	static double	tmp[3];
-	static double	ior = 1.5;
-
-	view = sub_vec3(inter.pos, ray.pos);
-	tmp[0] = dot_vec3(inter.normal, view);
-	if (tmp[0] < 0)
+	if (i == 1)
 	{
-		tmp[0] = -tmp[0];
-		tmp[1] = 1.0 / ior;
+		return (handle_color(core, hits.data[i].normal, hits.data[i].obj,
+					hits.data[i].pos));
 	}
-	else
-		tmp[1] = ior;
-	if ((tmp[2] = 1.0 - tmp[1] * tmp[1] * (1.0 - tmp[0] * tmp[0])) < 0.0)
-	{
-		tmp[1] = 1.0;
-		tmp[2] = 1.0 - tmp[0] * tmp[0];
-	}
-	ray.pos = inter.pos;
-	ray.dir = norm_vec3(add_vec3(mul_vec3(inter.normal, tmp[1]),
-				mul_vec3(inter.normal, tmp[1] * tmp[0] - sqrt(tmp[2]))));
-	return (mul_clr(raytrace(core, ray, rebound), 1.0 - inter.obj->absorption));
+	return (add_clr(mul_clr(n, 1 - hits.data[i - 1].obj->absorption),
+				mul_clr(handle_color(core, hits.data[i].normal,
+						hits.data[i].obj, hits.data[i].pos),
+					hits.data[i - 1].obj->absorption)));
 }
 
-t_clr			ray_trace_reflection(t_rtv1 const *core, t_ray ray,
-		t_inter const inter, unsigned int const rebound)
+static t_clr	get_color_transparent(t_rtv1 const *core, t_ray ray,
+		unsigned int const reb, t_inters const hits)
 {
-	static t_vec3	view;
+	t_clr	n;
+	int		i;
 
-	view = sub_vec3(ray.pos, inter.pos);
-	ray.pos = inter.pos;
-	ray.dir = norm_vec3(sub_vec3(mul_vec3(inter.normal,
-					2.0 * dot_vec3(inter.normal, view)), view));
-	return (mul_clr(raytrace(core, ray, rebound), 1.0 - inter.obj->absorption));
-}
-
-t_clr			ray_trace_fresnel(t_rtv1 const *core, t_ray ray,
-		t_inter const inter, unsigned int const rebound)
-{
-	double	k;
-
-	k = fresnel(ray, inter.pos, inter.normal, 1.5);
-	return (add_clr(mul_clr(ray_trace_reflection(core, ray, inter, rebound), k),
-				mul_clr(ray_trace_refraction(core, ray, inter, rebound),
-					1.0 - k)));
+	if (hits.size == 0)
+		return (new_clr(0.0, 0.0, 0.0, 0.0));
+	i = 1;
+	if (hits.data[i].obj->mat == MATERIAL_TRANSPARENT)
+	{
+		n = get_all_transparent(core, hits, &i);
+		if (i == hits.size)
+			return (mul_clr(n, hits.data[i - 1].obj->absorption));
+	}
+	if (hits.data[i].obj->mat != MATERIAL_DEFAULT && reb > 0)
+	{
+		if (i == 1)
+		{
+			return (g_trace[hits.data[i].obj->mat](core, ray,
+				hits.data[i], reb - 1));
+		}
+		return (add_clr(mul_clr(n, 1 - hits.data[i - 1].obj->absorption),
+					mul_clr(g_trace[hits.data[i].obj->mat](core, ray,
+							hits.data[i], reb - 1),
+						hits.data[i - 1].obj->absorption)));
+	}
+	return (cl(core, hits, n, i));
 }
 
 t_clr			raytrace(t_rtv1 const *core, t_ray ray,
 		unsigned int const rebound)
 {
-	static t_clr	(*re_trace[3])(t_rtv1 const *, t_ray, t_inter const,
-			unsigned int const) = {&ray_trace_reflection, &ray_trace_refraction,
-		&ray_trace_fresnel};
-	static t_inter	inter;
+	t_inters		hits;
 	t_clr			color_pxl;
 
-	inter = get_inter(core, ray);
-	if (inter.obj != NULL)
+	hits.size = 0;
+	hits.data = get_all_inter(core, ray, &hits.size);
+	if (hits.data != NULL && (*(hits.data)).obj != NULL)
 	{
-		color_pxl = handle_color(core, inter.normal, inter.obj, inter.pos);
-		if (inter.obj->mat != MATERIAL_DEFAULT && rebound > 0)
-			color_pxl = add_clr(mul_clr(color_pxl, inter.obj->absorption),
-					re_trace[inter.obj->mat](core, ray, inter, rebound - 1));
+		color_pxl = handle_color(core, (*(hits.data)).normal,
+				(*(hits.data)).obj, (*(hits.data)).pos);
+		if ((*(hits.data)).obj->mat == MATERIAL_TRANSPARENT)
+			color_pxl = add_clr(mul_clr(color_pxl,
+						1 - (*(hits.data)).obj->absorption),
+					mul_clr(get_color_transparent(core, ray, rebound, hits),
+						(*(hits.data)).obj->absorption));
+		else if ((*(hits.data)).obj->mat != MATERIAL_DEFAULT && rebound > 0)
+			color_pxl = add_clr(mul_clr(color_pxl,
+						(*(hits.data)).obj->absorption),
+					g_trace[(*(hits.data)).obj->mat](core, ray, (*(hits.data)),
+						rebound - 1));
 	}
 	else
 		return (new_clr(0.0, 0.0, 0.0, 0.0));

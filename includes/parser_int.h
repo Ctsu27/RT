@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:23:14 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/27 14:43:22 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/29 13:27:00 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void			take_light_pos(t_rtv1 *core, t_vec3 **ptr);
 int				get_vec_value(t_vec3 *ptr, t_cur *fcur, char *cfile);
 
 int				handle_double(t_rtv1 *core, t_cur *fcur, char *cfile);
+int				handle_str(t_rtv1 *core, t_cur *fcur, char *cfile,
+		unsigned char key);
 int				get_clr(t_rtv1 *core, t_cur *fcur, char *cfile);
 
 int				json_key(t_rtv1 *core, t_cur *fcur, char *cfile);
