@@ -19,7 +19,7 @@
 	"sphere" : {
 		"pos" : [-10.0, 0.0, 0.0],
 		"color" : [255.0, 255.0, 0.0, 1.0],
-		"material" : "default",
+		"material" : "transparent",
 		"absorption" : 40.0,
 		"radius": 9.0
 	},
@@ -33,7 +33,7 @@
 	"sphere" : {
 		"pos" : [10.0, 0.0, 0.0],
 		"color" : [0.0, 255.0, 255.0, 1.0],
-		"material" : "default",
+		"material" : "transparent",
 		"absorption" : 40.0,
 		"radius": 9.0
 	},
