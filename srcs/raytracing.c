@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 13:58:16 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/29 13:22:43 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/29 14:01:59 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ t_clr			raytrace(t_rtv1 const *core, t_ray ray,
 	t_inters		hits;
 	t_clr			color_pxl;
 
+	color_pxl = new_clr(0.0, 0.0, 0.0, 0.0);
 	hits.size = 0;
 	hits.data = get_all_inter(core, ray, &hits.size);
 	if (hits.data != NULL && (*(hits.data)).obj != NULL)
@@ -105,8 +106,7 @@ t_clr			raytrace(t_rtv1 const *core, t_ray ray,
 						(*(hits.data)).obj->absorption),
 					g_trace[(*(hits.data)).obj->mat](core, ray, (*(hits.data)),
 						rebound - 1));
+		free(hits.data);
 	}
-	else
-		return (new_clr(0.0, 0.0, 0.0, 0.0));
 	return (color_pxl);
 }
