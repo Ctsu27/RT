@@ -19,6 +19,7 @@ Features
 
 - ### Ray
 	+ Rotation [X]
+	+ Transparent [X]
 	+ Reflection [X]
 	+ Refraction [X]
 	+ Fresnel [X]
@@ -37,6 +38,7 @@ Features
 
 - ### Light
 	+ Phong Shading [X]
+	+ Shadow [x] (obsolete)
 	+ Dazzling effect [ ]
 	+ Parallel light [ ]
 
@@ -46,6 +48,17 @@ Features
 	+ Daltonism filter [ ]
 	+ Fifty shade of grey [ ]
 	+ Stereoscope [ ]
+
+- ### Disturbance
+	+ Normal vector disturbance [ ]
+	+ Color Disturbance [ ]
+	+ Perlin noise [ ]
+
+- ### Texture
+	+ Apply texture on 4 objects (sphere, plan, cylinder, cone)
+	+ Can stretch texture on 1 object
+	+ Can set an placement offset on 1 object
+	+ Can load a texture (jpeg, png ...)
 
 - ### Other option
 	+ Camera movement [ ]
@@ -70,3 +83,6 @@ Few actual renderer
 
 #### Rendering with fresnel 7 rebounds and aa5
 ![rip](render/fresnel_7rebound-aa5.png)
+
+#### Rendering with reflection and transparent spheres 10 rebounds and aa5
+![rip](render/transparent_10rebound-aa5.png)
