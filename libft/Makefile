@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/12 10:24:15 by kehuang           #+#    #+#              #
-#    Updated: 2018/11/27 17:26:21 by kehuang          ###   ########.fr        #
+#    Updated: 2018/11/30 16:20:13 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC_NAME		:=			$(SRC_BOOL_DIR)/ft_isalnum.c     	\
 							$(SRC_BOOL_DIR)/ft_isprint.c     	\
 							$(SRC_BOOL_DIR)/ft_iswhitespace.c	\
 							$(SRC_CLR_DIR)/add_clr.c			\
+							$(SRC_CLR_DIR)/modifier_clr.c		\
 							$(SRC_CLR_DIR)/div_clr.c			\
 							$(SRC_CLR_DIR)/mul_clr.c			\
 							$(SRC_CLR_DIR)/new_clr.c			\
