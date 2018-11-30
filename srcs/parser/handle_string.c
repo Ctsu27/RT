@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 13:25:16 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/29 13:26:09 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/30 17:36:48 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,22 @@
 #include "strft.h"
 #include "parser_int.h"
 
-char	*g_str_value[1][6] = \
+char	*g_str_value[2][6] = \
 {
 	[ID_MATERIAL] = {"reflective",
 		"refractive",
 		"fresnel",
 		"transparent",
 		"default",
+		NULL},
+	[ID_FILTER] = {"sepia",
+		"gray",
+		"deuteranomaly",
+		"none",
 		NULL}
 };
 
-static void	get_obj_material(t_rtv1 *core, unsigned int type)
+static void	get_obj_material(t_rtv1 *core, unsigned int const type)
 {
 	t_poly	*ptr;
 
@@ -36,8 +41,20 @@ static void	get_obj_material(t_rtv1 *core, unsigned int type)
 	}
 }
 
+static int	get_value_from_str(t_rtv1 *core, unsigned int const idx,
+		unsigned long const key)
+{
+	if (key == ID_MATERIAL)
+		get_obj_material(core, idx);
+	else if (key == ID_FILTER)
+		core->cam.filter = idx;
+	else
+		return (-1);
+	return (0);
+}
+
 int			handle_str(t_rtv1 *core, t_cur *fcur,
-		char *cfile, unsigned char key)
+		char *cfile, unsigned long key)
 {
 	unsigned int	size;
 	unsigned int	idx;
@@ -48,6 +65,8 @@ int			handle_str(t_rtv1 *core, t_cur *fcur,
 	fcur->x++;
 	if (key == KEY_MATERIAL)
 		key = ID_MATERIAL;
+	else if (key == KEY_FILTER)
+		key = ID_FILTER;
 	else
 		return (-1);
 	idx = 0;
@@ -59,6 +78,5 @@ int			handle_str(t_rtv1 *core, t_cur *fcur,
 		return (-1);
 	fcur->i = fcur->i + size + 1;
 	fcur->x = fcur->x + size + 1;
-	get_obj_material(core, idx);
-	return (0);
+	return (get_value_from_str(core, idx, key));
 }

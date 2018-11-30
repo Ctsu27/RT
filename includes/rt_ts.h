@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/29 12:00:37 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/30 17:15:46 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct	s_cam
 	t_vec3			rotate;
 	double			fov;
 	unsigned int	rebound;
+	int				filter;
 }				t_cam;
 
 typedef struct	s_light

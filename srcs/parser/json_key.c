@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:21:00 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/26 11:04:35 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/30 17:23:06 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ t_string		g_keys[KEY_MAX] = \
 	[11] = {"\"pos\"", 5},
 	[12] = {"\"material\"", 10},
 	[13] = {"\"depth\"", 7},
-	[14] = {"\"absorption\"", 12}
+	[14] = {"\"absorption\"", 12},
+	[15] = {"\"filter\"", 8}
 };
 
 static void		more_mask(unsigned long *mask)
@@ -60,6 +61,7 @@ static int		mask_major(unsigned long *mask, int c)
 	{
 		*mask = *mask | KEY_FOV;
 		*mask = *mask | KEY_DEPTH;
+		*mask = *mask | KEY_FILTER;
 	}
 	more_mask(mask);
 	if (*mask & KEY_CAM && *mask & HAS_CAM)

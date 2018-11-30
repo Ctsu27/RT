@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:23:14 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/29 13:27:00 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/30 17:24:25 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 # define PARSER_INT_H
 # include "rt_ts.h"
 
-# define KEY_MAX		15
+# define KEY_MAX		16
 # define REBOUND_MAX	15
 
 # define ID_MATERIAL	0
+# define ID_FILTER		1
 
 # define MASK_OBJ		0x100000000000000
 # define MASK_STOP		0x8000000000000000
@@ -38,6 +39,7 @@
 # define KEY_CYLINDER	0x200000000
 # define KEY_PLANE		0x100000000
 
+# define KEY_FILTER		0x200
 # define KEY_ABSORPTION	0x100
 
 # define KEY_DEPTH		0x80
@@ -71,7 +73,7 @@ int				get_vec_value(t_vec3 *ptr, t_cur *fcur, char *cfile);
 
 int				handle_double(t_rtv1 *core, t_cur *fcur, char *cfile);
 int				handle_str(t_rtv1 *core, t_cur *fcur, char *cfile,
-		unsigned char key);
+		unsigned long key);
 int				get_clr(t_rtv1 *core, t_cur *fcur, char *cfile);
 
 int				json_key(t_rtv1 *core, t_cur *fcur, char *cfile);

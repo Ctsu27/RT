@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:44 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/30 16:23:00 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/30 17:37:56 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,11 @@ void			projection(t_env *e)
 {
 	t_clr	(*get_color)(t_env *, t_ray, int const, int const);
 	t_clr	pxl;
+	int		filter;
 	int		x;
 	int		y;
 
+	filter = e->core.cam.filter;
 	y = 0;
 	e->core.offset_aa = (0.40 * (e->aa * 0.66)) / e->aa;
 	get_color = (e->aa == 0) ? &raytrace_default : &raytrace_alias;
@@ -80,6 +82,7 @@ void			projection(t_env *e)
 		while (x < WIN_W)
 		{
 			pxl = get_color(e, e->core.cam.ray, x, y);
+			pxl = modifier_clr(pxl, filter);
 			SDL_SetRenderDrawColor(e->render, pxl.r, pxl.g, pxl.b, pxl.a);
 			SDL_RenderDrawPoint(e->render, x, y);
 			x++;

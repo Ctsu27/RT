@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:41:05 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/29 13:26:45 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/11/30 17:35:10 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	handle_arr(t_rtv1 *core, t_cur *fcur, int size, char *cfile)
 	return (0);
 }
 
-static int	get_data(t_rtv1 *core, t_cur *fcur, char *cfile, unsigned char key)
+static int	get_data(t_rtv1 *core, t_cur *fcur, char *cfile, unsigned long key)
 {
 	if (key & KEY_POS || key & KEY_ROT || key & KEY_NORMAL)
 	{
@@ -72,9 +72,9 @@ static int	get_data(t_rtv1 *core, t_cur *fcur, char *cfile, unsigned char key)
 		if (handle_arr(core, fcur, 4, cfile) == -1)
 			return (-1);
 	}
-	else if (key & KEY_MATERIAL)
+	else if (key & KEY_MATERIAL || key & KEY_FILTER)
 	{
-		if (handle_str(core, fcur, cfile, KEY_MATERIAL) == -1)
+		if (handle_str(core, fcur, cfile, key) == -1)
 			return (-1);
 	}
 	else if (handle_double(core, fcur, cfile) == -1)
@@ -84,7 +84,7 @@ static int	get_data(t_rtv1 *core, t_cur *fcur, char *cfile, unsigned char key)
 
 int			json_val(t_rtv1 *core, t_cur *fcur, char *cfile)
 {
-	unsigned char	key;
+	unsigned long	key;
 
 	if (core->mask & MASK_OBJ)
 	{
