@@ -2,6 +2,7 @@
 	"cam" : {
 		"pos" : [0.0, 0.0, -500.0],
 		"rot" : [0.0, 0.0, 0.0],
+		"filter" : "none",
 		"depth" : 0,
 		"fov" :  30.0
 	},
@@ -16,47 +17,19 @@
 		"color" : [255.0, 255.0, 255.0, 0.0]
 	},
 
-<<<<<<< HEAD
 	"sphere" : {
 		"pos" : [-10.0, 0.0, 0.0],
 		"color" : [255.0, 255.0, 0.0, 1.0],
 		"material" : "default",
 		"absorption" : 0.0,
 		"radius": 9.0
-||||||| merged common ancestors
-		"sphere" : {
-			"pos" : [-10.0, 0.0, 0.0],
-			"color" : [255.0, 255.0, 0.0, 1.0],
-			"material" : "default",
-			"radius": 9.0
-=======
-		"sphere" : {
-			"pos" : [-10.0, 0.0, 0.0],
-			"color" : [0.0, 255.0, 0.0, 1.0],
-			"material" : "default",
-			"radius": 9.0
->>>>>>> e1ee035e2c7394a7e97f16fc8f631dd7ceb227e4
 	},
-<<<<<<< HEAD
 	"sphere" : {
 		"pos" : [0.0, 5.0, 10.0],
 		"color" : [255.0, 0.0, 255.0, 1.0],
 		"material" : "default",
 		"absorption" : 0.0,
 		"radius": 9.0
-||||||| merged common ancestors
-		"sphere" : {
-			"pos" : [0.0, 5.0, 10.0],
-			"color" : [255.0, 0.0, 255.0, 1.0],
-			"material" : "default",
-			"radius": 9.0
-=======
-		"sphere" : {
-			"pos" : [0.0, 5.0, 10.0],
-			"color" : [255.0, 0.0, 0.0, 1.0],
-			"material" : "default",
-			"radius": 9.0
->>>>>>> e1ee035e2c7394a7e97f16fc8f631dd7ceb227e4
 	},
 	"sphere" : {
 		"pos" : [10.0, 0.0, 0.0],
