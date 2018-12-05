@@ -2,6 +2,7 @@
 	"cam" : {
 		"pos" : [0.0, 0.0, -500.0],
 		"rot" : [0.0, 0.0, 0.0],
+		"global_illumination" : "on",
 		"filter" : "none",
 		"depth" : 3,
 		"fov" :  30.0
@@ -77,7 +78,7 @@
 	"plane" : {
 		"pos" : [-120.0, -10.0, 10.0],
 		"color" : [0.0, 0.0, 255.0, 1.0],
-		"material" : "default",
+		"material" : "illuminate",
 		"absorption" : 40.0,
 		"normal" : [1.0, 0.0, 0.0]
 	},
