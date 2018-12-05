@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:05 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/16 14:01:19 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/05 17:33:34 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "math_vec3.h"
 #include <math.h>
 
-static int		not_obstruct(t_rtv1 const *core, t_poly const *obj,
+int				not_obstruct(t_rtv1 const *core, t_poly const *obj,
 		t_vec3 const inter, t_light const *light)
 {
 	static t_ray	ray;
@@ -39,58 +39,38 @@ static int		not_obstruct(t_rtv1 const *core, t_poly const *obj,
 	return (TRUE);
 }
 
-static t_clr	diffuse_clr(t_clr obj_clr, t_vec3 obj_normal,
-		t_vec3 light_dir)
+t_clr			diffuse_clr(t_clr const obj_clr, t_vec3 const obj_normal,
+		t_vec3 const light_dir, double const ratio)
 {
-	static t_clr	diffuse;
 	static double	factor_clr;
 
 	factor_clr = dot_vec3(obj_normal, light_dir);
 	if (factor_clr < 0.0)
-	{
-		diffuse.r = 0.0;
-		diffuse.g = 0.0;
-		diffuse.b = 0.0;
-		diffuse.a = 255.0;
-	}
-	else
-	{
-		factor_clr = factor_clr * 0.70;
-		diffuse.r = obj_clr.r * factor_clr;
-		diffuse.g = obj_clr.g * factor_clr;
-		diffuse.b = obj_clr.b * factor_clr;
-		diffuse.a = 0.0;
-	}
-	return (diffuse);
+		return (new_clr(0.0, 0.0, 0.0, 0.0));
+	factor_clr = factor_clr * ratio;
+	return (new_clr(obj_clr.r * factor_clr,
+				obj_clr.g * factor_clr,
+				obj_clr.b * factor_clr,
+				0.0));
 }
 
 static t_clr	specular_clr(t_vec3 const view, t_vec3 const light_dir,
 		t_vec3 const obj_normal, t_clr const light_clr)
 {
 	static t_vec3		reflection;
-	static t_clr		specul;
 	static double		omega;
 	static const int	alpha = 120;
 
 	reflection = norm_vec3(sub_vec3(light_dir,
 				mul_vec3(obj_normal, 2.0 * dot_vec3(obj_normal, light_dir))));
 	omega = dot_vec3(reflection, view);
-	if (omega > 0.0)
-	{
-		omega = pow(omega, alpha) * 0.50;
-		specul.r = omega * light_clr.r;
-		specul.g = omega * light_clr.g;
-		specul.b = omega * light_clr.b;
-		specul.a = 0.0;
-	}
-	else
-	{
-		specul.r = 0.0;
-		specul.g = 0.0;
-		specul.b = 0.0;
-		specul.a = 255.0;
-	}
-	return (specul);
+	if (omega <= 0.0)
+		return (new_clr(0.0, 0.0, 0.0, 0.0));
+	omega = pow(omega, alpha) * 0.50;
+	return (new_clr(omega * light_clr.r,
+				omega * light_clr.g,
+				omega * light_clr.b,
+				0.0));
 }
 
 t_clr			phong_shading(t_rtv1 const *core, t_poly const *obj,
@@ -107,9 +87,10 @@ t_clr			phong_shading(t_rtv1 const *core, t_poly const *obj,
 	{
 		if (not_obstruct(core, obj, inter, light_ptr))
 		{
-			light_dir = norm_vec3(sub_vec3(inter, light_ptr->pos));
-			pxl = add_clr(pxl, diffuse_clr(obj->clr, obj_normal, light_dir));
-			view = norm_vec3(sub_vec3(core->cam.ray.pos, inter));
+			light_dir = norm_vec3(sub_vec3(light_ptr->pos, inter));
+			pxl = add_clr(pxl, diffuse_clr(obj->clr, obj_normal,
+						light_dir, 0.70));
+			view = norm_vec3(sub_vec3(inter, core->cam.ray.pos));
 			pxl = add_clr(pxl,
 					specular_clr(view, light_dir, obj_normal, light_ptr->clr));
 		}
@@ -124,8 +105,6 @@ t_clr			handle_color(t_rtv1 const *core, t_vec3 const normal,
 	t_clr	color_pxl;
 
 	color_pxl = phong_shading(core, obj, normal, inter);
-	color_pxl.r = (color_pxl.r > 1.0) ? 1.0 : color_pxl.r;
-	color_pxl.g = (color_pxl.g > 1.0) ? 1.0 : color_pxl.g;
-	color_pxl.b = (color_pxl.b > 1.0) ? 1.0 : color_pxl.b;
+	color_pxl = clamp_clr(color_pxl, 1.0);
 	return (color_pxl);
 }
