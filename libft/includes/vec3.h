@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 14:33:56 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/27 17:26:00 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/05 17:20:23 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct	s_vec3
 }				t_vec3;
 
 t_vec3			new_vec3(double const x, double const y, double const z);
+t_vec3			rnew_vec3(void);
 
 t_vec3			add_vec3(t_vec3 const a, t_vec3 const b);
 t_vec3			div_vec3(t_vec3 const a, double const b);

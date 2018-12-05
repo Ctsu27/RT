@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/12 10:24:15 by kehuang           #+#    #+#              #
-#    Updated: 2018/11/30 16:20:13 by kehuang          ###   ########.fr        #
+#    Updated: 2018/12/05 17:20:50 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRC_NAME		:=			$(SRC_BOOL_DIR)/ft_isalnum.c     	\
 							$(SRC_CLR_DIR)/new_clr.c			\
 							$(SRC_CLR_DIR)/sub_clr.c			\
 							$(SRC_CLR_DIR)/lerp_clr.c			\
+							$(SRC_CLR_DIR)/clamp_clr.c			\
 							$(SRC_IO_DIR)/ft_putchar.c   		\
 							$(SRC_IO_DIR)/ft_putchar_fd.c		\
 							$(SRC_IO_DIR)/ft_putendl.c   		\
@@ -111,6 +112,7 @@ SRC_NAME		:=			$(SRC_BOOL_DIR)/ft_isalnum.c     	\
 							$(SRC_STR_DIR)/ft_tolower.c  		\
 							$(SRC_STR_DIR)/ft_toupper.c  		\
 							$(SRC_VEC3_DIR)/new_vec3.c			\
+							$(SRC_VEC3_DIR)/rnew_vec3.c			\
 							$(SRC_VEC3_DIR)/add_vec3.c			\
 							$(SRC_VEC3_DIR)/div_vec3.c			\
 							$(SRC_VEC3_DIR)/mul_vec3.c			\
