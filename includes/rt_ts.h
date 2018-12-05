@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/05 17:27:43 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/05 19:21:26 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # define FALSE 0
 # define TRUE 1
 
+# define GI_OFF 0
+# define GI_ON 1
+
 # define TYPE_SPHERE 0
 # define TYPE_CYLINDER 1
 # define TYPE_CONE 2
@@ -28,7 +31,8 @@
 # define MATERIAL_REFRACTIVE 1
 # define MATERIAL_FRESNEL 2
 # define MATERIAL_TRANSPARENT 3
-# define MATERIAL_DEFAULT 4
+# define MATERIAL_ILLUMINATE 4
+# define MATERIAL_DEFAULT 5
 
 typedef struct	s_aa
 {
@@ -86,6 +90,7 @@ typedef struct	s_cam
 	double			fov;
 	unsigned int	rebound;
 	int				filter;
+	int				gi;
 }				t_cam;
 
 typedef struct	s_light

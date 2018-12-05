@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:05 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/05 17:33:34 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/05 19:26:21 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,8 @@ t_clr			handle_color(t_rtv1 const *core, t_vec3 const normal,
 
 	color_pxl = phong_shading(core, obj, normal, inter);
 	color_pxl = clamp_clr(color_pxl, 1.0);
+	if (core->cam.gi != GI_OFF)
+		color_pxl = add_clr(color_pxl,
+				clamp_clr(glob_illum(core, normal, inter), 1.0));
 	return (color_pxl);
 }
