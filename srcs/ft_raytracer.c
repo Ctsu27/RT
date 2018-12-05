@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:25:18 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/30 15:58:42 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/05 17:06:40 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void		ft_raytracer(t_env *e)
 
 	if ((ret = init_env(e)) != 0)
 		return (sdl_free(e, ret));
+	srand(time(NULL));
 	projection(e);
 	while (e->on != FALSE)
 		while (SDL_PollEvent(&e->evt))
