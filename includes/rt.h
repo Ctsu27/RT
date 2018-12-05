@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 17:09:19 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/30 15:58:23 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/05 17:36:21 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <SDL.h>
 # define WIN_W 980
 # define WIN_H 720
+
+# define MAX_I (5)
 
 typedef struct	s_env
 {

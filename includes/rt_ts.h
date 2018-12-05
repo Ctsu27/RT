@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/30 17:15:46 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/05 17:27:43 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,31 @@ t_clr			ray_trace_fresnel(t_rtv1 const *core, t_ray ray,
 t_clr			raytrace(t_rtv1 const *core, t_ray ray,
 		unsigned int const rebound);
 
+t_clr			next_obj_clr(t_rtv1 const *core, t_inters const hits,
+		t_clr const n, int const i);
+t_clr			get_all_transparent(t_rtv1 const *core, t_inters const hits,
+		int *i);
+t_clr			get_color_transparent(t_rtv1 const *core, t_ray ray,
+		unsigned int const reb, t_inters const hits);
+
+t_clr			gi_ray_trace_refraction(t_rtv1 const *core, t_ray ray,
+		t_inter const hit, unsigned int const rebound);
+t_clr			gi_ray_trace_reflection(t_rtv1 const *core, t_ray ray,
+		t_inter const hit, unsigned int const rebound);
+t_clr			gi_ray_trace_fresnel(t_rtv1 const *core, t_ray ray,
+		t_inter const hit, unsigned int const rebound);
+t_clr			glob_illum(t_rtv1 const *core,
+		t_vec3 const normal, t_vec3 const inter);
+t_clr			raytrace_diffuse(t_rtv1 const *core, t_ray ray,
+		unsigned int const rebound);
+
 void			json_error(t_cur *fcur, int const err);
 void			ft_atod(t_cur *fcur, char *str, double *val);
+
+int				not_obstruct(t_rtv1 const *core, t_poly const *obj,
+		t_vec3 const inter, t_light const *light);
+t_clr			diffuse_clr(t_clr const obj_clr, t_vec3 const obj_normal,
+		t_vec3 const light_dir, double const ratio);
 t_clr			phong_shading(t_rtv1 const *core, t_poly const *obj,
 		t_vec3 const obj_normal, t_vec3 const inter);
 

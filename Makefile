@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/08 16:59:52 by kehuang           #+#    #+#              #
-#    Updated: 2018/11/30 16:18:34 by kehuang          ###   ########.fr        #
+#    Updated: 2018/12/05 16:56:26 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,11 @@ SRC				:=			main.c					\
 							init.c					\
 							raytracing.c			\
 							ray_distorted.c			\
+							gi_ray_distorted.c		\
+							global_illumination.c	\
 							fresnel.c				\
 							get_all_inter.c			\
+							transparent.c			\
 
 SRC_PARSER		:=			parser_json.c			\
 							json_key.c				\
