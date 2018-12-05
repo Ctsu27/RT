@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 13:25:16 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/30 17:36:48 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/05 19:21:04 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,24 @@
 #include "strft.h"
 #include "parser_int.h"
 
-char	*g_str_value[2][6] = \
+char	*g_str_value[3][7] = \
 {
 	[ID_MATERIAL] = {"reflective",
 		"refractive",
 		"fresnel",
 		"transparent",
+		"illuminate",
 		"default",
 		NULL},
 	[ID_FILTER] = {"sepia",
 		"gray",
 		"deuteranomaly",
 		"none",
-		NULL}
+		NULL},
+	[ID_GI] = {"off",
+		"on",
+		NULL
+	}
 };
 
 static void	get_obj_material(t_rtv1 *core, unsigned int const type)
@@ -48,6 +53,8 @@ static int	get_value_from_str(t_rtv1 *core, unsigned int const idx,
 		get_obj_material(core, idx);
 	else if (key == ID_FILTER)
 		core->cam.filter = idx;
+	else if (key == ID_GI)
+		core->cam.gi = idx;
 	else
 		return (-1);
 	return (0);
@@ -67,6 +74,8 @@ int			handle_str(t_rtv1 *core, t_cur *fcur,
 		key = ID_MATERIAL;
 	else if (key == KEY_FILTER)
 		key = ID_FILTER;
+	else if (key == KEY_GI)
+		key = ID_GI;
 	else
 		return (-1);
 	idx = 0;
