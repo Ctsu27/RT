@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:55:57 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/06 10:56:55 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/06 12:08:40 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,8 @@ t_clr			raytrace_diffuse(t_rtv1 const *core, t_ray ray,
 					core->gi_trace[data->obj->mat](core, ray, *data,
 						rebound - 1));
 		if (data->obj->mat != MATERIAL_ILLUMINATE)
-		{
-			free(hits.data);
 			color_pxl = new_clr(0.0, 0.0, 0.0, 0.0);
-		}
+		free(hits.data);
 	}
 	return (color_pxl);
 }
