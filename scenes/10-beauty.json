@@ -4,6 +4,7 @@
 		"rot" : [0.0, 0.0, 180.0],
 		"global_illumination" : "off",
 		"filter": "sepia",
+		"sample_ray" : 15,
 		"depth" : 10,
 		"fov" :  30.0
 	},

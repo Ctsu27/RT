@@ -4,6 +4,7 @@
 		"rot" : [0.0, 0.0, 0.0],
 		"global_illumination" : "off",
 		"filter" : "none",
+		"sample_ray" : 15,
 		"depth" : 0,
 		"fov" :  30.0
 	},
