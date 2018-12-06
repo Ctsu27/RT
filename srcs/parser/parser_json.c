@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:16:49 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/24 19:23:29 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/06 15:09:22 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 **	cylinder
 **	plane
 **
+**	sample ray
+**	global illumination
+**	filter
 **	absorption
 **	depth
 **	material
@@ -33,7 +36,7 @@
 **	--  ---c --ao    ---- ----    ---- ----    --cl scyp
 **	0b  0000 0000 |  0000 0000 |  0000 0000 |  0000 0000
 **
-**	--  ---- ---a    dmpr fcrn    ---- ---a    dmpr fcrn
+**	--  ---- ---a    dmpr fcrn    ---- sgfa    dmpr fcrn
 **	--  0000 0000 |  0000 0000 |  0000 0000 |  0000 0000
 **
 **	'o' bit --> '{' had to be encounter
