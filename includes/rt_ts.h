@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/06 10:32:50 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/06 10:41:34 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,12 @@ typedef struct	s_rtv1
 	unsigned long	mask;
 }				t_rtv1;
 
+/*
+**	#==========================================================================#
+**	#--------------------------------------------------------------------------#
+**	#                                  UTILS                                   #
+*/
+
 t_clr			handle_color(t_rtv1 const *core, t_vec3 const normal,
 		t_poly const *obj, t_vec3 const inter);
 
@@ -150,6 +156,12 @@ t_inter			*get_all_inter(t_rtv1 const *core, t_ray const ray, int *size);
 
 double			fresnel(t_ray const ray, t_vec3 const inter,
 		t_vec3 const normal, double const ior);
+
+/*
+**	#==========================================================================#
+**	#--------------------------------------------------------------------------#
+**	#                                   RAY                                    #
+*/
 
 t_clr			ray_trace_refraction(t_rtv1 const *core, t_ray ray,
 		t_inter const inter, unsigned int const rebound);
@@ -159,11 +171,6 @@ t_clr			ray_trace_fresnel(t_rtv1 const *core, t_ray ray,
 		t_inter const inter, unsigned int const rebound);
 t_clr			raytrace(t_rtv1 const *core, t_ray ray,
 		unsigned int const rebound);
-
-t_clr			get_color_transparent(t_rtv1 const *core, t_ray ray,
-		unsigned int const reb, t_inters const hits);
-t_clr			gi_get_color_transparent(t_rtv1 const *core, t_ray ray,
-		unsigned int const reb, t_inters const hits);
 
 t_clr			gi_ray_trace_refraction(t_rtv1 const *core, t_ray ray,
 		t_inter const hit, unsigned int const rebound);
@@ -176,8 +183,31 @@ t_clr			glob_illum(t_rtv1 const *core,
 t_clr			raytrace_diffuse(t_rtv1 const *core, t_ray ray,
 		unsigned int const rebound);
 
+/*
+**	#==========================================================================#
+**	#--------------------------------------------------------------------------#
+**	#                               TRANSPARENT                                #
+*/
+
+t_clr			get_color_transparent(t_rtv1 const *core, t_ray ray,
+		unsigned int const reb, t_inters const hits);
+t_clr			gi_get_color_transparent(t_rtv1 const *core, t_ray ray,
+		unsigned int const reb, t_inters const hits);
+
+/*
+**	#==========================================================================#
+**	#--------------------------------------------------------------------------#
+**	#                                 PARSER                                   #
+*/
+
 void			json_error(t_cur *fcur, int const err);
 void			ft_atod(t_cur *fcur, char *str, double *val);
+
+/*
+**	#==========================================================================#
+**	#--------------------------------------------------------------------------#
+**	#                                 PHONG                                    #
+*/
 
 int				not_obstruct(t_rtv1 const *core, t_poly const *obj,
 		t_vec3 const inter, t_light const *light);
