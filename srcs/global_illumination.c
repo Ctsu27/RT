@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:55:57 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/06 12:29:57 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/06 17:20:58 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static void		init_raytrace_diffuse(t_rtv1 const *core, t_ray ray,
 t_clr			raytrace_diffuse(t_rtv1 const *core, t_ray ray,
 		unsigned int const rebound)
 {
-	t_inters		hits;
-	static t_inter	*data;
-	t_clr			color_pxl;
+	t_inters	hits;
+	t_inter		*data;
+	t_clr		color_pxl;
 
 	init_raytrace_diffuse(core, ray, &hits, &color_pxl);
 	if (hits.data != NULL && (data = (hits.data))->obj != NULL
