@@ -4,28 +4,43 @@
 		"rot" : [-10.0, 0.0, 0.0],
 		"global_illumination" : "on",
 		"filter" : "none",
-		"sample_ray" : 5,
+		"sample_ray" : 30,
 		"depth" : 1,
 		"fov" :  30.0
 	},
 
 	"light" : {
-		"pos" : [0.0, 0.0, -50.0],
+		"pos" : [-10.0, -20.0, -50.0],
 		"color" : [255.0, 255.0, 255.0, 0.0]
 	},
 
 	"light" : {
-		"pos" : [0.0, -50.0, -50.0],
+		"pos" : [10.0, -40.0, -50.0],
 		"color" : [255.0, 255.0, 255.0, 0.0]
 	},
 
 	"sphere" : {
+		"pos" : [-70.0, -10.0, -20.0],
+		"color" : [255.0, 55.0, 55.0, 0.0],
+		"material" : "illuminate",
+		"absorption" : 0.0,
+		"radius": 10.0
+	},
+	"sphere" : {
 		"pos" : [-10.0, 0.0, 0.0],
-		"color" : [255.0, 255.0, 0.0, 1.0],
+		"color" : [255.0, 255.0, 0.0, 0.0],
 		"material" : "illuminate",
 		"absorption" : 0.0,
 		"radius": 20.0
 	},
+	"sphere" : {
+		"pos" : [50.0, -10.0, -20.0],
+		"color" : [55.0, 55.0, 255.0, 0.0],
+		"material" : "illuminate",
+		"absorption" : 0.0,
+		"radius": 10.0
+	},
+
 	"cylinder" : {
 		"pos" : [20.0, 5.0, 10.0],
 		"color" : [150.0, 255.0, 155.0, 0.0],
@@ -37,16 +52,24 @@
 
 	"cone" : {
 		"pos" : [-50.0, -20.0, 10.0],
-		"color" : [150.0, 55.0, 55.0, 1.0],
+		"color" : [150.0, 55.0, 55.0, 0.0],
 		"rot" : [0.0, 0.0, -10.0],
 		"material" : "fresnel",
 		"absorption" : 40.0,
 		"radius": 10.0
 	},
+
+	"plane" : {
+		"pos" : [0.0, 0.0, 70.0],
+		"color" : [90.0, 55.0, 94.0, 0.0],
+		"material" : "default",
+		"absorption" : 40.0,
+		"normal" : [0.0, 0.0, -1.0]
+	},
 	"plane" : {
 		"pos" : [0.0, 10.0, 0.0],
-		"color" : [155.0, 155.0, 155.0, 1.0],
-		"material" : "fresnel",
+		"color" : [155.0, 155.0, 155.0, 0.0],
+		"material" : "default",
 		"absorption" : 40.0,
 		"normal" : [0.0, -1.0, 0.0]
 	}
