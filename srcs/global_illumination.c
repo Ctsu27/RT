@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:55:57 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/06 10:30:25 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/06 10:56:55 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,14 @@ t_clr			raytrace_diffuse(t_rtv1 const *core, t_ray ray,
 t_clr			glob_illum(t_rtv1 const *core,
 		t_vec3 const normal, t_vec3 const inter)
 {
-	t_ray						ray;
-	t_clr						pxl;
-	t_clr						tmp;
-	static unsigned int const	sample_ray = MAX_I;
-	unsigned int				n_iter;
+	t_ray			ray;
+	t_clr			pxl;
+	t_clr			tmp;
+	unsigned int	sample_ray;
+	unsigned int	n_iter;
 
 	ray.pos = inter;
+	sample_ray = core->cam.sample_ray;
 	pxl = new_clr(0.0, 0.0, 0.0, 0.0);
 	n_iter = 0;
 	while (n_iter < sample_ray)
