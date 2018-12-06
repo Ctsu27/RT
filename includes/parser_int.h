@@ -6,15 +6,13 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:23:14 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/05 19:19:37 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/06 10:05:10 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_INT_H
 # define PARSER_INT_H
 # include "rt_ts.h"
-
-#include "ioft.h"
 
 # define KEY_MAX		17
 # define REBOUND_MAX	15
