@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:57:59 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/06 10:52:46 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/06 12:13:19 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	more_handle_double(t_rtv1 *core, double const val)
 {
 	if (core->mask & (KEY_SAMPLE_RAY << 16))
 	{
-		if (val < 0 || (int)(val + 0.5) > SAMPLE_MAX)
+		if (val < 1.0 || (int)(val + 0.5) > SAMPLE_MAX)
 			return (-1);
 		core->cam.sample_ray = (unsigned int)(val + 0.5);
 	}
