@@ -88,5 +88,5 @@ Few actual renderer
 #### Rendering with reflection and transparent spheres 10 rebounds and aa5
 ![rip](render/transparent_10rebound-aa5.png)
 
-#### Rendering with reflection and transparent spheres 10 rebounds and aa5
+#### Rendering with global illumination (cone)
 ![rip](render/global_illumination.png)
