@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/05 19:21:26 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/06 10:32:50 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,10 @@ typedef struct	s_rtv1
 	t_light			*light;
 	t_poly			*objs;
 	t_cam			cam;
+	t_clr			(*trace[3])(struct s_rtv1 const *, t_ray,
+			t_inter const, unsigned int const);
+	t_clr			(*gi_trace[3])(struct s_rtv1 const *, t_ray,
+			t_inter const, unsigned int const);
 	t_vec3			(*normal_obj[4])(void *, t_vec3);
 	int				(*inter_obj[4])(t_ray const, void *, double *);
 	double			distance;
@@ -156,11 +160,9 @@ t_clr			ray_trace_fresnel(t_rtv1 const *core, t_ray ray,
 t_clr			raytrace(t_rtv1 const *core, t_ray ray,
 		unsigned int const rebound);
 
-t_clr			next_obj_clr(t_rtv1 const *core, t_inters const hits,
-		t_clr const n, int const i);
-t_clr			get_all_transparent(t_rtv1 const *core, t_inters const hits,
-		int *i);
 t_clr			get_color_transparent(t_rtv1 const *core, t_ray ray,
+		unsigned int const reb, t_inters const hits);
+t_clr			gi_get_color_transparent(t_rtv1 const *core, t_ray ray,
 		unsigned int const reb, t_inters const hits);
 
 t_clr			gi_ray_trace_refraction(t_rtv1 const *core, t_ray ray,
