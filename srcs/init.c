@@ -6,12 +6,14 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:09:49 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/06 10:20:03 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/06 12:31:23 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include "math_vec3.h"
+#include <stdlib.h>
+#include <math.h>
 
 static void	init_light(t_rtv1 *core)
 {

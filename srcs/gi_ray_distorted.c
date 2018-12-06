@@ -6,10 +6,11 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:55:02 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/05 16:55:02 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/06 12:23:18 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "rt.h"
 
 t_clr			gi_ray_trace_refraction(t_rtv1 const *core, t_ray ray,

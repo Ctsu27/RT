@@ -6,11 +6,12 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:55:57 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/06 12:08:40 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/06 12:29:57 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <time.h>
+#include <stdlib.h>
 #include "rt.h"
 
 static t_clr	get_diffuse_clr(t_rtv1 const *core, t_poly const *obj,
@@ -65,8 +66,8 @@ t_clr			raytrace_diffuse(t_rtv1 const *core, t_ray ray,
 						rebound - 1));
 		if (data->obj->mat != MATERIAL_ILLUMINATE)
 			color_pxl = new_clr(0.0, 0.0, 0.0, 0.0);
-		free(hits.data);
 	}
+	free(hits.data);
 	return (color_pxl);
 }
 
@@ -75,19 +76,20 @@ t_clr			glob_illum(t_rtv1 const *core,
 {
 	t_ray			ray;
 	t_clr			pxl;
-	t_clr			tmp;
+	unsigned int	rebound;
 	unsigned int	sample_ray;
 	unsigned int	n_iter;
 
 	ray.pos = inter;
 	sample_ray = core->cam.sample_ray;
+	rebound = core->cam.rebound;
 	pxl = new_clr(0.0, 0.0, 0.0, 0.0);
 	n_iter = 0;
 	while (n_iter < sample_ray)
 	{
 		ray.dir = rot_vec3(normal, rnew_vec3());
-		tmp = raytrace_diffuse(core, ray, core->cam.rebound);
-		pxl = add_clr(pxl, mul_clr(tmp, core->n_light));
+		pxl = add_clr(pxl, mul_clr(raytrace_diffuse(core, ray, rebound),
+					core->n_light));
 		n_iter++;
 	}
 	return (div_clr(pxl, sample_ray));
