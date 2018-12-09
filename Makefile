@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/08 16:59:52 by kehuang           #+#    #+#              #
-#    Updated: 2018/12/05 16:56:26 by kehuang          ###   ########.fr        #
+#    Updated: 2018/12/09 18:04:28 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ NAME			:=			RT
 
 SRC_DIR			:=			./srcs
 PARSER_DIR		:=			parser
+MLX_DIR			:=			./mlx_macos
 INC_DIR			:=			./includes
 OBJ_DIR			:=			./objs
 LIB_DIR			:=			./libft
@@ -61,8 +62,6 @@ OBJ				+=			$(OBJ_PARSER)
 SRC_ALL			:=			$(SRC_PARSER)
 SRC_ALL			+=			$(SRC)
 
-LIBFT			:=			$(LIB_DIR)/libft.a
-
 NB				:=			$(words $(SRC_ALL))
 INDEX			:=			0
 
@@ -74,14 +73,16 @@ CC				:=			gcc
 CFLAGS			:=			-Wall -Wextra -Werror
 CFLAGS			+=			-g3
 CFLAGS			+=			-O2
-INC_SDL			:=			-I/Users/$(USER)/.brew/include/SDL2 -D_THREAD_SAFE
-LIB_SDL			:=			-L/Users/$(USER)/.brew/lib -lSDL2
-CLIB			:=			-L$(LIB_DIR) -lft
+MLXFLAGS		:=			-framework OpenGL -framework AppKit
+
 
 #==============================================================================#
 #------------------------------------------------------------------------------#
 #                                LIBRARY                                       #
 
+LIBFT			:=			$(LIB_DIR)/libft.a
+CLIB			:=			-L$(LIB_DIR) -lft
+LIB_MLX			:=			$(MLX_DIR)/libmlx.a
 L_FT			:=			$(LIB_DIR)
 
 #==============================================================================#
@@ -91,7 +92,8 @@ L_FT			:=			$(LIB_DIR)
 all:					$(NAME)
 
 $(NAME):				$(LIBFT) $(OBJ_DIR) $(OBJ)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(CLIB) $(LIB_SDL)
+	@$(MAKE) -C $(MLX_DIR)
+	@$(CC) $(CFLAGS) $(MLXFLAGS) -o $(NAME) $(OBJ) $(CLIB) $(LIB_MLX)
 	@printf '\033[33m[ READY ] %s\n\033[0m' "Compilation of $(NAME) is done ---"
 
 $(LIBFT):
@@ -101,7 +103,7 @@ $(OBJ_DIR)/%.o:			$(SRC_DIR)/%.c $(INC_DIR)
 	@$(eval DONE=$(shell echo $$(($(INDEX)*20/$(NB)))))
 	@$(eval PERCENT=$(shell echo $$(($(INDEX)*100/$(NB)))))
 	@$(eval TO_DO=$(shell echo "$@"))
-	@$(CC) $(CFLAGS) -o $@ -c $< -I$(INC_DIR) $(INC_SDL)
+	@$(CC) $(CFLAGS) -o $@ -c $< -I$(INC_DIR)
 	@printf "[ %d%% ] %s :: %s        \r" $(PERCENT) $(NAME) $@
 	@$(eval INDEX=$(shell echo $$(($(INDEX)+1))))
 
@@ -109,7 +111,7 @@ $(OBJ_DIR)/%.o:			$(SRC_DIR)/$(PARSER_DIR)/%.c $(INC_DIR)
 	@$(eval DONE=$(shell echo $$(($(INDEX)*20/$(NB)))))
 	@$(eval PERCENT=$(shell echo $$(($(INDEX)*100/$(NB)))))
 	@$(eval TO_DO=$(shell echo "$@"))
-	@$(CC) $(CFLAGS) -o $@ -c $< -I$(INC_DIR) $(INC_SDL)
+	@$(CC) $(CFLAGS) -o $@ -c $< -I$(INC_DIR)
 	@printf "[ %d%% ] %s :: %s        \r" $(PERCENT) $(NAME) $@
 	@$(eval INDEX=$(shell echo $$(($(INDEX)+1))))
 
@@ -119,12 +121,14 @@ $(OBJ_DIR):
 clean:
 	@rm -f $(OBJ)
 	@rm -rf $(OBJ_DIR)
-	@make -C $(LIB_DIR) clean
+	@$(MAKE) -C $(LIB_DIR) clean
+	@$(MAKE) -C $(MLX_DIR) clean
 	@printf '\033[33m[ KILL ] %s\n\033[0m' "Clean of $(NAME) is done ---"
 
 fclean: 				clean
 	@rm -rf $(NAME)
-	@make -C $(LIB_DIR) fclean
+	@$(MAKE) -C $(LIB_DIR) fclean
+	@$(MAKE) -C $(MLX_DIR) fclean
 	@printf '\033[33m[ KILL ] %s\n\033[0m' "Fclean of $(NAME) is done ---"
 
 re:

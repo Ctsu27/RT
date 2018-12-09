@@ -6,12 +6,13 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:44 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/30 17:37:56 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/09 18:14:40 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "rt.h"
+#include "mlx.h"
 
 static t_ray	get_cam_dir(t_env const *e, t_vec3 const pos,
 		double const x, double const y)
@@ -64,6 +65,19 @@ static t_clr	raytrace_default(t_env *e, t_ray ray, int const x, int const y)
 	return (lerp_clr(raytrace(&e->core, ray, e->core.cam.rebound)));
 }
 
+static void		mlx_put_pxl_img(char *img, t_clr const c,
+		int const x, int const y)
+{
+	static int		sizeline = WIN_W * 4;
+	unsigned long	i;
+
+	i = x * 4 + y * sizeline;
+	img[i] = (char)(c.r + 0.5);
+	img[i + 1] = (char)(c.g + 0.5);
+	img[i + 2] = (char)(c.b + 0.5);
+	img[i + 3] = (char)(c.a + 0.5);
+}
+
 void			projection(t_env *e)
 {
 	t_clr	(*get_color)(t_env *, t_ray, int const, int const);
@@ -83,11 +97,9 @@ void			projection(t_env *e)
 		{
 			pxl = get_color(e, e->core.cam.ray, x, y);
 			pxl = modifier_clr(pxl, filter);
-			SDL_SetRenderDrawColor(e->render, pxl.r, pxl.g, pxl.b, pxl.a);
-			SDL_RenderDrawPoint(e->render, x, y);
+			mlx_put_pxl_img(e->img, pxl, x, y);
 			x++;
 		}
 		y++;
 	}
-	SDL_RenderPresent(e->render);
 }

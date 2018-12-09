@@ -6,68 +6,43 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:25:18 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/05 17:06:40 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/09 18:12:35 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
-#include "libft.h"
 #include <unistd.h>
+#include <time.h>
+#include "rt.h"
+#include "parser.h"
+#include "libft.h"
+#include "mlx.h"
 
-static void	sdl_free(t_env *e, int ret)
+static void	mlx_free(t_env *e, int ret)
 {
 	if (ret & 0x08)
-		SDL_DestroyRenderer(e->render);
+		mlx_destroy_image(e->mlx, e->render);
 	if (ret & 0x04)
-		SDL_DestroyWindow(e->win);
-	if (ret & 0x02)
-		SDL_Quit();
+		mlx_destroy_window(e->mlx, e->win);
 }
 
-static void	handle_keyboard_event(t_env *e)
+static void	suicide(t_env *e)
 {
-	if (e->evt.key.keysym.sym == SDLK_ESCAPE)
-		e->on = 0;
-	else if (e->evt.key.keysym.sym == SDLK_a)
-	{
-		if (e->aa < 3)
-		{
-			e->aa++;
-			projection(e);
-		}
-	}
-	else if (e->evt.key.keysym.sym == SDLK_q)
-	{
-		if (e->aa > 0)
-		{
-			e->aa--;
-			projection(e);
-		}
-	}
-	else if (e->evt.key.keysym.sym == SDLK_z)
-	{
-		if (e->core.cam.rebound > 0)
-		{
-			e->core.cam.rebound--;
-			projection(e);
-		}
-	}
-	else if (e->evt.key.keysym.sym == SDLK_x)
-	{
-		if (e->core.cam.rebound < 7)
-		{
-			e->core.cam.rebound++;
-			projection(e);
-		}
-	}
+	free_lst(&e->core);
+	mlx_free(e, 0x0e);
+	exit(0);
 }
 
-static void	treat_event(t_env *e)
+static int	key_press_hook(int key, t_env *e)
 {
-	if (e->evt.type == SDL_QUIT)
-		e->on = 0;
-	else if (e->evt.type == SDL_KEYDOWN)
-		handle_keyboard_event(e);
+	if (key == 53)
+		suicide(e);
+	return (0);
+}
+
+static int	put_render(t_env const *e)
+{
+	mlx_put_image_to_window(e->mlx, e->win, e->render, 0, 0);
+	return (0);
 }
 
 void		ft_raytracer(t_env *e)
@@ -75,11 +50,10 @@ void		ft_raytracer(t_env *e)
 	int		ret;
 
 	if ((ret = init_env(e)) != 0)
-		return (sdl_free(e, ret));
+		return (mlx_free(e, ret));
 	srand(time(NULL));
 	projection(e);
-	while (e->on != FALSE)
-		while (SDL_PollEvent(&e->evt))
-			treat_event(e);
-	sdl_free(e, 0x0e);
+	mlx_expose_hook(e->win, put_render, e);
+	mlx_key_hook(e->win, key_press_hook, e);
+	mlx_loop(e->mlx);
 }

@@ -6,22 +6,22 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 17:09:19 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/06 10:55:57 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/09 18:11:51 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_H
 # define RT_H
 # include "rt_ts.h"
-# include <SDL.h>
 # define WIN_W 980
 # define WIN_H 720
 
 typedef struct	s_env
 {
-	SDL_Window		*win;
-	SDL_Renderer	*render;
-	SDL_Event		evt;
+	void			*mlx;
+	void			*win;
+	void			*render;
+	char			*img;
 	t_rtv1			core;
 	unsigned char	aa;
 	char			on;

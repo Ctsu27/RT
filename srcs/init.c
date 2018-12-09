@@ -6,14 +6,15 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:09:49 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/06 12:31:23 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/09 17:59:17 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
-#include "math_vec3.h"
 #include <stdlib.h>
 #include <math.h>
+#include "mlx.h"
+#include "rt.h"
+#include "math_vec3.h"
 
 static void	init_light(t_rtv1 *core)
 {
@@ -67,16 +68,18 @@ static void	init_obj_clr(t_poly const *objs, int const n_light, int *n_obj)
 
 int			init_env(t_env *e)
 {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0)
-		return (0x01);
-	if ((e->win = SDL_CreateWindow("Rip Trigonometry",
-					SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-					WIN_W, WIN_H,
-					SDL_WINDOW_SHOWN)) == NULL)
-		return (0x02);
-	if ((e->render = SDL_CreateRenderer(e->win, -1,
-					SDL_RENDERER_ACCELERATED)) == NULL)
-		return (0x06);
+	int		useless[3];
+
+	e->mlx = NULL;
+	e->render = NULL;
+	e->img = NULL;
+	if ((e->mlx = mlx_init(e->mlx)) == NULL)
+		return (0x1);
+	if ((e->win = mlx_new_window(e->mlx, WIN_W, WIN_H, "Rip Teemo")) == NULL)
+		return (0x2);
+	if ((e->render = mlx_new_image(e->mlx, WIN_W, WIN_H)) == NULL)
+		return (0x6);
+	e->img = mlx_get_data_addr(e->render, useless, useless + 1, useless + 2);
 	e->core.n_obj = 0;
 	init_fct(&(e->core));
 	init_light(&e->core);
@@ -85,8 +88,5 @@ int			init_env(t_env *e)
 		/ tan((e->core.cam.fov * M_PI / 180) / 2);
 	e->aa = 0;
 	e->on = TRUE;
-	SDL_SetRenderDrawColor(e->render, 0, 0, 0, 0);
-	SDL_RenderClear(e->render);
-	SDL_RenderPresent(e->render);
 	return (0);
 }
