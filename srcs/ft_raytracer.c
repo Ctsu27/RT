@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:25:18 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/09 18:12:35 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/10 11:36:29 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ static void	mlx_free(t_env *e, int ret)
 		mlx_destroy_window(e->mlx, e->win);
 }
 
-static void	suicide(t_env *e)
+static int	suicide(t_env *e)
 {
 	free_lst(&e->core);
 	mlx_free(e, 0x0e);
 	exit(0);
+	return (0);
 }
 
 static int	key_press_hook(int key, t_env *e)
@@ -55,5 +56,6 @@ void		ft_raytracer(t_env *e)
 	projection(e);
 	mlx_expose_hook(e->win, put_render, e);
 	mlx_key_hook(e->win, key_press_hook, e);
+	mlx_hook(e->win, 17, 1L << 17, suicide, e);
 	mlx_loop(e->mlx);
 }
