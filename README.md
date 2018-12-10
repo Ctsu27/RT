@@ -9,7 +9,6 @@ Requirements
 ------------
 
 - MacOS
-- SDL2
 
 Features
 --------
