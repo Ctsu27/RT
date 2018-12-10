@@ -6,13 +6,15 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:05 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/06 10:28:51 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/10 13:51:23 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "math_vec3.h"
 #include <math.h>
+
+extern unsigned int	g_state;
 
 int				not_obstruct(t_rtv1 const *core, t_poly const *obj,
 		t_vec3 const inter, t_light const *light)
@@ -83,19 +85,20 @@ t_clr			phong_shading(t_rtv1 const *core, t_poly const *obj,
 
 	light_ptr = core->light;
 	pxl = obj->ambient;
-	while (light_ptr != NULL)
-	{
-		if (not_obstruct(core, obj, inter, light_ptr))
+	if (g_state == 1)
+		while (light_ptr != NULL)
 		{
-			light_dir = norm_vec3(sub_vec3(light_ptr->pos, inter));
-			pxl = add_clr(pxl, diffuse_clr(obj->clr, obj_normal,
-						light_dir, 0.70));
-			view = norm_vec3(sub_vec3(inter, core->cam.ray.pos));
-			pxl = add_clr(pxl,
-					specular_clr(view, light_dir, obj_normal, light_ptr->clr));
+			if (not_obstruct(core, obj, inter, light_ptr))
+			{
+				light_dir = norm_vec3(sub_vec3(light_ptr->pos, inter));
+				pxl = add_clr(pxl, diffuse_clr(obj->clr, obj_normal,
+							light_dir, 0.70));
+				view = norm_vec3(sub_vec3(inter, core->cam.ray.pos));
+				pxl = add_clr(pxl,
+						specular_clr(view, light_dir, obj_normal, light_ptr->clr));
+			}
+			light_ptr = light_ptr->next;
 		}
-		light_ptr = light_ptr->next;
-	}
 	return (pxl);
 }
 
@@ -106,8 +109,9 @@ t_clr			handle_color(t_rtv1 const *core, t_vec3 const normal,
 
 	color_pxl = phong_shading(core, obj, normal, inter);
 	color_pxl = clamp_clr(color_pxl, 1.0);
-	if (core->cam.gi != GI_OFF)
-		color_pxl = add_clr(color_pxl,
-				clamp_clr(glob_illum(core, normal, inter), 1.0));
+	if (g_state == 1)
+		if (core->cam.gi != GI_OFF)
+			color_pxl = add_clr(color_pxl,
+					clamp_clr(glob_illum(core, normal, inter), 1.0));
 	return (color_pxl);
 }

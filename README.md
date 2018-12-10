@@ -61,7 +61,7 @@ Features
 	+ Can load a texture (jpeg, png ...)
 
 - ### Other option
-	+ Camera movement [ ]
+	+ Camera movement [X]
 	+ Multi-threading [ ]
 	+ Save rendering (.jpeg, .png ...) [ ]
 	+ Clusterise [ ]
