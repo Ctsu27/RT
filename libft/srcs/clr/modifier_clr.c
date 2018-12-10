@@ -6,7 +6,7 @@
 /*   By: lufranco <lufranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 02:03:09 by lufranco          #+#    #+#             */
-/*   Updated: 2018/11/30 16:33:05 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/10 15:25:50 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,16 @@ static t_clr	sepia(t_clr const pxl)
 	return (new_clr(tmp_r, tmp_g, tmp_b, pxl.a));
 }
 
+static t_clr	(*g_modifier[3])(t_clr const) = \
+{
+	[FILTER_SEPIA] = &sepia,
+	[FILTER_GRAY] = &gray,
+	[FILTER_DEUTERANOMALY] = &deuteranomaly
+};
+
 t_clr			modifier_clr(t_clr const pxl, int const filter)
 {
-	static t_clr	(*modifier[3])(t_clr const) = { \
-		[FILTER_SEPIA] = &sepia,
-		[FILTER_GRAY] = &gray,
-		[FILTER_DEUTERANOMALY] = &deuteranomaly
-	};
-
 	if (filter == FILTER_NONE)
 		return (pxl);
-	return (modifier[filter](pxl));
+	return (g_modifier[filter](pxl));
 }

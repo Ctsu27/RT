@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:05 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/10 13:51:23 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/10 15:27:13 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ t_clr			phong_shading(t_rtv1 const *core, t_poly const *obj,
 							light_dir, 0.70));
 				view = norm_vec3(sub_vec3(inter, core->cam.ray.pos));
 				pxl = add_clr(pxl,
-						specular_clr(view, light_dir, obj_normal, light_ptr->clr));
+						specular_clr(view, light_dir,
+							obj_normal, light_ptr->clr));
 			}
 			light_ptr = light_ptr->next;
 		}

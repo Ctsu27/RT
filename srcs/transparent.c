@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:46:42 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/06 10:32:39 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/10 15:27:50 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_clr	next_obj_clr(t_rtv1 const *core, t_inters const hits,
 					hits.data[i - 1].obj->absorption)));
 }
 
-t_clr	get_color_transparent(t_rtv1 const *core, t_ray ray,
+t_clr			get_color_transparent(t_rtv1 const *core, t_ray ray,
 		unsigned int const reb, t_inters const hits)
 {
 	t_clr	n;
@@ -72,7 +72,7 @@ t_clr	get_color_transparent(t_rtv1 const *core, t_ray ray,
 	return (next_obj_clr(core, hits, n, i));
 }
 
-t_clr	gi_get_color_transparent(t_rtv1 const *core, t_ray ray,
+t_clr			gi_get_color_transparent(t_rtv1 const *core, t_ray ray,
 		unsigned int const reb, t_inters const hits)
 {
 	t_clr	n;

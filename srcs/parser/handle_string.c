@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 13:25:16 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/05 19:21:04 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/10 15:32:38 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,29 @@
 
 char	*g_str_value[3][7] = \
 {
-	[ID_MATERIAL] = {"reflective",
+	[ID_MATERIAL] = \
+	{
+		"reflective",
 		"refractive",
 		"fresnel",
 		"transparent",
 		"illuminate",
 		"default",
-		NULL},
-	[ID_FILTER] = {"sepia",
+		NULL
+	}
+	,
+	[ID_FILTER] = \
+	{
+		"sepia",
 		"gray",
 		"deuteranomaly",
 		"none",
-		NULL},
-	[ID_GI] = {"off",
+		NULL
+	}
+	,
+	[ID_GI] = \
+	{
+		"off",
 		"on",
 		NULL
 	}
