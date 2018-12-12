@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:25:18 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/10 14:32:56 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/12 13:31:12 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static int	key_realease(int key, t_env *e)
 {
 	if (key == K_ESC)
 		suicide(e);
+	else if (key == K_F12)
+		screenshot(e->img);
 	return (0);
 }
 
