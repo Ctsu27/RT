@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 17:09:19 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/09 18:11:51 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/12 13:22:53 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct	s_env
 	unsigned char	aa;
 	char			on;
 }				t_env;
+
+void			screenshot(char *img);
 
 int				init_env(t_env *e);
 void			ft_raytracer(t_env *e);

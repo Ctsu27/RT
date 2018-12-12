@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/08 16:59:52 by kehuang           #+#    #+#              #
-#    Updated: 2018/12/09 18:04:28 by kehuang          ###   ########.fr        #
+#    Updated: 2018/12/12 13:22:42 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC				:=			main.c					\
 							fresnel.c				\
 							get_all_inter.c			\
 							transparent.c			\
+							screenshot.c			\
 
 SRC_PARSER		:=			parser_json.c			\
 							json_key.c				\
