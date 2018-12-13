@@ -62,7 +62,7 @@ Features
 - ### Other option
 	+ Camera movement [X]
 	+ Multi-threading [ ]
-	+ Save rendering (.jpeg, .png ...) [ ]
+	+ Save rendering (.bmp) [X]
 	+ Clusterise [ ]
 	+ Interface [ ]
 	+ Live modification [ ]
