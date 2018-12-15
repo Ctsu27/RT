@@ -6,10 +6,11 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:44 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/09 18:14:40 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/15 13:50:44 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <pthread.h>
 #include <math.h>
 #include "rt.h"
 #include "mlx.h"
@@ -32,10 +33,10 @@ static t_ray	get_cam_dir(t_env const *e, t_vec3 const pos,
 
 static t_clr	raytrace_alias(t_env *e, t_ray ray, int const x, int const y)
 {
-	static t_clr		color;
-	static t_vec3		ray_pos;
-	static t_aa			data;
-	static unsigned int	rebound;
+	t_clr			color;
+	t_vec3			ray_pos;
+	t_aa			data;
+	unsigned int	rebound;
 
 	ray_pos = e->core.cam.ray.pos;
 	data.n_ray = 0;
@@ -65,20 +66,7 @@ static t_clr	raytrace_default(t_env *e, t_ray ray, int const x, int const y)
 	return (lerp_clr(raytrace(&e->core, ray, e->core.cam.rebound)));
 }
 
-static void		mlx_put_pxl_img(char *img, t_clr const c,
-		int const x, int const y)
-{
-	static int		sizeline = WIN_W * 4;
-	unsigned long	i;
-
-	i = x * 4 + y * sizeline;
-	img[i] = (char)(c.r + 0.5);
-	img[i + 1] = (char)(c.g + 0.5);
-	img[i + 2] = (char)(c.b + 0.5);
-	img[i + 3] = (char)(c.a + 0.5);
-}
-
-void			projection(t_env *e)
+static void		draw_render(t_thread *th)
 {
 	t_clr	(*get_color)(t_env *, t_ray, int const, int const);
 	t_clr	pxl;
@@ -86,20 +74,42 @@ void			projection(t_env *e)
 	int		x;
 	int		y;
 
-	filter = e->core.cam.filter;
-	y = 0;
-	e->core.offset_aa = (0.40 * (e->aa * 0.66)) / e->aa;
-	get_color = (e->aa == 0) ? &raytrace_default : &raytrace_alias;
+	filter = th->e->core.cam.filter;
+	y = th->id;
+	th->e->core.offset_aa = (0.40 * (th->e->aa * 0.66)) / th->e->aa;
+	get_color = (th->e->aa == 0) ? &raytrace_default : &raytrace_alias;
 	while (y < WIN_H)
 	{
 		x = 0;
 		while (x < WIN_W)
 		{
-			pxl = get_color(e, e->core.cam.ray, x, y);
+			pxl = get_color(th->e, th->e->core.cam.ray, x, y);
 			pxl = modifier_clr(pxl, filter);
-			mlx_put_pxl_img(e->img, pxl, x, y);
+			mlx_put_pxl_img(th->e->img, pxl, x, y);
 			x++;
 		}
-		y++;
+		y += N_THREAD;
 	}
+	pthread_exit(NULL);
+}
+
+void			projection(t_env *e)
+{
+	t_thread		thend[N_THREAD];
+	pthread_t		threads[N_THREAD];
+	int				i;
+
+	i = -1;
+	while (++i < N_THREAD)
+	{
+		thend[i].e = e;
+		thend[i].id = i;
+		if (pthread_create(threads + i, NULL,
+				(void *)&draw_render, (void *)(thend + i)) != 0)
+			ft_panic(e, "error: can not create a tread\n");
+	}
+	i = -1;
+	while (++i < N_THREAD)
+		if (pthread_join(threads[i], NULL) != 0)
+			ft_panic(e, "error: can not join treads\n");
 }
