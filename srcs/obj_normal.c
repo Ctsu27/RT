@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 16:01:33 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/05 17:07:20 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/15 13:30:04 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 t_vec3			normal_cylinder(void *data, t_vec3 intersect)
 {
-	static t_cyl	*cyl;
-	static t_vec3	normal;
-	static t_vec3	tmp;
+	t_cyl	*cyl;
+	t_vec3	normal;
+	t_vec3	tmp;
 
 	cyl = (t_cyl *)data;
 	normal = rot_vec3(sub_vec3(intersect, cyl->pos), cyl->rot);
@@ -32,9 +32,9 @@ t_vec3			normal_cylinder(void *data, t_vec3 intersect)
 
 t_vec3			normal_cone(void *data, t_vec3 intersect)
 {
-	static t_cone	*cone;
-	static t_vec3	normal;
-	static t_vec3	tmp;
+	t_cone	*cone;
+	t_vec3	normal;
+	t_vec3	tmp;
 
 	cone = (t_cone *)data;
 	normal = rot_vec3(sub_vec3(intersect, cone->pos), cone->rot);
@@ -48,8 +48,8 @@ t_vec3			normal_cone(void *data, t_vec3 intersect)
 
 t_vec3			normal_plane(void *data, t_vec3 ray_dir)
 {
-	static t_plane	*plane;
-	static t_vec3	normal;
+	t_plane	*plane;
+	t_vec3	normal;
 
 	plane = (t_plane *)data;
 	if (dot_vec3(ray_dir, plane->dir) > 0.0)

@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:55:57 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/06 17:20:58 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/15 13:29:24 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 static t_clr	get_diffuse_clr(t_rtv1 const *core, t_poly const *obj,
 		t_vec3 const obj_normal, t_vec3 const inter)
 {
-	static t_light	*light_ptr;
-	static t_vec3	light_dir;
-	static t_clr	pxl;
+	t_light	*light_ptr;
+	t_vec3	light_dir;
+	t_clr	pxl;
 
 	light_ptr = core->light;
 	pxl = new_clr(0.0, 0.0, 0.0, 0.0);

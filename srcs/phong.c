@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:05 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/10 15:27:13 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/15 13:30:19 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ extern unsigned int	g_state;
 int				not_obstruct(t_rtv1 const *core, t_poly const *obj,
 		t_vec3 const inter, t_light const *light)
 {
-	static t_ray	ray;
-	static t_poly	*ptr;
-	static t_vec3	vdis;
-	static double	t;
-	static double	distance_max;
+	t_ray	ray;
+	t_poly	*ptr;
+	t_vec3	vdis;
+	double	t;
+	double	distance_max;
 
 	ray.pos = inter;
 	vdis = sub_vec3(light->pos, ray.pos);
@@ -44,7 +44,7 @@ int				not_obstruct(t_rtv1 const *core, t_poly const *obj,
 t_clr			diffuse_clr(t_clr const obj_clr, t_vec3 const obj_normal,
 		t_vec3 const light_dir, double const ratio)
 {
-	static double	factor_clr;
+	double	factor_clr;
 
 	factor_clr = dot_vec3(obj_normal, light_dir);
 	if (factor_clr < 0.0)
@@ -59,8 +59,8 @@ t_clr			diffuse_clr(t_clr const obj_clr, t_vec3 const obj_normal,
 static t_clr	specular_clr(t_vec3 const view, t_vec3 const light_dir,
 		t_vec3 const obj_normal, t_clr const light_clr)
 {
-	static t_vec3		reflection;
-	static double		omega;
+	t_vec3		reflection;
+	double		omega;
 	static const int	alpha = 120;
 
 	reflection = norm_vec3(sub_vec3(light_dir,
@@ -78,10 +78,10 @@ static t_clr	specular_clr(t_vec3 const view, t_vec3 const light_dir,
 t_clr			phong_shading(t_rtv1 const *core, t_poly const *obj,
 		t_vec3 const obj_normal, t_vec3 const inter)
 {
-	static t_light	*light_ptr;
-	static t_vec3	light_dir;
-	static t_vec3	view;
-	static t_clr	pxl;
+	t_light	*light_ptr;
+	t_vec3	light_dir;
+	t_vec3	view;
+	t_clr	pxl;
 
 	light_ptr = core->light;
 	pxl = obj->ambient;

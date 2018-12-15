@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 11:28:13 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/29 11:42:16 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/15 13:28:32 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 static void		insert_sort(t_inter *arr, int const size)
 {
-	static t_inter	tmp;
-	static int		j;
+	t_inter	tmp;
+	int		j;
 
 	j = size - 1;
 	while (j >= 0 && arr[j].t > arr[j + 1].t)
@@ -43,9 +43,9 @@ static t_inter	get_inter_data(t_rtv1 const *core, t_ray const ray,
 
 t_inter			*get_all_inter(t_rtv1 const *core, t_ray const ray, int *size)
 {
-	static t_poly	*ptr;
-	static double	t;
-	t_inter			*hit;
+	t_poly	*ptr;
+	double	t;
+	t_inter	*hit;
 
 	if ((hit = (t_inter *)ft_memalloc(sizeof(*hit) * core->n_obj)) != NULL)
 	{

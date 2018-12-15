@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 15:07:52 by kehuang           #+#    #+#             */
-/*   Updated: 2018/11/13 18:27:04 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/15 13:29:52 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 static int	solver_quadratic(double a, double b, double c, double *t)
 {
-	static double	delta;
-	static double	dis[2];
+	double	delta;
+	double	dis[2];
 
 	delta = b * b - 4.0 * a * c;
 	if (delta < 0)
@@ -35,9 +35,9 @@ static int	solver_quadratic(double a, double b, double c, double *t)
 
 int			intersection_sphere(t_ray const ray, void *obj, double *t)
 {
-	static t_sphere		*sphere;
-	static t_vec3		oc;
-	static t_unknown	tmp;
+	t_sphere	*sphere;
+	t_vec3		oc;
+	t_unknown	tmp;
 
 	sphere = (t_sphere *)obj;
 	oc = sub_vec3(ray.pos, sphere->pos);
@@ -49,10 +49,10 @@ int			intersection_sphere(t_ray const ray, void *obj, double *t)
 
 int			intersection_cylinder(t_ray const ray, void *obj, double *t)
 {
-	static t_cyl		*cyl;
-	static t_vec3		oc;
-	static t_vec3		dir;
-	static t_unknown	tmp;
+	t_cyl		*cyl;
+	t_vec3		oc;
+	t_vec3		dir;
+	t_unknown	tmp;
 
 	cyl = (t_cyl *)obj;
 	oc = sub_vec3(ray.pos, cyl->pos);
@@ -66,11 +66,11 @@ int			intersection_cylinder(t_ray const ray, void *obj, double *t)
 
 int			intersection_cone(t_ray const ray, void *obj, double *t)
 {
-	static t_cone		*cone;
-	static t_vec3		oc;
-	static t_vec3		dir;
-	static t_unknown	tmp;
-	static double		pow_r;
+	t_cone		*cone;
+	t_vec3		oc;
+	t_vec3		dir;
+	t_unknown	tmp;
+	double		pow_r;
 
 	cone = (t_cone *)obj;
 	oc = sub_vec3(ray.pos, cone->pos);
@@ -85,8 +85,8 @@ int			intersection_cone(t_ray const ray, void *obj, double *t)
 
 int			intersection_plane(t_ray const ray, void *obj, double *t)
 {
-	static t_plane	*plane;
-	static double	div;
+	t_plane	*plane;
+	double	div;
 
 	plane = (t_plane *)obj;
 	div = dot_vec3(plane->dir, ray.dir);

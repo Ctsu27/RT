@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:55:02 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/06 12:23:18 by kehuang          ###   ########.fr       */
+/*   Updated: 2018/12/15 13:29:17 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 t_clr			gi_ray_trace_refraction(t_rtv1 const *core, t_ray ray,
 		t_inter const hit, unsigned int const rebound)
 {
-	static t_vec3	view;
-	static double	tmp[3];
-	static double	ior = 1.5;
+	t_vec3	view;
+	double	tmp[3];
+	double	ior = 1.5;
 
 	view = sub_vec3(hit.pos, ray.pos);
 	tmp[0] = dot_vec3(hit.normal, view);
@@ -44,7 +44,7 @@ t_clr			gi_ray_trace_refraction(t_rtv1 const *core, t_ray ray,
 t_clr			gi_ray_trace_reflection(t_rtv1 const *core, t_ray ray,
 		t_inter const hit, unsigned int const rebound)
 {
-	static t_vec3	view;
+	t_vec3	view;
 
 	view = sub_vec3(ray.pos, hit.pos);
 	ray.pos = hit.pos;
