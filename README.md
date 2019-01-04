@@ -54,14 +54,14 @@ Features
 	+ Perlin noise [ ]
 
 - ### Texture
-	+ Apply texture on 4 objects (sphere, plan, cylinder, cone)
-	+ Can stretch texture on 1 object
-	+ Can set an placement offset on 1 object
-	+ Can load a texture (jpeg, png ...)
+	+ Apply texture on 4 objects (sphere, plan, cylinder, cone) [ ]
+	+ Can stretch texture on 1 object [ ]
+	+ Can set an placement offset on 1 object [ ]
+	+ Can load a texture (jpeg, png ...) [ ]
 
 - ### Other option
 	+ Camera movement [X]
-	+ Multi-threading [ ]
+	+ Multi-threading [X]
 	+ Save rendering (.bmp) [X]
 	+ Clusterise [ ]
 	+ Interface [ ]
