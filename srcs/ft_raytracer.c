@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:25:18 by kehuang           #+#    #+#             */
-/*   Updated: 2019/01/04 23:18:09 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/05 00:31:00 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ static void	move_cam(int key, t_env *e)
 		e->core.cam.ray.pos = add_vec3(c.ray.pos,
 				rot_vec3(norm_vec3(mul_vec3(c.ray.dir, -1.0)),
 					add_vec3(c.rotate, new_vec3(0.0, -90.0, 0.0))));
+	else if (key == K_X)
+		e->core.cam.ray.pos = add_vec3(c.ray.pos, new_vec3(0.0, 1.0, 0.0));
+	else if (key == K_SPACE)
+		e->core.cam.ray.pos = add_vec3(c.ray.pos, new_vec3(0.0, -1.0, 0.0));
 }
 
 static void	rotate_cam(int key, t_env *e)
@@ -82,7 +86,8 @@ static void	rotate_cam(int key, t_env *e)
 
 static int	key_press(int key, t_env *e)
 {
-	if (key == K_A || key == K_W || key == K_S || key == K_D)
+	if (key == K_A || key == K_W || key == K_S || key == K_D
+			|| key == K_X || key == K_SPACE)
 	{
 		g_state = 0;
 		move_cam(key, e);
@@ -97,14 +102,11 @@ static int	key_press(int key, t_env *e)
 		projection(e);
 		mlx_put_image_to_window(e->mlx, e->win, e->render, 0, 0);
 	}
-	else if (key == K_RETURN)
+	else if (key == K_RETURN && g_state != 1)
 	{
-		if (g_state != 1)
-		{
-			g_state = 1;
-			projection(e);
-			mlx_put_image_to_window(e->mlx, e->win, e->render, 0, 0);
-		}
+		g_state = 1;
+		projection(e);
+		mlx_put_image_to_window(e->mlx, e->win, e->render, 0, 0);
 	}
 	return (0);
 }
