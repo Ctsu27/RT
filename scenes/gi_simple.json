@@ -5,7 +5,7 @@
 		"global_illumination" : "on",
 		"filter" : "none",
 		"sample_ray" : 30,
-		"depth" : 1,
+		"depth" : 3,
 		"fov" :  30.0
 	},
 
@@ -19,58 +19,67 @@
 		"color" : [255.0, 255.0, 255.0, 0.0]
 	},
 
+	"cylinder" : {
+		"pos" : [-10.0, 0.0, 25.0],
+		"color" : [0.0, 255.0, 0.0, 100.0],
+		"rot" : [0.0, 0.0, 0.0],
+		"material" : "default",
+		"ior" : 1.0,
+		"radius": 3.0
+	},
+
 	"sphere" : {
 		"pos" : [-70.0, -10.0, -20.0],
-		"color" : [255.0, 55.0, 55.0, 0.0],
-		"material" : "illuminate",
-		"absorption" : 0.0,
+		"color" : [255.0, 55.0, 55.0, 100.0],
+		"material" : "reflective",
+		"ior" : 1.0,
 		"radius": 10.0
 	},
 	"sphere" : {
 		"pos" : [-10.0, 0.0, 0.0],
-		"color" : [255.0, 255.0, 0.0, 0.0],
-		"material" : "illuminate",
-		"absorption" : 0.0,
-		"radius": 20.0
+		"color" : [255.0, 255.0, 0.0, 100.0],
+		"material" : "refractive",
+		"ior" : 1.5,
+		"radius": 5.0
 	},
 	"sphere" : {
 		"pos" : [50.0, -10.0, -20.0],
-		"color" : [55.0, 55.0, 255.0, 0.0],
-		"material" : "illuminate",
-		"absorption" : 0.0,
+		"color" : [55.0, 55.0, 255.0, 100.0],
+		"material" : "default",
+		"ior" : 1.0,
 		"radius": 10.0
 	},
 
 	"cylinder" : {
 		"pos" : [20.0, 5.0, 10.0],
-		"color" : [150.0, 255.0, 155.0, 0.0],
+		"color" : [150.0, 255.0, 155.0, 100.0],
 		"rot" : [0.0, 0.0, 10.0],
 		"material" : "fresnel",
-		"absorption" : 40.0,
+		"ior" : 1.5,
 		"radius": 4.0
 	},
 
 	"cone" : {
 		"pos" : [-50.0, -20.0, 10.0],
-		"color" : [150.0, 55.0, 55.0, 0.0],
+		"color" : [150.0, 55.0, 55.0, 100.0],
 		"rot" : [0.0, 0.0, -10.0],
 		"material" : "fresnel",
-		"absorption" : 40.0,
+		"ior" : 1.5,
 		"radius": 10.0
 	},
 
 	"plane" : {
 		"pos" : [0.0, 0.0, 70.0],
-		"color" : [90.0, 55.0, 94.0, 0.0],
+		"color" : [90.0, 55.0, 94.0, 100.0],
 		"material" : "default",
-		"absorption" : 40.0,
+		"ior" : 1.5,
 		"normal" : [0.0, 0.0, -1.0]
 	},
 	"plane" : {
 		"pos" : [0.0, 10.0, 0.0],
-		"color" : [155.0, 155.0, 155.0, 0.0],
+		"color" : [155.0, 155.0, 155.0, 100.0],
 		"material" : "default",
-		"absorption" : 40.0,
+		"ior" : 1.5,
 		"normal" : [0.0, -1.0, 0.0]
 	}
 

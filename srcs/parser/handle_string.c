@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 13:25:16 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/10 15:32:38 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/04 23:09:38 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 #include "strft.h"
 #include "parser_int.h"
 
-char	*g_str_value[3][7] = \
+char	*g_str_value[3][6] = \
 {
 	[ID_MATERIAL] = \
 	{
 		"reflective",
 		"refractive",
 		"fresnel",
-		"transparent",
 		"illuminate",
 		"default",
 		NULL

@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/08 16:59:52 by kehuang           #+#    #+#              #
-#    Updated: 2018/12/15 13:49:09 by kehuang          ###   ########.fr        #
+#    Updated: 2019/01/04 23:23:42 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,7 @@ SRC				:=			main.c					\
 							gi_ray_distorted.c		\
 							global_illumination.c	\
 							fresnel.c				\
-							get_all_inter.c			\
-							transparent.c			\
+							get_inter.c				\
 							screenshot.c			\
 							mlx_put_pxl_img.c		\
 							ft_panic.c				\

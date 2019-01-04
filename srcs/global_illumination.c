@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:55:57 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/15 13:29:24 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/03 18:26:26 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,39 +35,31 @@ static t_clr	get_diffuse_clr(t_rtv1 const *core, t_poly const *obj,
 	return (pxl);
 }
 
-static void		init_raytrace_diffuse(t_rtv1 const *core, t_ray ray,
-		t_inters *hits, t_clr *clr_pxl)
-{
-	*clr_pxl = new_clr(0.0, 0.0, 0.0, 0.0);
-	hits->size = 0;
-	hits->data = get_all_inter(core, ray, &(hits->size));
-}
-
 t_clr			raytrace_diffuse(t_rtv1 const *core, t_ray ray,
 		unsigned int const rebound)
 {
-	t_inters	hits;
-	t_inter		*data;
+	t_inter		hit;
 	t_clr		color_pxl;
+	static t_clr	(*gi_trace[3])(t_rtv1 const *, t_ray, t_inter const,
+			unsigned int const) = {
+		&gi_ray_trace_reflection,
+		&gi_ray_trace_refraction,
+		&gi_ray_trace_fresnel
+	};
 
-	init_raytrace_diffuse(core, ray, &hits, &color_pxl);
-	if (hits.data != NULL && (data = (hits.data))->obj != NULL
-			&& data->obj->mat != MATERIAL_DEFAULT)
+	hit = get_inter(core, ray);
+	if (hit.obj != NULL && hit.obj->mat != MATERIAL_DEFAULT)
 	{
-		color_pxl = get_diffuse_clr(core, data->obj, data->normal, data->pos);
-		if (data->obj->mat == MATERIAL_TRANSPARENT)
-			color_pxl = add_clr(mul_clr(color_pxl, 1 - data->obj->absorption),
-					mul_clr(gi_get_color_transparent(core, ray, rebound, hits),
-						data->obj->absorption));
-		else if (data->obj->mat != MATERIAL_DEFAULT &&
-				data->obj->mat != MATERIAL_ILLUMINATE && rebound > 0)
-			color_pxl = add_clr(mul_clr(color_pxl, data->obj->absorption),
-					core->gi_trace[data->obj->mat](core, ray, *data,
-						rebound - 1));
-		if (data->obj->mat != MATERIAL_ILLUMINATE)
+		color_pxl = get_diffuse_clr(core, hit.obj, hit.normal, hit.pos);
+		if (hit.obj->mat != MATERIAL_DEFAULT &&
+				hit.obj->mat != MATERIAL_ILLUMINATE && rebound > 0)
+			color_pxl = add_clr(mul_clr(color_pxl, hit.obj->clr.a),
+					gi_trace[hit.obj->mat](core, ray, hit, rebound - 1));
+		if (hit.obj->mat != MATERIAL_ILLUMINATE)
 			color_pxl = new_clr(0.0, 0.0, 0.0, 0.0);
 	}
-	free(hits.data);
+	else
+		return (new_clr(0.0, 0.0, 0.0, 0.0));
 	return (color_pxl);
 }
 

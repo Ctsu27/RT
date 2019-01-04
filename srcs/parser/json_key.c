@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:21:00 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/10 15:29:50 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/03 19:07:03 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_string		g_keys[KEY_MAX] = \
 	,
 	[14] = \
 	{
-		"\"absorption\"", 12
+		"\"ior\"", 5
 	}
 	,
 	[15] = \
@@ -118,7 +118,7 @@ static void		more_mask(unsigned long *mask)
 	if (*mask & KEY_OBJECT)
 	{
 		*mask = *mask | KEY_MATERIAL;
-		*mask = *mask | KEY_ABSORPTION;
+		*mask = *mask | KEY_IOR;
 	}
 }
 

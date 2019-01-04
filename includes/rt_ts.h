@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/06 10:43:51 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/04 23:24:07 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@
 # define MATERIAL_REFLECTIVE 0
 # define MATERIAL_REFRACTIVE 1
 # define MATERIAL_FRESNEL 2
-# define MATERIAL_TRANSPARENT 3
-# define MATERIAL_ILLUMINATE 4
-# define MATERIAL_DEFAULT 5
+# define MATERIAL_ILLUMINATE 3
+# define MATERIAL_DEFAULT 4
 
 typedef struct	s_aa
 {
@@ -106,7 +105,7 @@ typedef struct	s_poly
 	void			*data;
 	t_clr			clr;
 	t_clr			ambient;
-	double			absorption;
+	double			ior;
 	unsigned int	type;
 	unsigned int	mat;
 	struct s_poly	*next;
@@ -120,21 +119,11 @@ typedef struct	s_inter
 	double	t;
 }				t_inter;
 
-typedef struct	s_inters
-{
-	t_inter	*data;
-	int		size;
-}				t_inters;
-
 typedef struct	s_rtv1
 {
 	t_light			*light;
 	t_poly			*objs;
 	t_cam			cam;
-	t_clr			(*trace[3])(struct s_rtv1 const *, t_ray,
-			t_inter const, unsigned int const);
-	t_clr			(*gi_trace[3])(struct s_rtv1 const *, t_ray,
-			t_inter const, unsigned int const);
 	t_vec3			(*normal_obj[4])(void *, t_vec3);
 	int				(*inter_obj[4])(t_ray const, void *, double *);
 	double			distance;
@@ -153,6 +142,7 @@ typedef struct	s_rtv1
 t_clr			handle_color(t_rtv1 const *core, t_vec3 const normal,
 		t_poly const *obj, t_vec3 const inter);
 
+t_inter			get_inter(t_rtv1 const *core, t_ray const ray);
 t_inter			*get_all_inter(t_rtv1 const *core, t_ray const ray, int *size);
 
 double			fresnel(t_ray const ray, t_vec3 const inter,
@@ -165,11 +155,11 @@ double			fresnel(t_ray const ray, t_vec3 const inter,
 */
 
 t_clr			ray_trace_refraction(t_rtv1 const *core, t_ray ray,
-		t_inter const inter, unsigned int const rebound);
+		t_inter const hit, unsigned int const rebound);
 t_clr			ray_trace_reflection(t_rtv1 const *core, t_ray ray,
-		t_inter const inter, unsigned int const rebound);
+		t_inter const hit, unsigned int const rebound);
 t_clr			ray_trace_fresnel(t_rtv1 const *core, t_ray ray,
-		t_inter const inter, unsigned int const rebound);
+		t_inter const hit, unsigned int const rebound);
 t_clr			raytrace(t_rtv1 const *core, t_ray ray,
 		unsigned int const rebound);
 
@@ -183,17 +173,6 @@ t_clr			glob_illum(t_rtv1 const *core,
 		t_vec3 const normal, t_vec3 const inter);
 t_clr			raytrace_diffuse(t_rtv1 const *core, t_ray ray,
 		unsigned int const rebound);
-
-/*
-**	#==========================================================================#
-**	#--------------------------------------------------------------------------#
-**	#                               TRANSPARENT                                #
-*/
-
-t_clr			get_color_transparent(t_rtv1 const *core, t_ray ray,
-		unsigned int const reb, t_inters const hits);
-t_clr			gi_get_color_transparent(t_rtv1 const *core, t_ray ray,
-		unsigned int const reb, t_inters const hits);
 
 /*
 **	#==========================================================================#

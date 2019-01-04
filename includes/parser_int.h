@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 10:23:14 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/06 10:45:17 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/03 18:35:26 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define KEY_SAMPLE_RAY	0x800
 # define KEY_GI			0x400
 # define KEY_FILTER		0x200
-# define KEY_ABSORPTION	0x100
+# define KEY_IOR		0x100
 
 # define KEY_DEPTH		0x80
 # define KEY_MATERIAL	0x40
