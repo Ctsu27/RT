@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 13:47:46 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/15 13:48:45 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/05 00:11:21 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void		mlx_put_pxl_img(char *img, t_clr const c,
 	unsigned long		i;
 
 	i = x * 4 + y * sizeline;
-	img[i] = (char)(c.r + 0.5);
+	img[i] = (char)(c.b + 0.5);
 	img[i + 1] = (char)(c.g + 0.5);
-	img[i + 2] = (char)(c.b + 0.5);
+	img[i + 2] = (char)(c.r + 0.5);
 	img[i + 3] = (char)(c.a + 0.5);
 }
