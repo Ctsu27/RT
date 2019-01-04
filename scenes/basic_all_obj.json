@@ -18,14 +18,14 @@
 		"pos" : [50.0, 40.0, -50.0],
 		"radius": 20.0,
 		"material" : "default",
-		"absorption" : 0.0,
+		"ior" : 1.0,
 		"color" : [255.0, 22.0, 255.0, 0.0]
 	},
 	"sphere" : {
 		"pos" : [15.0, -60.0, 10.0],
 		"radius": 10.0,
 		"material" : "default",
-		"absorption" : 0.0,
+		"ior" : 1.0,
 		"color" : [255.0, 22.0, 255.0, 0.0]
 	},
 
@@ -34,7 +34,7 @@
 		"radius": 10.0,
 		"color" : [5.0, 24.0, 255.0, 0.0],
 		"material" : "default",
-		"absorption" : 0.0,
+		"ior" : 1.0,
 		"rot" : [50.0, 0.0, -20.0]
 	},
 
@@ -43,7 +43,7 @@
 		"radius": 10.0,
 		"color" : [255.0, 23.0, 43.0, 0.0],
 		"material" : "default",
-		"absorption" : 0.0,
+		"ior" : 1.0,
 		"rot" : [0.0, 0.0, 40.0]
 	},
 
@@ -51,7 +51,7 @@
 		"pos" : [0.0, 0.0, 100.0],
 		"color" : [155.0, 155.0, 155.0, 0.0],
 		"material" : "default",
-		"absorption" : 0.0,
+		"ior" : 1.0,
 		"normal" : [0.0, 0.0, -1.0]
 	},
 
@@ -59,7 +59,7 @@
 		"pos" : [0.0, 50.0, 0.0],
 		"color" : [35.0, 255.0, 46.0, 0.0],
 		"material" : "default",
-		"absorption" : 0.0,
+		"ior" : 1.0,
 		"normal" : [0.0, -1.0, 0.0]
 	}
 }

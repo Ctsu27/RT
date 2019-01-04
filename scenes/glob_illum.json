@@ -4,7 +4,7 @@
 		"rot" : [0.0, 0.0, 0.0],
 		"global_illumination" : "on",
 		"filter" : "none",
-		"sample_ray" : 15,
+		"sample_ray" : 400,
 		"depth" : 3,
 		"fov" :  30.0
 	},
@@ -23,28 +23,28 @@
 		"pos" : [-100.0, 0.0, 0.0],
 		"color" : [255.0, 255.0, 0.0, 1.0],
 		"material" : "default",
-		"absorption" : 40.0,
+		"ior" : 1.5,
 		"radius": 9.0
 	},
 	"sphere" : {
 		"pos" : [0.0, 5.0, 10.0],
 		"color" : [255.0, 0.0, 255.0, 1.0],
 		"material" : "default",
-		"absorption" : 40.0,
+		"ior" : 1.5,
 		"radius": 9.0
 	},
 	"sphere" : {
 		"pos" : [10.0, 0.0, 0.0],
 		"color" : [0.0, 255.0, 255.0, 1.0],
 		"material" : "default",
-		"absorption" : 40.0,
+		"ior" : 1.5,
 		"radius": 9.0
 	},
 	"sphere" : {
 		"pos" : [0.0, -10.0, 0.0],
 		"color" : [155.0, 155.0, 155.0, 1.0],
 		"material" : "default",
-		"absorption" : 40.0,
+		"ior" : 1.5,
 		"radius": 9.0
 	},
 
@@ -52,42 +52,42 @@
 		"pos" : [-10.0, 70.0, -10.0],
 		"color" : [255.0, 0.0, 255.0, 1.0],
 		"material" : "default",
-		"absorption" : 40.0,
+		"ior" : 1.5,
 		"normal" : [0.0, 1.0, 0.0]
 	},
 	"plane" : {
 		"pos" : [-10.0, -50.0, -10.0],
 		"color" : [0.0, 255.0, 0.0, 1.0],
 		"material" : "default",
-		"absorption" : 40.0,
+		"ior" : 1.5,
 		"normal" : [0.0, 1.0, 0.0]
 	},
 	"plane" : {
 		"pos" : [-10.0, -10.0, 45.0],
 		"color" : [0.0, 155.0, 155.0, 1.0],
 		"material" : "default",
-		"absorption" : 40.0,
+		"ior" : 1.5,
 		"normal" : [0.0, 0.0, -1.0]
 	},
 	"plane" : {
 		"pos" : [-10.0, -10.0, -600.0],
 		"color" : [0.0, 155.0, 155.0, 1.0],
 		"material" : "default",
-		"absorption" : 40.0,
+		"ior" : 1.5,
 		"normal" : [0.0, 0.0, -1.0]
 	},
 	"plane" : {
 		"pos" : [-120.0, -10.0, 10.0],
 		"color" : [0.0, 0.0, 255.0, 1.0],
 		"material" : "illuminate",
-		"absorption" : 40.0,
+		"ior" : 1.5,
 		"normal" : [1.0, 0.0, 0.0]
 	},
 	"plane" : {
 		"pos" : [60.0, -10.0, 10.0],
 		"color" : [155.0, 55.0, 0.0, 1.0],
 		"material" : "default",
-		"absorption" : 40.0,
+		"ior" : 1.5,
 		"normal" : [-0.70, 0.30, 0.0]
 	},
 
@@ -95,7 +95,7 @@
 		"pos" : [0.0, -30.0, -200.0],
 		"color" : [5.0, 5.0, 155.0, 1.0],
 		"material" : "default",
-		"absorption" : 40.0,
+		"ior" : 1.5,
 		"radius": 9.0
 	}
 }

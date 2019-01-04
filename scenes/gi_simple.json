@@ -19,28 +19,19 @@
 		"color" : [255.0, 255.0, 255.0, 0.0]
 	},
 
-	"cylinder" : {
-		"pos" : [-10.0, 0.0, 25.0],
-		"color" : [0.0, 255.0, 0.0, 100.0],
-		"rot" : [0.0, 0.0, 0.0],
-		"material" : "default",
-		"ior" : 1.0,
-		"radius": 3.0
-	},
-
 	"sphere" : {
 		"pos" : [-70.0, -10.0, -20.0],
 		"color" : [255.0, 55.0, 55.0, 100.0],
-		"material" : "reflective",
+		"material" : "default",
 		"ior" : 1.0,
 		"radius": 10.0
 	},
 	"sphere" : {
 		"pos" : [-10.0, 0.0, 0.0],
-		"color" : [255.0, 255.0, 0.0, 100.0],
-		"material" : "refractive",
+		"color" : [0.0, 255.0, 255.0, 100.0],
+		"material" : "illuminate",
 		"ior" : 1.5,
-		"radius": 5.0
+		"radius": 20.0
 	},
 	"sphere" : {
 		"pos" : [50.0, -10.0, -20.0],
@@ -54,7 +45,7 @@
 		"pos" : [20.0, 5.0, 10.0],
 		"color" : [150.0, 255.0, 155.0, 100.0],
 		"rot" : [0.0, 0.0, 10.0],
-		"material" : "fresnel",
+		"material" : "default",
 		"ior" : 1.5,
 		"radius": 4.0
 	},
@@ -63,7 +54,7 @@
 		"pos" : [-50.0, -20.0, 10.0],
 		"color" : [150.0, 55.0, 55.0, 100.0],
 		"rot" : [0.0, 0.0, -10.0],
-		"material" : "fresnel",
+		"material" : "default",
 		"ior" : 1.5,
 		"radius": 10.0
 	},
