@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 11:44:19 by kehuang           #+#    #+#             */
-/*   Updated: 2019/01/04 23:22:19 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/13 13:59:39 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,27 @@
 t_clr			ray_trace_refraction(t_rtv1 const *core, t_ray ray,
 		t_inter const hit, unsigned int const rebound)
 {
-	t_vec3			view;
-	double			tmp[3];
+	double	dot;
+	double	eta;
+	double	k;
 
-	view = norm_vec3(sub_vec3(hit.pos, ray.pos));
-	tmp[0] = dot_vec3(hit.normal, view);
-	if (tmp[0] < 0)
+	dot = dot_vec3(hit.normal, ray.dir);
+	if (dot < 0)
 	{
-		tmp[0] = -tmp[0];
-		tmp[1] = 1.0 / hit.obj->ior;
+		dot = -dot;
+		eta = 1.0 / hit.obj->ior;
 	}
 	else
-		tmp[1] = hit.obj->ior;
-	if ((tmp[2] = 1.0 - tmp[1] * tmp[1] * (1.0 - tmp[0] * tmp[0])) < 0.0)
+		eta = hit.obj->ior;
+	k = 1.0 - eta * eta * (1.0 * dot * dot);
+	if (k < 0)
 	{
-		tmp[1] = 1.0;
-		tmp[2] = 1.0 - tmp[0] * tmp[0];
+		eta = 1.0;
+		k = 1.0 - dot * dot;
 	}
 	ray.pos = hit.pos;
-	ray.dir = norm_vec3(add_vec3(mul_vec3(view, tmp[1]),
-				mul_vec3(hit.normal, tmp[1] * tmp[0] - sqrt(tmp[2]))));
+	ray.dir = norm_vec3(add_vec3(mul_vec3(ray.dir, eta),
+				mul_vec3(hit.normal, eta * dot - sqrt(k))));
 	return (mul_clr(raytrace(core, ray, rebound), 1.0 - hit.obj->clr.a));
 }
 
