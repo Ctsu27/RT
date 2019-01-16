@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:55:57 by kehuang           #+#    #+#             */
-/*   Updated: 2019/01/03 18:26:26 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/15 23:17:21 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ t_clr			raytrace_diffuse(t_rtv1 const *core, t_ray ray,
 	if (hit.obj != NULL && hit.obj->mat != MATERIAL_DEFAULT)
 	{
 		color_pxl = get_diffuse_clr(core, hit.obj, hit.normal, hit.pos);
-		if (hit.obj->mat != MATERIAL_DEFAULT &&
-				hit.obj->mat != MATERIAL_ILLUMINATE && rebound > 0)
+		if (hit.obj->mat != MATERIAL_DEFAULT
+				&& hit.obj->mat != MATERIAL_ILLUMINATE && rebound > 0)
 			color_pxl = add_clr(mul_clr(color_pxl, hit.obj->clr.a),
 					gi_trace[hit.obj->mat](core, ray, hit, rebound - 1));
 		if (hit.obj->mat != MATERIAL_ILLUMINATE)
