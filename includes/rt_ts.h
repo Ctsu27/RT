@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 11:52:51 by kehuang           #+#    #+#             */
-/*   Updated: 2019/01/04 23:24:07 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/16 23:51:37 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define MATERIAL_FRESNEL 2
 # define MATERIAL_ILLUMINATE 3
 # define MATERIAL_DEFAULT 4
+
+# define TEXTURE_PROCESS_SIZE 8
 
 typedef struct	s_aa
 {
@@ -138,6 +140,8 @@ typedef struct	s_rtv1
 **	#--------------------------------------------------------------------------#
 **	#                                  UTILS                                   #
 */
+
+t_clr			texture_checkboard(t_vec3 const pos, t_vec3 const rot);
 
 t_clr			handle_color(t_rtv1 const *core, t_vec3 const normal,
 		t_poly const *obj, t_vec3 const inter);

@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/08 16:59:52 by kehuang           #+#    #+#              #
-#    Updated: 2019/01/04 23:23:42 by kehuang          ###   ########.fr        #
+#    Updated: 2019/01/16 23:27:34 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC				:=			main.c					\
 							screenshot.c			\
 							mlx_put_pxl_img.c		\
 							ft_panic.c				\
+							texture_checkboard.c	\
 
 SRC_PARSER		:=			parser_json.c			\
 							json_key.c				\
