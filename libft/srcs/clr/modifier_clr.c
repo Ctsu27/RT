@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 23:01:59 by kehuang           #+#    #+#             */
-/*   Updated: 2019/01/16 23:02:11 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/16 23:28:00 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_clr	gray(t_clr const pxl)
 	double	average;
 
 	average = (pxl.r + pxl.g + pxl.b) / 765.0 * 255.0;
-	return (new_clr(test, test, test, pxl.a));
+	return (new_clr(average, average, average, pxl.a));
 }
 
 static t_clr	deuteranomaly(t_clr const pxl)
