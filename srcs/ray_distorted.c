@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 11:44:19 by kehuang           #+#    #+#             */
-/*   Updated: 2019/01/13 13:59:39 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/18 21:53:17 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ t_clr			ray_trace_refraction(t_rtv1 const *core, t_ray ray,
 	double	k;
 
 	dot = dot_vec3(hit.normal, ray.dir);
-	if (dot < 0)
+	if (dot < 0.)
 	{
 		dot = -dot;
 		eta = 1.0 / hit.obj->ior;
 	}
 	else
 		eta = hit.obj->ior;
-	k = 1.0 - eta * eta * (1.0 * dot * dot);
-	if (k < 0)
+	k = 1.0 - eta * eta * (1.0 - dot * dot);
+	if (k < 0.)
 	{
 		eta = 1.0;
 		k = 1.0 - dot * dot;
