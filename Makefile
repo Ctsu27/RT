@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/08 16:59:52 by kehuang           #+#    #+#              #
-#    Updated: 2019/01/23 01:34:31 by kehuang          ###   ########.fr        #
+#    Updated: 2019/01/23 01:37:24 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -152,9 +152,9 @@ ra:
 .PHONY: ra
 
 o2:
-	$(MAKE) CC="gcc -O2"
+	@$(MAKE) CC="gcc -O2"
 .PHONY: o2
 
 debug:
-	$(MAKE) CC="gcc -fsanitize=address -g3"
+	@$(MAKE) CC="gcc -fsanitize=address -g3"
 .PHONY: debug
