@@ -6,7 +6,7 @@
 #    By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/08 16:59:52 by kehuang           #+#    #+#              #
-#    Updated: 2019/01/16 23:27:34 by kehuang          ###   ########.fr        #
+#    Updated: 2019/01/23 01:34:31 by kehuang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,10 +74,7 @@ INDEX			:=			0
 
 CC				:=			gcc
 CFLAGS			:=			-Wall -Wextra -Werror
-CFLAGS			+=			-g3
-CFLAGS			+=			-O2
 MLXFLAGS		:=			-framework OpenGL -framework AppKit
-
 
 #==============================================================================#
 #------------------------------------------------------------------------------#
@@ -93,6 +90,7 @@ L_FT			:=			$(LIB_DIR)
 #                                 RULES                                        #
 
 all:					$(NAME)
+.PHONY: all
 
 $(NAME):				$(LIBFT) $(OBJ_DIR) $(OBJ)
 	@$(MAKE) -C $(MLX_DIR)
@@ -127,15 +125,36 @@ clean:
 	@$(MAKE) -C $(LIB_DIR) clean
 	@$(MAKE) -C $(MLX_DIR) clean
 	@printf '\033[33m[ KILL ] %s\n\033[0m' "Clean of $(NAME) is done ---"
+.PHONY: clean
 
 fclean: 				clean
 	@rm -rf $(NAME)
 	@$(MAKE) -C $(LIB_DIR) fclean
 	@$(MAKE) -C $(MLX_DIR) fclean
 	@printf '\033[33m[ KILL ] %s\n\033[0m' "Fclean of $(NAME) is done ---"
+.PHONY: fclean
+
+lclean:
+	@rm -rf $(OBJ_DIR)
+	@printf '\033[33m[ KILL ] %s\n\033[0m' "Clean of $(NAME) is done ---"
+	@rm -rf $(NAME)
+	@printf '\033[33m[ KILL ] %s\n\033[0m' "Fclean of $(NAME) is done ---"
+.PHONY: lclean
 
 re:
 	@$(MAKE) fclean
 	@$(MAKE)
+.PHONY: re
 
-.PHONY: all clean fclean re build cbuild
+ra:
+	@$(MAKE) lclean
+	@$(MAKE)
+.PHONY: ra
+
+o2:
+	$(MAKE) CC="gcc -O2"
+.PHONY: o2
+
+debug:
+	$(MAKE) CC="gcc -fsanitize=address -g3"
+.PHONY: debug
