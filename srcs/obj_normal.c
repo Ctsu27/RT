@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 16:01:33 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/15 13:30:04 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/27 15:11:08 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_vec3			normal_cylinder(void *data, t_vec3 intersect)
 	normal = rot_vec3(sub_vec3(intersect, cyl->pos), cyl->rot);
 	normal.y = 0;
 	tmp.x = 360 - cyl->rot.x;
-	tmp.y = 0;
+	tmp.y = 360 - cyl->rot.y;
 	tmp.z = 360 - cyl->rot.z;
 	normal = norm_vec3(rot_vec3(normal, tmp));
 	return (normal);
