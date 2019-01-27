@@ -1,0 +1,8 @@
+.DS_Store
+objs/
+*.o
+*.swp
+*.dSYM
+*.a
+*.out
+RT
