@@ -6,12 +6,13 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:12:44 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/15 13:50:44 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/31 21:35:03 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pthread.h>
 #include <math.h>
+#include "libft.h"
 #include "rt.h"
 #include "mlx.h"
 
@@ -91,6 +92,86 @@ static void		draw_render(t_thread *th)
 		y += N_THREAD;
 	}
 	pthread_exit(NULL);
+}
+
+void		draw_edge(t_env const *e)
+{
+	t_clr			avg[9];
+	t_clr			v_avg;
+	t_clr			h_avg;
+	t_clr			pxl;
+	double const 	v_cvt[9] = {
+		-1.0, 0.0, 1.0,
+		-2.0, 0.0, 2.0,
+		-1.0, 0.0, 1.0
+	};
+	double const 	h_cvt[9] = {
+		-1.0, -2.0, -1.0,
+		0.0, 0.0, 0.0,
+		1.0, 2.0, 1.0
+	};
+	int				x;
+	int				y;
+	int				i;
+	int				idx;
+
+	ft_memset(e->ly_img, 255, (WIN_W * 4) * WIN_H);
+	y = 1;
+	while (y < WIN_H - 1)
+	{
+		x = 1;
+		while (x < WIN_W - 1)
+		{
+//			get grayscale on the 3x3 on the cursor
+			i = 0;
+			while (i < 9)
+			{
+				idx = ((y - 1 + i % 3) * WIN_W * 4) + (((x - 1) * 4) + i % 3);
+				avg[i].b = e->img[idx];
+				avg[i].g = e->img[idx + 1];
+				avg[i].r = e->img[idx + 2];
+				avg[i].a = 0.0;
+				avg[i] = modifier_clr(avg[i], FILTER_GRAY);
+				++i;
+			}
+//			use the vertical sobel edge detection avec the kernel convulusion
+			v_avg = new_clr(0.0, 0.0, 0.0, 0.0);
+			i = 0;
+			while (i < 9)
+			{
+				v_avg = add_clr(v_avg, mul_clr(avg[i], v_cvt[i]));
+				++i;
+			}
+			v_avg = div_clr(v_avg, 9.0);
+//			use the horizontal sobel edge detection avec the kernel convulusion
+			h_avg = new_clr(0.0, 0.0, 0.0, 0.0);
+			i = 0;
+			while (i < 9)
+			{
+				h_avg = add_clr(h_avg, mul_clr(avg[i], h_cvt[i]));
+				++i;
+			}
+			h_avg = div_clr(h_avg, 9.0);
+			pxl = new_clr(sqrt((pow(v_avg.r, 2.0) + pow(h_avg.r, 2.0))),
+					sqrt((pow(v_avg.g, 2.0) + pow(h_avg.g, 2.0))),
+					sqrt((pow(v_avg.b, 2.0) + pow(h_avg.b, 2.0))),
+					0.0);
+//			ft_putnbr(pxl.r + pxl.g + pxl.b);
+//			ft_putstr(" <- red\n");
+//			if (pxl.r + pxl.g + pxl.b < 2.0)
+			if (pxl.r > 40.0)
+			{
+				mlx_put_pxl_img(e->ly_img, new_clr(0.0, 0.0, 0.0, 0.0), x, y);
+			}
+//			else
+//			{
+//				ft_putstr("ALPHA___\n");
+//				mlx_put_pxl_img(e->ly_img, new_clr(0.0, 0.0, 0.0, 255.0), x, y);
+//			}
+			++x;
+		}
+		++y;
+	}
 }
 
 void			projection(t_env *e)

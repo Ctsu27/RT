@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 17:09:19 by kehuang           #+#    #+#             */
-/*   Updated: 2018/12/15 13:51:16 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/31 14:47:28 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ typedef struct	s_env
 	void			*mlx;
 	void			*win;
 	void			*render;
-	char			*img;
+	unsigned char			*img;
+	void			*layer;
+	unsigned char			*ly_img;
 	unsigned char	aa;
 	char			on;
 }				t_env;
@@ -39,7 +41,7 @@ typedef struct	s_thread
 void			screenshot(char *img);
 
 void			ft_panic(t_env *e, char const *msg);
-void			mlx_put_pxl_img(char *img, t_clr const c,
+void			mlx_put_pxl_img(unsigned char *img, t_clr const c,
 		int const x, int const y);
 
 int				init_env(t_env *e);

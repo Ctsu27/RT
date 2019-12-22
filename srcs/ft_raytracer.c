@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 12:25:18 by kehuang           #+#    #+#             */
-/*   Updated: 2019/01/05 00:31:00 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/31 14:53:50 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "mlx.h"
 #include "key_mlx.h"
 
+void		draw_edge(t_env const *e);
 unsigned int	g_state = 1;
 
 static void	mlx_free(t_env *e, int ret)
@@ -40,8 +41,8 @@ static int	key_realease(int key, t_env *e)
 {
 	if (key == K_ESC)
 		suicide(e);
-	else if (key == K_F12)
-		screenshot(e->img);
+//	else if (key == K_F12)
+//		screenshot(e->img);
 	return (0);
 }
 
@@ -108,6 +109,20 @@ static int	key_press(int key, t_env *e)
 		projection(e);
 		mlx_put_image_to_window(e->mlx, e->win, e->render, 0, 0);
 	}
+	else if (key == K_I)
+	{
+		mlx_put_image_to_window(e->mlx, e->win, e->render, 0, 0);
+	}
+	else if (key == K_O)
+	{
+//		for (size_t i = 0; i < WIN_W * 4 * WIN_H; ++i) {
+//			e->ly_img[i] = 255;
+//			e->ly_img[i + 1] = 0;
+//			e->ly_img[i + 2] = 0;
+//			e->ly_img[i + 3] = 255;
+//		}
+		mlx_put_image_to_window(e->mlx, e->win, e->layer, 0, 0);
+	}
 	return (0);
 }
 
@@ -125,6 +140,7 @@ void		ft_raytracer(t_env *e)
 		return (mlx_free(e, ret));
 	srand(time(NULL));
 	projection(e);
+	draw_edge(e);
 	mlx_expose_hook(e->win, put_render, e);
 	mlx_key_hook(e->win, key_realease, e);
 	mlx_hook(e->win, 2, 3, key_press, e);

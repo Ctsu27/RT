@@ -6,7 +6,7 @@
 /*   By: kehuang <kehuang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 10:09:49 by kehuang           #+#    #+#             */
-/*   Updated: 2019/01/04 23:02:44 by kehuang          ###   ########.fr       */
+/*   Updated: 2019/01/31 21:29:45 by kehuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ int			init_env(t_env *e)
 		return (0x2);
 	if ((e->render = mlx_new_image(e->mlx, WIN_W, WIN_H)) == NULL)
 		return (0x6);
-	e->img = mlx_get_data_addr(e->render, useless, useless + 1, useless + 2);
+	if ((e->layer = mlx_new_image(e->mlx, WIN_W, WIN_H)) == NULL)
+		return (0x6);
+	e->img = (unsigned char *)mlx_get_data_addr(e->render, useless, useless + 1, useless + 2);
+	e->ly_img = (unsigned char *)mlx_get_data_addr(e->layer, useless, useless + 1, useless + 2);
 	e->core.n_obj = 0;
 	init_fct(&(e->core));
 	init_light(&e->core);
